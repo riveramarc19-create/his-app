@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/his_oreo_v2.html" }
+  ]
+}
