@@ -202,6 +202,121 @@
         }
         @media (min-width: 1025px) { .wizard-overlay { display: none !important; } }
 
+        /* WIZARD STYLES — PROPOSAL 3 */
+        .wiz-steps { display:flex; background:#0a1a16; padding:10px 18px; gap:0; align-items:center; border-bottom:1px solid rgba(0,180,140,0.12); }
+        .wiz-step { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; }
+        .wiz-step-num { width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all 0.3s; }
+        .wiz-step.active .wiz-step-num { background:rgba(0,200,150,0.15);border:2px solid #00c896;color:#00c896;box-shadow:0 0 14px rgba(0,200,150,0.3); }
+        .wiz-step.done   .wiz-step-num { background:rgba(0,160,122,0.2);border:2px solid #00a07a;color:#00a07a; }
+        .wiz-step.pending .wiz-step-num { background:transparent;border:2px solid rgba(0,180,140,0.15);color:rgba(0,180,140,0.2); }
+        .wiz-step-label { font-size:7px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase; }
+        .wiz-step.active .wiz-step-label { color:rgba(0,200,150,0.7); }
+        .wiz-step.done   .wiz-step-label { color:rgba(0,160,122,0.5); }
+        .wiz-step.pending .wiz-step-label { color:rgba(0,180,140,0.15); }
+        .wiz-line { flex:0.4;height:1px;background:rgba(0,180,140,0.12);margin-bottom:14px; }
+        .wiz-progress { height:3px;background:rgba(0,180,140,0.1); }
+        .wiz-progress-bar { height:100%;background:linear-gradient(90deg,#00a07a,#00c896);transition:width 0.5s ease;border-radius:0 2px 2px 0; }
+        .wiz-content { flex:1;overflow-y:auto;padding:16px 18px 100px;-webkit-overflow-scrolling:touch; }
+        .wiz-content::-webkit-scrollbar { width:2px; }
+        .wiz-content::-webkit-scrollbar-thumb { background:rgba(0,180,140,0.2);border-radius:2px; }
+
+        /* PATIENT CHIP */
+        .wiz-pat-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:18px; }
+        .wiz-pat-av { width:38px;height:38px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:1.5px solid rgba(0,200,150,0.35);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#00c896; }
+        .wiz-pat-name { font-size:13px;font-weight:700;color:rgba(200,255,240,0.9); }
+        .wiz-pat-meta { font-size:9px;color:rgba(0,200,150,0.5);margin-top:2px; }
+
+        /* SECTIONS */
+        .wiz-section { margin-bottom:22px; }
+        .wiz-sec-title { font-size:9px;font-weight:700;color:rgba(0,200,150,0.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:flex;align-items:center;gap:8px; }
+        .wiz-sec-title::after { content:'';flex:1;height:1px;background:rgba(0,180,140,0.1); }
+
+        /* FIELDS — underline style */
+        .wiz-field { margin-bottom:18px; }
+        .wiz-field label { display:block;font-size:11px;font-weight:700;color:rgba(0,200,150,0.55);letter-spacing:0.5px;margin-bottom:7px; }
+        .wiz-field input, .wiz-field select { width:100%;background:transparent;border:none;border-bottom:2px solid rgba(0,180,140,0.2);padding:8px 4px;font-size:18px;color:rgba(200,255,240,0.9);font-family:'Rajdhani',sans-serif;font-weight:600;outline:none;transition:border-color 0.2s;-webkit-appearance:none; }
+        .wiz-field input:focus, .wiz-field select:focus { border-bottom-color:#00c896; }
+        .wiz-field input[readonly] { color:rgba(0,200,150,0.35);font-size:14px;cursor:default; }
+        .wiz-field input.wiz-accent { font-size:22px;font-weight:800;color:#00c896;letter-spacing:2px; }
+        .wiz-row { display:flex;gap:20px; }
+        .wiz-row .wiz-field { flex:1; }
+
+        /* TOGGLE BUTTONS (sex, EST, SER) */
+        .wiz-toggle-group { display:flex;gap:8px;margin-top:4px; }
+        .wiz-toggle-btn { flex:1;padding:12px 8px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:800;cursor:pointer;border:1.5px solid rgba(0,180,140,0.15);background:rgba(0,180,140,0.04);color:rgba(0,180,140,0.3);transition:all 0.2s;text-align:center; }
+        .wiz-toggle-btn.sel { background:rgba(0,200,150,0.18);border-color:#00c896;color:#00c896;box-shadow:0 0 12px rgba(0,200,150,0.2); }
+
+        /* AGE BOXES */
+        .wiz-age-grid { display:flex;gap:10px;margin-top:4px; }
+        .wiz-age-box { flex:1;background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:10px;padding:12px 8px;text-align:center; }
+        .wiz-age-lbl { font-size:9px;color:rgba(0,200,150,0.4);margin-bottom:4px;font-weight:700;letter-spacing:1px;text-transform:uppercase; }
+        .wiz-age-val { font-size:22px;font-weight:800;color:#00c896; }
+
+        /* DIAG CARD */
+        .wiz-diag-card { background:#0a1a16;border:1px solid rgba(0,180,140,0.15);border-radius:14px;padding:14px;margin-bottom:14px; }
+        .wiz-diag-title { font-size:9px;color:rgba(0,200,150,0.4);letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:12px; }
+        .wiz-diag-result { background:rgba(0,180,140,0.06);border-radius:8px;padding:10px 12px;font-size:12px;color:rgba(0,200,150,0.7);font-weight:600;border:1px solid rgba(0,180,140,0.12);min-height:38px;margin-bottom:14px;transition:all 0.3s; }
+        .wiz-diag-result.filled { background:rgba(0,180,140,0.1);border-color:rgba(0,200,150,0.25);color:rgba(200,255,240,0.85); }
+        .wiz-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:12px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:4px;transition:all 0.2s;font-family:'Rajdhani',sans-serif; }
+
+        /* FOOTER */
+        .wiz-footer { background:#060f0d;padding:12px 18px;display:flex;gap:10px;border-top:1px solid rgba(0,180,140,0.1); }
+        .wiz-btn { flex:1;padding:13px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-btn-back { flex:0.5;background:rgba(0,180,140,0.06);color:rgba(0,200,150,0.6);border:1.5px solid rgba(0,180,140,0.2); }
+        .wiz-btn-next { flex:1.5;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;font-weight:800;letter-spacing:1px; }
+        .wiz-btn-save { flex:1.5;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;font-weight:800; }
+
+        /* SUCCESS */
+        .wiz-success { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;flex:1; }
+        .wiz-suc-icon { font-size:48px;margin-bottom:14px; }
+        .wiz-suc-title { font-family:'Orbitron',monospace;font-size:13px;color:#00c896;letter-spacing:2px;margin-bottom:6px; }
+        .wiz-suc-pts { font-family:'Orbitron',monospace;font-size:30px;font-weight:900;color:rgba(200,255,240,0.9);margin-bottom:16px; }
+        .wiz-suc-table { width:100%;background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:12px;padding:12px;margin-bottom:16px; }
+        .wiz-suc-tbl { width:100%;border-collapse:collapse;font-family:'Rajdhani',sans-serif; }
+        .wiz-suc-tbl th { font-size:7px;color:rgba(0,200,150,0.35);padding:3px 6px;border-bottom:1px solid rgba(0,180,140,0.12);text-align:left;font-weight:700; }
+        .wiz-suc-tbl td { font-size:9px;color:rgba(180,240,220,0.7);padding:5px 6px;border-bottom:1px solid rgba(0,180,140,0.08); }
+        .wiz-suc-tbl tr.wiz-new td { color:#00c896;font-weight:800; }
+        .wiz-suc-btn { width:100%;padding:14px;background:rgba(0,200,150,0.12);border:1.5px solid rgba(0,180,140,0.3);border-radius:12px;color:#00c896;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:1px; }
+
+        /* PATIENTS BAR */
+        .wiz-patients-bar { background:#0d2018;padding:6px 14px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(0,180,140,0.18); }
+        .wiz-pat-btn { background:rgba(0,180,140,0.08);color:rgba(0,200,150,0.7);border:1px solid rgba(0,180,140,0.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-pat-btn.active { background:rgba(0,200,150,0.2);color:#00c896;border-color:#00a07a;box-shadow:0 0 10px rgba(0,200,150,0.2); }
+        .wiz-pat-btn-add { background:transparent;color:rgba(0,200,150,0.5);border:1px dashed rgba(0,180,140,0.25); }
+
+        .wiz-dni-found { color:rgba(0,200,150,0.8);font-size:10px;margin-top:3px;font-weight:700; }
+        .campo-found { background:rgba(0,200,150,0.08) !important; }
+        .campo-notfound { background:rgba(255,60,60,0.06) !important; }
+
+        /* ANCHOS */
+        .w-dia   { width: 2.5%; } .w-dni  { width: 6.5%; } .w-fin  { width: 2.5%; }
+        .w-dist  { width: 11%; }  .w-edad { width: 4%; }   .w-sex  { width: 1.5%; }
+        .w-antro { width: 10.5%; }.w-cond { width: 1.5%; } .w-dx   { width: 24%; }
+        .w-tipo  { width: 3%; }   .w-lab  { width: 1.8%; } .w-cie  { width: 6%; }
+
+        /* FOOTER */
+        .his-footer {
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0d2018;
+            border-top: 1px solid rgba(0,180,140,0.30);
+            border-radius: 0 0 14px 14px;
+        }
+
+        /* READONLY diagnostic */
+        input[readonly] { cursor: default; color: rgba(0,180,140,0.4); background: rgba(0,180,140,0.03); }
+
+        /* ===== WIZARD MÓVIL ===== */
+        .wizard-overlay { display: none; }
+        @media (max-width: 1024px) {
+            #hisForm { display: none !important; }
+            .his-header-bar { font-size: 12px; padding: 10px; }
+            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060f0d; }
+        }
+        @media (min-width: 1025px) { .wizard-overlay { display: none !important; } }
+
         /* WIZARD STYLES */
         .wiz-steps { display:flex; background:#0d2018; padding:8px 12px; gap:0; align-items:center; border-bottom:1px solid rgba(0,180,140,0.18); }
         .wiz-step { flex:1; text-align:center; }
@@ -1311,156 +1426,150 @@ document.addEventListener('focusin', function(e) {
             el.className = 'wiz-step ' + (i < WIZ.step ? 'done' : i === WIZ.step ? 'active' : 'pending');
             el.querySelector('.wiz-step-num').textContent = i < WIZ.step ? '✓' : i;
         });
+
         document.getElementById('wizProgress').style.width = (WIZ.step * 33.3) + '%';
         document.getElementById('wizBtnBack').style.display = WIZ.step > 1 ? 'block' : 'none';
 
         var nextBtn = document.getElementById('wizBtnNext');
 
-        if (WIZ.step === 1) {
-            nextBtn.className = 'wiz-btn wiz-btn-next';
-            nextBtn.textContent = 'Siguiente →';
-            c.innerHTML = `
-                <div class="wiz-section-title">Datos del paciente <span class="wiz-badge">Paso 1 de 3</span></div>
-                <div class="wiz-field">
-                    <label>DNI</label>
-                    <input type="number" id="wDni" value="${p.dni}" placeholder="Ingrese DNI" oninput="wizDNISearch(this.value)" onchange="wizSave()">
-                    <div class="wiz-dni-found" id="wDniFound">${p.nombres ? '✓ '+p.nombres : ''}</div>
-                </div>
-                <div class="wiz-field">
-                    <label>Apellidos y Nombres</label>
-                    <input type="text" id="wNombres" value="${p.nombres}" placeholder="Se llena automáticamente" onchange="wizSave()">
-                </div>
-                <div class="wiz-row">
-                    <div class="wiz-field">
-                        <label>Fecha Nacimiento</label>
-                        <input type="text" id="wFN" value="${p.fn}" placeholder="dd/mm/aaaa" onchange="wizSave();wizCalcEdad()">
-                    </div>
-                    <div class="wiz-field">
-                        <label>Sexo</label>
-                        <select id="wSexo" onchange="wizSave()">
-                            <option value="">-</option>
-                            <option value="M" ${p.sexo==='M'?'selected':''}>M</option>
-                            <option value="F" ${p.sexo==='F'?'selected':''}>F</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="wiz-row">
-                    <div class="wiz-field">
-                        <label>Edad (años)</label>
-                        <input type="number" id="wEdadA" value="${p.edadA}" readonly>
-                    </div>
-                    <div class="wiz-field">
-                        <label>Meses</label>
-                        <input type="number" id="wEdadM" value="${p.edadM}" readonly>
-                    </div>
-                    <div class="wiz-field">
-                        <label>Días</label>
-                        <input type="number" id="wEdadD" value="${p.edadD}" readonly>
-                    </div>
-                </div>
-                <div class="wiz-row">
-                    <div class="wiz-field">
-                        <label>Financiador</label>
-                        <input type="text" id="wFin" value="${p.fin}" placeholder="SIS, ESSALUD..." onchange="wizSave()">
-                    </div>
-                    <div class="wiz-field">
-                        <label>H.C.</label>
-                        <input type="text" id="wHc" value="${p.hc}" placeholder="Nro. H.C." onchange="wizSave()">
-                    </div>
-                </div>
-                <div class="wiz-field">
-                    <label>Distrito</label>
-                    <input type="text" id="wDistrito" value="${p.distrito}" placeholder="Distrito" onchange="wizSave()">
-                </div>
-                <div class="wiz-field">
-                    <label>Dirección</label>
-                    <input type="text" id="wDireccion" value="${p.direccion}" placeholder="Dirección exacta" onchange="wizSave()">
-                </div>
-            `;
-        } else if (WIZ.step === 2) {
-            nextBtn.className = 'wiz-btn wiz-btn-next';
-            nextBtn.textContent = 'Siguiente →';
-            c.innerHTML = `
-                ${p.nombres ? '<div class="wiz-patient-info"><div class="name">' + p.nombres + '</div><div class="meta">' + (p.edadA ? p.edadA + 'a ' : '') + (p.edadM ? p.edadM + 'm' : '') + ' · ' + (p.sexo||'-') + '</div></div>' : ''}
-                <div class="wiz-section-title">Datos Antropométricos <span class="wiz-badge">Paso 2 de 3</span></div>
-                <div class="wiz-row">
-                    <div class="wiz-field"><label>Talla (cm)</label><input type="number" id="wTalla" value="${p.talla}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
-                    <div class="wiz-field"><label>Peso (kg)</label><input type="number" id="wPeso" value="${p.peso}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
-                </div>
-                <div class="wiz-row">
-                    <div class="wiz-field"><label>P. Cefálico</label><input type="number" id="wPc" value="${p.pc}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
-                    <div class="wiz-field"><label>P. Abdominal</label><input type="number" id="wPabd" value="${p.pabd}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
-                </div>
-                <div class="wiz-row">
-                    <div class="wiz-field"><label>Hemoglobina</label><input type="number" id="wHb" value="${p.hb}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
-                    <div class="wiz-field"><label>P. Preg.</label><input type="number" id="wPpreg" value="${p.ppreg}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
-                </div>
-                <div class="wiz-field"><label>FUR</label><input type="text" id="wFur" value="${p.fur}" placeholder="dd/mm/aaaa" onchange="wizSave()"></div>
-                <div class="wiz-row">
-                    <div class="wiz-field"><label>EST</label>
-                        <select id="wEst" onchange="wizSave()">
-                            <option value="">-</option>
-                            <option value="N" ${p.est==='N'?'selected':''}>N</option>
-                            <option value="C" ${p.est==='C'?'selected':''}>C</option>
-                            <option value="R" ${p.est==='R'?'selected':''}>R</option>
-                        </select>
-                    </div>
-                    <div class="wiz-field"><label>SER</label>
-                        <select id="wSer" onchange="wizSave()">
-                            <option value="">-</option>
-                            <option value="N" ${p.ser==='N'?'selected':''}>N</option>
-                            <option value="C" ${p.ser==='C'?'selected':''}>C</option>
-                            <option value="R" ${p.ser==='R'?'selected':''}>R</option>
-                        </select>
-                    </div>
-                </div>
-            `;
-        } else if (WIZ.step === 3) {
-            nextBtn.className = 'wiz-btn wiz-btn-save';
-            nextBtn.textContent = '✓ Guardar Paciente';
-            c.innerHTML = `
-                ${p.nombres ? '<div class="wiz-patient-info"><div class="name">' + p.nombres + '</div></div>' : ''}
-                <div class="wiz-section-title">Diagnósticos <span class="wiz-badge">Paso 3 de 3</span></div>
-
-                ${Array.from({length:wizDiagCount},function(_,i){return i+1;}).map(function(n) {
-                    var diag = p['diag'+n], tipo = p['tipo'+n], cie = p['cie'+n];
-                    var lab1 = p['lab'+n+'a'], lab2 = p['lab'+n+'b'], lab3 = p['lab'+n+'c'];
-                    return `
-                    <div style="background:white;border:1px solid #a8d5b5;border-radius:8px;padding:10px;margin-bottom:10px;">
-                        <div style="font-size:9px;font-weight:700;color:#0f6e56;margin-bottom:8px;">DIAGNÓSTICO ${n}</div>
-                        <div class="wiz-field">
-                            <label>Código CIE-10</label>
-                            <input type="text" id="wCie${n}" value="${cie}" placeholder="Ej: Z349" oninput="wizCIE(this,${n})" style="text-transform:uppercase;">
-                        </div>
-                        <div class="wiz-field">
-                            <label>Descripción</label>
-                            <div class="wiz-cie-result" id="wDiag${n}">${diag || 'Se llena al ingresar código CIE'}</div>
-                        </div>
-                        <div class="wiz-row">
-                            <div class="wiz-field">
-                                <label>TIPO</label>
-                                <select id="wTipo${n}" onchange="wizSave()">
-                                    <option value="">-</option>
-                                    <option value="P" ${tipo==='P'?'selected':''}>P</option>
-                                    <option value="D" ${tipo==='D'?'selected':''}>D</option>
-                                    <option value="R" ${tipo==='R'?'selected':''}>R</option>
-                                </select>
-                            </div>
-                            <div class="wiz-field"><label>LAB 1</label><input type="text" id="wLab${n}a" value="${lab1}" onchange="wizSave()"></div>
-                            <div class="wiz-field"><label>LAB 2</label><input type="text" id="wLab${n}b" value="${lab2}" onchange="wizSave()"></div>
-                            <div class="wiz-field"><label>LAB 3</label><input type="text" id="wLab${n}c" value="${lab3}" onchange="wizSave()"></div>
-                        </div>
-                    </div>`;
-                }).join('')}
-                + '<div style="text-align:center;margin-top:6px;">' +
-                  '<button onclick="wizAddDiag()" style="background:rgba(0,200,150,0.1);border:1px dashed rgba(0,200,150,0.3);border-radius:8px;color:#00c896;padding:8px 20px;font-family:Rajdhani,sans-serif;font-size:12px;font-weight:700;cursor:pointer;width:100%;">+ AGREGAR DIAGNÓSTICO</button>' +
-                '</div>'
-            `;
+        function toggleBtn(group, val) {
+            return group.map(function(v) {
+                return '<div class="wiz-toggle-btn' + (v===val?' sel':'') + '" onclick="wizToggle(this,\''+v+'\',event)">' + v + '</div>';
+            }).join('');
         }
 
-        // Scroll to top
+        if (WIZ.step === 1) {
+            nextBtn.className = 'wiz-btn wiz-btn-next';
+            nextBtn.textContent = 'SIGUIENTE →';
+            var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
+            c.innerHTML =
+                '<div class="wiz-section">' +
+                  '<div class="wiz-sec-title">Identificación</div>' +
+                  '<div class="wiz-field"><label>DNI</label><input class="wiz-accent" id="wDni" value="'+p.dni+'" type="text" oninput="wizDNISearch(this.value)" onchange="wizSave()"><div class="wiz-dni-found" id="wDniFound">'+(p.nombres?'✓ '+p.nombres:'')+'</div></div>' +
+                  '<div class="wiz-field"><label>Apellidos y Nombres</label><input id="wNombres" value="'+p.nombres+'" readonly style="font-size:14px;"></div>' +
+                  '<div class="wiz-field"><label>Financiador</label><input id="wFin" value="'+p.fin+'" onchange="wizSave()"></div>' +
+                '</div>' +
+                '<div class="wiz-section">' +
+                  '<div class="wiz-sec-title">Datos personales</div>' +
+                  '<div class="wiz-row">' +
+                    '<div class="wiz-field"><label>Fecha Nacimiento</label><input id="wFN" value="'+p.fn+'" placeholder="dd/mm/aaaa" onchange="wizSave();wizCalcEdad()"></div>' +
+                    '<div class="wiz-field"><label>Sexo</label><div class="wiz-toggle-group">' + toggleBtn(['F','M'], p.sexo) + '</div></div>' +
+                  '</div>' +
+                  '<div class="wiz-field"><label>Edad calculada</label>' +
+                    '<div class="wiz-age-grid">' +
+                      '<div class="wiz-age-box"><div class="wiz-age-lbl">Años</div><div class="wiz-age-val" id="wEdadA">'+(p.edadA||'—')+'</div></div>' +
+                      '<div class="wiz-age-box"><div class="wiz-age-lbl">Meses</div><div class="wiz-age-val" id="wEdadM">'+(p.edadM||'—')+'</div></div>' +
+                      '<div class="wiz-age-box"><div class="wiz-age-lbl">Días</div><div class="wiz-age-val" id="wEdadD">'+(p.edadD||'—')+'</div></div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="wiz-row">' +
+                    '<div class="wiz-field"><label>H.C.</label><input id="wHc" value="'+p.hc+'" onchange="wizSave()"></div>' +
+                    '<div class="wiz-field"><label>Distrito</label><input id="wDistrito" value="'+p.distrito+'" onchange="wizSave()"></div>' +
+                  '</div>' +
+                  '<div class="wiz-field"><label>Dirección</label><input id="wDireccion" value="'+p.direccion+'" onchange="wizSave()"></div>' +
+                '</div>';
+
+        } else if (WIZ.step === 2) {
+            nextBtn.className = 'wiz-btn wiz-btn-next';
+            nextBtn.textContent = 'SIGUIENTE →';
+            var initials2 = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
+            c.innerHTML =
+                '<div class="wiz-pat-chip"><div class="wiz-pat-av">'+initials2+'</div><div><div class="wiz-pat-name">'+(p.nombres||'PACIENTE')+'</div><div class="wiz-pat-meta">'+(p.edadA?p.edadA+'a':'')+' · '+(p.sexo||'?')+' · '+(p.distrito||'')+'</div></div></div>' +
+                '<div class="wiz-section">' +
+                  '<div class="wiz-sec-title">Medidas corporales</div>' +
+                  '<div class="wiz-row">' +
+                    '<div class="wiz-field"><label>Talla (cm)</label><input class="wiz-accent" id="wTalla" value="'+p.talla+'" type="number" onchange="wizSave()"></div>' +
+                    '<div class="wiz-field"><label>Peso (kg)</label><input class="wiz-accent" id="wPeso" value="'+p.peso+'" type="number" onchange="wizSave()"></div>' +
+                  '</div>' +
+                  '<div class="wiz-row">' +
+                    '<div class="wiz-field"><label>P. Cefálico</label><input id="wPc" value="'+p.pc+'" type="number" onchange="wizSave()"></div>' +
+                    '<div class="wiz-field"><label>P. Abdominal</label><input id="wPabd" value="'+p.pabd+'" type="number" onchange="wizSave()"></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="wiz-section">' +
+                  '<div class="wiz-sec-title">Laboratorio</div>' +
+                  '<div class="wiz-row">' +
+                    '<div class="wiz-field"><label>Hemoglobina</label><input class="wiz-accent" id="wHb" value="'+p.hb+'" type="number" onchange="wizSave()"></div>' +
+                    '<div class="wiz-field"><label>P. Preg.</label><input id="wPpreg" value="'+p.ppreg+'" type="number" onchange="wizSave()"></div>' +
+                  '</div>' +
+                  '<div class="wiz-row">' +
+                    '<div class="wiz-field"><label>FUR</label><input id="wFur" value="'+p.fur+'" onchange="wizSave()"></div>' +
+                    '<div class="wiz-field"><label>EST</label><div class="wiz-toggle-group">' + toggleBtn(['N','C','R'], p.est) + '</div></div>' +
+                  '</div>' +
+                  '<div class="wiz-field"><label>SER</label><div class="wiz-toggle-group">' + toggleBtn(['N','C','R'], p.ser) + '</div></div>' +
+                '</div>';
+
+        } else if (WIZ.step === 3) {
+            nextBtn.className = 'wiz-btn wiz-btn-save';
+            nextBtn.textContent = '✓ GUARDAR';
+            var initials3 = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
+            var diagsHtml = '';
+            for (var n = 1; n <= wizDiagCount; n++) {
+                var cie = p['cie'+n]||'', diag = p['diag'+n]||'';
+                var tipo = p['tipo'+n]||'';
+                diagsHtml +=
+                    '<div class="wiz-diag-card">' +
+                      '<div class="wiz-diag-title">DIAGNÓSTICO ' + n + '</div>' +
+                      '<div class="wiz-field"><label>Código CIE-10</label>' +
+                        '<input class="wiz-accent" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" oninput="wizCIESearch(this,'+n+')" style="letter-spacing:3px;"></div>' +
+                      '<div class="wiz-diag-result'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'Escribe un código CIE-10...')+'</div>' +
+                      '<div class="wiz-field" style="margin-bottom:0;"><label>Tipo</label>' +
+                        '<div class="wiz-toggle-group">' + toggleBtn(['P','D','R'], tipo) + '</div>' +
+                      '</div>' +
+                    '</div>';
+            }
+            c.innerHTML =
+                '<div class="wiz-pat-chip"><div class="wiz-pat-av">'+initials3+'</div><div><div class="wiz-pat-name">'+(p.nombres||'PACIENTE')+'</div><div class="wiz-pat-meta">Talla '+(p.talla||'—')+' · Peso '+(p.peso||'—')+' · HB '+(p.hb||'—')+'</div></div></div>' +
+                diagsHtml +
+                '<div class="wiz-add-diag" onclick="wizAddDiag()">+ AGREGAR DIAGNÓSTICO</div>';
+        }
+
         document.getElementById('wizContent').scrollTop = 0;
     }
+
+    // Toggle button handler
+    function wizToggle(btn, val, event) {
+        var group = btn.parentElement;
+        group.querySelectorAll('.wiz-toggle-btn').forEach(function(b){ b.className='wiz-toggle-btn'; });
+        btn.className = 'wiz-toggle-btn sel';
+        var p = wizPat();
+        // Detect which field by parent context
+        var field = group.closest('.wiz-field');
+        if (field) {
+            var lbl = field.querySelector('label');
+            if (lbl) {
+                var t = lbl.textContent.trim();
+                if (t==='Sexo') p.sexo = val;
+                else if (t==='EST') p.est = val;
+                else if (t==='SER') p.ser = val;
+                else if (t==='Tipo') {
+                    var card = group.closest('.wiz-diag-card');
+                    if (card) {
+                        var title = card.querySelector('.wiz-diag-title').textContent;
+                        var n = parseInt(title.replace('DIAGNÓSTICO ',''));
+                        if (!isNaN(n)) p['tipo'+n] = val;
+                    }
+                }
+            }
+        }
+    }
+
+    // CIE search in wizard
+    function wizCIESearch(inp, n) {
+        var v = inp.value.toUpperCase();
+        var diagEl = document.getElementById('wDiag'+n);
+        if (!diagEl) return;
+        if (typeof CIE_MAP !== 'undefined' && CIE_MAP[v]) {
+            diagEl.textContent = CIE_MAP[v];
+            diagEl.className = 'wiz-diag-result filled';
+            var p = wizPat();
+            p['cie'+n] = v; p['diag'+n] = CIE_MAP[v];
+        } else {
+            diagEl.textContent = v.length >= 2 ? 'Buscando...' : 'Escribe un código CIE-10...';
+            diagEl.className = 'wiz-diag-result';
+        }
+    }
+
 
     // =============================================
     // NAVIGATION
@@ -1556,8 +1665,9 @@ document.addEventListener('focusin', function(e) {
         function g(id){ var el=document.getElementById(id); return el?el.value:''; }
         if (WIZ.step===1) {
             p.dni=g('wDni'); p.nombres=g('wNombres'); p.fn=g('wFN');
-            p.sexo=g('wSexo'); p.fin=g('wFin'); p.hc=g('wHc');
+            p.fin=g('wFin'); p.hc=g('wHc');
             p.distrito=g('wDistrito'); p.direccion=g('wDireccion');
+            // sexo saved by wizToggle
         } else if (WIZ.step===2) {
             p.talla=g('wTalla'); p.peso=g('wPeso'); p.pc=g('wPc');
             p.pabd=g('wPabd'); p.hb=g('wHb'); p.ppreg=g('wPpreg');
@@ -1714,15 +1824,23 @@ document.addEventListener('focusin', function(e) {
     // =============================================
     function wizShowSuccess() {
         var c = document.getElementById('wizContent');
-        c.innerHTML = `
-            <div style="text-align:center;padding:30px 20px;">
-                <div style="font-size:50px;margin-bottom:16px;">✅</div>
-                <div style="font-size:16px;font-weight:700;color:#085041;margin-bottom:8px;">Paciente guardado</div>
-                <div style="font-size:12px;color:#0f6e56;margin-bottom:24px;">${wizPat().nombres || 'Paciente ' + (WIZ.patIdx+1)}</div>
-                <button class="wiz-btn wiz-btn-next" style="width:100%;margin-bottom:10px;" onclick="wizAddPatient()">+ Agregar otro paciente</button>
-                <button class="wiz-btn" style="width:100%;background:#e1f5ee;color:#085041;" onclick="WIZ.step=1;wizRender()">✏️ Editar este paciente</button>
-            </div>
-        `;
+        var p = wizPat();
+        var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
+        c.innerHTML =
+            '<div class="wiz-success">' +
+              '<div class="wiz-suc-icon">🏆</div>' +
+              '<div class="wiz-suc-title">GUARDADO</div>' +
+              '<div class="wiz-suc-pts">+150 XP</div>' +
+              '<div class="wiz-suc-table">' +
+                '<div style="font-size:8px;color:rgba(0,200,150,0.4);letter-spacing:2px;font-weight:700;margin-bottom:8px;text-transform:uppercase;">Tabla HIS Actualizada</div>' +
+                '<table class="wiz-suc-tbl">' +
+                  '<tr><th>DNI</th><th>PACIENTE</th><th>CIE</th><th>TIPO</th></tr>' +
+                  '<tr class="wiz-new"><td>'+(p.dni?p.dni.slice(-5):'?')+'</td><td>'+(p.nombres?p.nombres.split(' ')[0]:'?')+'</td><td>'+(p.cie1||'—')+'</td><td>'+(p.tipo1||'—')+'</td></tr>' +
+                '</table>' +
+              '</div>' +
+              '<button class="wiz-suc-btn" onclick="wizAddPatient()">► NUEVO PACIENTE</button>' +
+              '<button class="wiz-suc-btn" style="margin-top:8px;background:transparent;" onclick="WIZ.step=1;document.getElementById('wizFooter').style.display='flex';wizRender()">✏ EDITAR</button>' +
+            '</div>';
         document.getElementById('wizFooter').style.display = 'none';
     }
 
