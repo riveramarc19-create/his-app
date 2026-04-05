@@ -2,52 +2,52 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.3, maximum-scale=3.0, user-scalable=yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="HIS OREO">
-    <meta name="theme-color" content="#060610">
+    <meta name="theme-color" content="#0f6e56">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-192.png">
-    <title>HIS AURORA - Registro Diario</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>HIS OREO - Formulario Final</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap');
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Rajdhani', 'Segoe UI', Arial, sans-serif;
             font-size: 11px;
             margin: 20px;
-            background: #060610;
+            background: #060f0d;
         }
         .his-container {
             width: 100%;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(168,85,247,0.25);
+            background: #0a1a16;
+            border: 1px solid rgba(0,180,140,0.30);
             padding: 0;
-            box-shadow: 0 0 60px rgba(6,182,212,0.08), 0 0 120px rgba(168,85,247,0.06);
+            box-shadow: 0 0 60px rgba(0,200,150,0.2), 0 0 120px rgba(0,150,120,0.08);
             border-radius: 14px;
             overflow: visible;
         }
         .his-header-bar {
-            background: linear-gradient(135deg, #0a0a1a 0%, #130820 100%);
-            border-bottom: 1px solid rgba(168,85,247,0.2);
-            color: white;
+            background: #0d2018;
+            border-bottom: 1px solid rgba(0,180,140,0.30);
+            color: #00c896;
             text-align: center;
             padding: 12px 16px;
             font-size: 13px;
             font-weight: 700;
             letter-spacing: 0.15em;
             font-family: 'Orbitron', monospace;
-            background-clip: text;
             position: relative;
         }
         .his-header-bar::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 20%; right: 20%;
+            bottom: 0; left: 15%; right: 15%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), rgba(168,85,247,0.5), transparent);
+            background: linear-gradient(90deg, transparent, #00c896, transparent);
         }
         h2 { display: none; }
 
@@ -57,601 +57,208 @@
             border-spacing: 0;
             margin-bottom: 0;
             table-layout: fixed;
-            border: none;
-            border-radius: 0;
             overflow: visible;
         }
-
         th, td {
             border: none;
-            border-right: 1px solid rgba(168,85,247,0.15);
-            border-bottom: 1px solid rgba(168,85,247,0.15);
+            border-right: 1px solid rgba(0,180,140,0.18);
+            border-bottom: 1px solid rgba(0,180,140,0.18);
             padding: 0;
             text-align: center;
             vertical-align: middle;
             height: 26px;
             box-sizing: border-box;
         }
-        th:first-child, td:first-child { border-left: 1px solid rgba(168,85,247,0.15); }
-        thead tr:first-child th { border-top: 1px solid rgba(168,85,247,0.15); }
-        tbody tr:first-child td { border-top: 1px solid rgba(168,85,247,0.15); }
-
-        tbody td {
-            border-right: 1px solid rgba(168,85,247,0.15) !important;
-            border-bottom: 1px solid rgba(168,85,247,0.15) !important;
-        }
-        tbody td:first-child { border-left: 1px solid rgba(168,85,247,0.15) !important; }
+        th:first-child, td:first-child { border-left: 1px solid rgba(0,180,140,0.18); }
+        thead tr:first-child th { border-top: 1px solid rgba(0,180,140,0.18); }
+        tbody tr:first-child td { border-top: 1px solid rgba(0,180,140,0.18); }
+        tbody td { border-right: 1px solid rgba(0,180,140,0.18) !important; border-bottom: 1px solid rgba(0,180,140,0.18) !important; }
+        tbody td:first-child { border-left: 1px solid rgba(0,180,140,0.18) !important; }
 
         th {
-            background: rgba(6,182,212,0.08);
+            background: rgba(0,180,140,0.08);
             padding: 4px;
             font-size: 9px;
             font-weight: 700;
-            color: rgba(6,182,212,0.8);
+            color: rgba(0,200,150,0.7);
             white-space: nowrap;
             overflow: visible;
             font-family: 'Rajdhani', sans-serif;
             letter-spacing: 0.05em;
         }
-        .header-top th { background: rgba(168,85,247,0.15); color: rgba(192,132,252,0.9); }
-        .section-b-header th { background: rgba(6,182,212,0.1); color: rgba(103,232,249,0.8); }
+        .header-top th { background: rgba(0,160,122,0.12); color: #00c896; }
+        .section-b-header th { background: rgba(0,200,150,0.07); color: rgba(0,200,150,0.7); }
 
         input {
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
+            width: 100%; height: 100%;
+            border: none; outline: none;
             text-align: center;
             font-family: 'Rajdhani', inherit;
             font-size: 10px;
-            color: rgba(220,220,255,0.85);
+            color: rgba(200,255,240,0.9);
             background: transparent;
             font-weight: 600;
             text-transform: uppercase;
             box-sizing: border-box;
             max-width: 100%;
         }
-        input:focus { background: rgba(168,85,247,0.08); }
-        input::placeholder { color: rgba(168,85,247,0.25); font-weight: normal; font-size: 9px; }
-
+        input:focus { background: rgba(0,200,150,0.06); }
+        input::placeholder { color: rgba(0,180,140,0.4); font-weight: normal; font-size: 9px; }
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         input[type="number"] { -moz-appearance: textfield; }
-
-        input[readonly] {
-            cursor: default;
-            color: rgba(6,182,212,0.4);
-            background: rgba(6,182,212,0.03);
-        }
-        input:not([readonly]) {
-            pointer-events: auto;
-            cursor: text;
-        }
-        .input-left { text-align: left; padding-left: 5px; }
+        input[readonly] { cursor: default; color: rgba(0,180,140,0.4); background: rgba(0,180,140,0.03); }
+        input:not([readonly]) { pointer-events: auto; cursor: text; }
 
         select {
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
+            width: 100%; height: 100%;
+            border: none; outline: none;
             font-family: 'Rajdhani', sans-serif;
             font-size: 10px;
-            color: rgba(220,220,255,0.85);
+            color: rgba(200,255,240,0.9);
             font-weight: 600;
             background: transparent;
             text-align: center;
             cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
         }
-        select:focus { background: rgba(168,85,247,0.08); }
-        select option { background: #0d0d20; color: #e0e0ff; }
+        select:focus { background: rgba(0,200,150,0.06); }
+        select option { background: #0d2018; color: rgba(200,255,240,0.9); }
 
+        .input-left { text-align: left; padding-left: 5px; }
+
+        /* FN/FUR ROW */
         .fn-fur-row td {
-            background-color: #e1f5ee;
-            border-top: 1px solid #1d9e75 !important;
-            border-right: 1px solid #a8d5b5 !important;
-            border-bottom: 1px solid #a8d5b5 !important;
-            border-left: 1px solid #a8d5b5 !important;
-            height: 28px;
-            font-size: 9px;
-            padding: 0;
+            background: rgba(0,180,140,0.05);
+            border-top: 1px solid #00a07a !important;
+            border-right: 1px solid rgba(0,180,140,0.18) !important;
+            border-bottom: 1px solid rgba(0,180,140,0.18) !important;
+            border-left: 1px solid rgba(0,180,140,0.18) !important;
+            height: 28px; font-size: 9px; padding: 0;
         }
         .fn-fur-cell { display: flex; align-items: center; height: 100%; }
         .fn-fur-label {
-            width: 32px;
-            font-size: 8px;
-            font-weight: 700;
-            color: rgba(6,182,212,0.8);
-            background: rgba(6,182,212,0.08);
-            border-right: 1px solid rgba(6,182,212,0.15);
-            padding: 0;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            flex-shrink: 0;
+            width: 32px; font-size: 8px; font-weight: 700;
+            color: #00c896;
+            background: rgba(0,200,150,0.08);
+            border-right: 1px solid rgba(0,180,140,0.18);
+            padding: 0; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            white-space: nowrap; flex-shrink: 0;
         }
         .fn-fur-input {
-            flex-grow: 1;
-            font-size: 9px;
-            color: rgba(220,220,255,0.8);
-            font-weight: 600;
-            text-align: left;
-            padding-left: 3px;
+            flex-grow: 1; font-size: 9px; color: rgba(200,255,240,0.9);
+            font-weight: 600; text-align: left; padding-left: 3px;
         }
 
         /* EDAD */
         .age-cell { display: flex; align-items: center; height: 100%; }
         .age-label {
-            width: 15px;
-            background: rgba(168,85,247,0.1);
-            border-right: 1px solid rgba(168,85,247,0.15);
-            font-size: 9px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(192,132,252,0.8);
-            flex-shrink: 0;
-            font-weight: 700;
+            width: 15px; background: rgba(0,180,140,0.1);
+            border-right: 1px solid rgba(0,180,140,0.18);
+            font-size: 9px; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            color: #00c896; flex-shrink: 0; font-weight: 700;
         }
         .age-input { flex-grow: 1; }
 
-        /* CELDA ANTRO */
+        /* ANTRO */
         .antro-cell { display: flex; align-items: center; height: 100%; }
         .antro-label {
-            width: 32px;
-            background: rgba(6,182,212,0.08);
-            border-right: 1px solid rgba(6,182,212,0.15);
-            font-size: 8px;
-            font-weight: 700;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(6,182,212,0.7);
-            flex-shrink: 0;
+            width: 32px; background: rgba(0,180,140,0.08);
+            border-right: 1px solid rgba(0,180,140,0.18);
+            font-size: 8px; font-weight: 700; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            color: #00a07a; flex-shrink: 0;
         }
         .antro-input { flex-grow: 1; }
 
         /* ANCHOS */
-        .w-dia   { width: 2.5%; }
-        .w-dni   { width: 6.5%; }
-        .w-fin   { width: 2.5%; }
-        .w-dist  { width: 11%; }
-        .w-edad  { width: 4%; }
-        .w-sex   { width: 1.5%; }
-        .w-antro { width: 10.5%; }
-        .w-cond  { width: 1.5%; }
-        .w-dx    { width: 24%; }
-        .w-tipo  { width: 3%; }
-        .w-lab   { width: 1.8%; }
-        .w-cie   { width: 6%; }
+        .w-dia   { width: 2.5%; } .w-dni  { width: 6.5%; } .w-fin  { width: 2.5%; }
+        .w-dist  { width: 11%; }  .w-edad { width: 4%; }   .w-sex  { width: 1.5%; }
+        .w-antro { width: 10.5%; }.w-cond { width: 1.5%; } .w-dx   { width: 24%; }
+        .w-tipo  { width: 3%; }   .w-lab  { width: 1.8%; } .w-cie  { width: 6%; }
 
-        /* BOTONES */
+        /* FOOTER */
         .his-footer {
             padding: 10px 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(6,182,212,0.03);
-            border-top: 1px solid rgba(168,85,247,0.15);
+            background: #0d2018;
+            border-top: 1px solid rgba(0,180,140,0.30);
+            border-radius: 0 0 14px 14px;
         }
 
-
-        /* ===== MÓVIL / PWA ===== */
-        @media (max-width: 900px) {
-            body {
-                margin: 4px;
-                font-size: 10px;
-                /* Permite scroll suave */
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .his-container {
-                border-radius: 8px;
-            }
-
-            .his-header-bar {
-                font-size: 11px;
-                padding: 8px;
-                position: sticky;
-                top: 0;
-                z-index: 100;
-            }
-
-            /* Wrapper scrollable horizontal */
-            .his-scroll-wrapper {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scroll-snap-type: x proximity;
-            }
-
-            /* La tabla mantiene su ancho real para ser legible */
-            .his-scroll-wrapper table {
-                min-width: 800px;
-            }
-
-            th {
-                font-size: 7.5px;
-                padding: 3px 2px;
-                white-space: nowrap;
-            }
-
-            td, th { height: 32px; }
-
-            input, select {
-                font-size: 13px !important; /* evita zoom iOS */
-                height: 32px;
-            }
-
-            .fn-fur-row td { height: 34px; }
-            .fn-fur-input  { font-size: 12px; }
-
-            .antro-label  { width: 28px; font-size: 7px; }
-            .age-label    { width: 14px; font-size: 8px; }
-            .fn-fur-label { width: 28px; font-size: 7px; }
-
-            /* Footer sticky abajo */
-            .his-footer {
-                position: sticky;
-                bottom: 0;
-                z-index: 100;
-                flex-direction: column;
-                gap: 8px;
-                padding: 8px;
-            }
-
-            .his-footer button,
-            .his-footer label {
-                width: 100%;
-                padding: 14px;
-                font-size: 13px;
-                border-radius: 8px;
-                text-align: center;
-                justify-content: center;
-            }
-
-            /* Campo activo sube sobre el teclado */
-            input:focus, select:focus {
-                position: relative;
-                z-index: 10;
-                scroll-margin-bottom: 300px;
-            }
-
-            /* Panel CIE centrado en móvil */
-            #cieDD { width: 92vw !important; left: 4vw !important; transform: none !important; top: 20vh !important; }
-        }
-
+        /* READONLY diagnostic */
+        input[readonly] { cursor: default; color: rgba(0,180,140,0.4); background: rgba(0,180,140,0.03); }
 
         /* ===== WIZARD MÓVIL ===== */
-        .wizard-overlay {
-            display: none;
-        }
-
+        .wizard-overlay { display: none; }
         @media (max-width: 1024px) {
             #hisForm, .his-footer { display: none !important; }
             .his-header-bar { font-size: 12px; padding: 10px; }
-            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060610; }
+            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060f0d; }
         }
-
-        @media (min-width: 1025px) {
-            .wizard-overlay { display: none !important; }
-        }
-
-
-        /* AURORA WIZARD STYLES */
-        .wiz-steps { display:flex; background:#08081a; padding:8px 12px; gap:0; align-items:center; border-bottom:1px solid rgba(168,85,247,0.1); }
-        .wiz-step { flex:1; text-align:center; }
-        .wiz-step-num { width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin:0 auto 3px;transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); }
-        .wiz-step.active .wiz-step-num { background:rgba(168,85,247,0.2);border:2px solid #a855f7;color:#c084fc;box-shadow:0 0 16px rgba(168,85,247,0.4); }
-        .wiz-step.done   .wiz-step-num { background:rgba(6,182,212,0.15);border:2px solid #06b6d4;color:#67e8f9; }
-        .wiz-step.pending .wiz-step-num { background:transparent;border:2px solid rgba(168,85,247,0.15);color:rgba(168,85,247,0.25); }
-        .wiz-step-label { font-size:8px;font-weight:700;letter-spacing:0.5px; }
-        .wiz-step.active .wiz-step-label { color:rgba(192,132,252,0.9); }
-        .wiz-step.done   .wiz-step-label { color:rgba(6,182,212,0.6); }
-        .wiz-step.pending .wiz-step-label { color:rgba(168,85,247,0.2); }
-        .wiz-line { flex:0.4;height:1px;background:rgba(168,85,247,0.15);margin-bottom:14px; }
-
-        .wiz-progress { height:2px;background:rgba(168,85,247,0.1); }
-        .wiz-progress-bar { height:100%;background:linear-gradient(90deg,#06b6d4,#a855f7);transition:width 0.5s ease;border-radius:0 2px 2px 0; }
-
-        .wiz-content { flex:1;overflow-y:auto;padding:14px 14px 120px 14px;-webkit-overflow-scrolling:touch;scroll-padding-bottom:120px; }
-        .wiz-content::-webkit-scrollbar { width:2px; }
-        .wiz-content::-webkit-scrollbar-thumb { background:rgba(168,85,247,0.2);border-radius:2px; }
-
-        .wiz-section-title { font-size:9px;font-weight:700;color:rgba(6,182,212,0.7);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;padding-bottom:5px;border-bottom:1px solid rgba(168,85,247,0.1);display:flex;justify-content:space-between;align-items:center; }
-        .wiz-badge { background:rgba(168,85,247,0.12);color:rgba(192,132,252,0.8);border-radius:20px;padding:2px 8px;font-size:8px;font-weight:700;border:1px solid rgba(168,85,247,0.2); }
-
-        .wiz-field { margin-bottom:12px; }
-        .wiz-field label { display:block;font-size:9px;font-weight:700;color:rgba(6,182,212,0.6);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase; }
-        .wiz-field input, .wiz-field select { width:100%;background:rgba(255,255,255,0.03);border:1.5px solid rgba(168,85,247,0.2);border-radius:8px;padding:10px 12px;font-size:15px;color:rgba(220,220,255,0.9);font-family:'Rajdhani',sans-serif;font-weight:600;-webkit-appearance:none;appearance:none;outline:none;transition:all 0.2s; }
-        .wiz-field input:focus, .wiz-field select:focus { border-color:#a855f7;background:rgba(168,85,247,0.06);box-shadow:0 0 0 3px rgba(168,85,247,0.1); }
-        .wiz-field input[readonly] { background:rgba(6,182,212,0.03);color:rgba(6,182,212,0.4);border-color:rgba(6,182,212,0.1); }
-        .wiz-row { display:flex;gap:10px; }
-        .wiz-row .wiz-field { flex:1; }
-
-        .wiz-patient-info { background:rgba(168,85,247,0.06);border-radius:10px;padding:10px 12px;margin-bottom:14px;border-left:2px solid rgba(168,85,247,0.4); }
-        .wiz-patient-info .name { font-size:13px;font-weight:700;color:rgba(220,220,255,0.9); }
-        .wiz-patient-info .meta { font-size:10px;color:rgba(6,182,212,0.6);margin-top:2px; }
-
-        .wiz-footer { background:rgba(6,182,212,0.03);padding:12px 14px;display:flex;gap:10px;border-top:1px solid rgba(168,85,247,0.1); }
-        .wiz-btn { flex:1;padding:13px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif; }
-        .wiz-btn-back { background:rgba(255,255,255,0.03);color:rgba(168,85,247,0.7);border:1.5px solid rgba(168,85,247,0.2); }
-        .wiz-btn-next { background:linear-gradient(135deg,rgba(6,182,212,0.2),rgba(168,85,247,0.2));color:rgba(192,132,252,0.9);border:1.5px solid rgba(168,85,247,0.4);flex:1.5;box-shadow:0 4px 20px rgba(168,85,247,0.15); }
-        .wiz-btn-save { background:linear-gradient(135deg,#0891b2,#7c3aed);color:white;flex:1.5;box-shadow:0 4px 20px rgba(124,58,237,0.3); }
-
-        .wiz-patients-bar { background:#06060f;padding:6px 14px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(168,85,247,0.1); }
-        .wiz-pat-btn { background:rgba(168,85,247,0.08);color:rgba(192,132,252,0.7);border:1px solid rgba(168,85,247,0.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s; }
-        .wiz-pat-btn.active { background:rgba(168,85,247,0.2);color:#c084fc;border-color:rgba(168,85,247,0.5);box-shadow:0 0 10px rgba(168,85,247,0.2); }
-        .wiz-pat-btn-add { background:transparent;color:rgba(6,182,212,0.5);border:1px dashed rgba(6,182,212,0.25); }
-
-        .wiz-cie-result { background:rgba(168,85,247,0.06);border-radius:6px;padding:8px 10px;margin-top:4px;font-size:11px;color:rgba(192,132,252,0.8);font-weight:600;min-height:36px;border:1px solid rgba(168,85,247,0.15); }
-        .wiz-dni-found { color:rgba(6,182,212,0.8);font-size:10px;margin-top:3px;font-weight:700; }
-
-        .campo-found { background:rgba(6,182,212,0.08) !important; }
-        .campo-notfound { background:rgba(255,60,60,0.08) !important; }
-
-        /* ANCHOS */
-        .w-dia   { width: 2.5%; }
-        .w-dni   { width: 6.5%; }
-        .w-fin   { width: 2.5%; }
-        .w-dist  { width: 11%; }
-        .w-edad  { width: 4%; }
-        .w-sex   { width: 1.5%; }
-        .w-antro { width: 10.5%; }
-        .w-cond  { width: 1.5%; }
-        .w-dx    { width: 24%; }
-        .w-tipo  { width: 3%; }
-        .w-lab   { width: 1.8%; }
-        .w-cie   { width: 6%; }
-
-        /* BOTONES */
-        .his-footer {
-            padding: 10px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(6,182,212,0.03);
-            border-top: 1px solid rgba(168,85,247,0.15);
-        }
-
-
-        /* ===== MÓVIL / PWA ===== */
-        @media (max-width: 900px) {
-            body {
-                margin: 4px;
-                font-size: 10px;
-                /* Permite scroll suave */
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .his-container {
-                border-radius: 8px;
-            }
-
-            .his-header-bar {
-                font-size: 11px;
-                padding: 8px;
-                position: sticky;
-                top: 0;
-                z-index: 100;
-            }
-
-            /* Wrapper scrollable horizontal */
-            .his-scroll-wrapper {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scroll-snap-type: x proximity;
-            }
-
-            /* La tabla mantiene su ancho real para ser legible */
-            .his-scroll-wrapper table {
-                min-width: 800px;
-            }
-
-            th {
-                font-size: 7.5px;
-                padding: 3px 2px;
-                white-space: nowrap;
-            }
-
-            td, th { height: 32px; }
-
-            input, select {
-                font-size: 13px !important; /* evita zoom iOS */
-                height: 32px;
-            }
-
-            .fn-fur-row td { height: 34px; }
-            .fn-fur-input  { font-size: 12px; }
-
-            .antro-label  { width: 28px; font-size: 7px; }
-            .age-label    { width: 14px; font-size: 8px; }
-            .fn-fur-label { width: 28px; font-size: 7px; }
-
-            /* Footer sticky abajo */
-            .his-footer {
-                position: sticky;
-                bottom: 0;
-                z-index: 100;
-                flex-direction: column;
-                gap: 8px;
-                padding: 8px;
-            }
-
-            .his-footer button,
-            .his-footer label {
-                width: 100%;
-                padding: 14px;
-                font-size: 13px;
-                border-radius: 8px;
-                text-align: center;
-                justify-content: center;
-            }
-
-            /* Campo activo sube sobre el teclado */
-            input:focus, select:focus {
-                position: relative;
-                z-index: 10;
-                scroll-margin-bottom: 300px;
-            }
-
-            /* Panel CIE centrado en móvil */
-            #cieDD { width: 92vw !important; left: 4vw !important; transform: none !important; top: 20vh !important; }
-        }
-
-
-        /* ===== WIZARD MÓVIL ===== */
-        .wizard-overlay {
-            display: none;
-        }
-
-        @media (max-width: 1024px) {
-            #hisForm, .his-footer { display: none !important; }
-            .his-header-bar { font-size: 12px; padding: 10px; }
-            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060610; }
-        }
-
-        @media (min-width: 1025px) {
-            .wizard-overlay { display: none !important; }
-        }
+        @media (min-width: 1025px) { .wizard-overlay { display: none !important; } }
 
         /* WIZARD STYLES */
-        .wiz-steps {
-            display: flex;
-            background: #085041;
-            padding: 8px 12px;
-            gap: 0;
-            align-items: center;
-        }
-        .wiz-step {
-            flex: 1;
-            text-align: center;
-        }
-        .wiz-step-num {
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 700;
-            margin: 0 auto 3px;
-            transition: all 0.3s;
-        }
-        .wiz-step.active  .wiz-step-num { background: white; color: #0f6e56; }
-        .wiz-step.done    .wiz-step-num { background: #1d9e75; color: white; }
-        .wiz-step.pending .wiz-step-num { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
-        .wiz-step-label { font-size: 8px; color: rgba(255,255,255,0.6); }
-        .wiz-step.active  .wiz-step-label,
-        .wiz-step.done    .wiz-step-label { color: white; font-weight: 600; }
-        .wiz-line { flex: 0.4; height: 1px; background: rgba(255,255,255,0.2); margin-bottom: 14px; }
-
-        .wiz-progress { height: 4px; background: #c5ebd8; }
-        .wiz-progress-bar { height: 100%; background: #0f6e56; transition: width 0.4s ease; border-radius: 0 2px 2px 0; }
-
-        .wiz-content { flex: 1; overflow-y: auto; padding: 14px 14px 120px 14px; -webkit-overflow-scrolling: touch; scroll-padding-bottom: 120px; }
-
-        .wiz-section-title {
-            font-size: 10px; font-weight: 700; color: #0f6e56;
-            text-transform: uppercase; letter-spacing: 0.06em;
-            margin-bottom: 12px; padding-bottom: 5px;
-            border-bottom: 1.5px solid #a8d5b5;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .wiz-badge {
-            background: #e1f5ee; color: #0f6e56;
-            border-radius: 20px; padding: 2px 8px;
-            font-size: 9px; font-weight: 600;
-        }
-
-        .wiz-field { margin-bottom: 12px; }
-        .wiz-field label {
-            display: block; font-size: 10px; font-weight: 600;
-            color: #085041; margin-bottom: 4px;
-        }
-        .wiz-field input, .wiz-field select {
-            width: 100%; background: white;
-            border: 1.5px solid #a8d5b5; border-radius: 8px;
-            padding: 10px 12px; font-size: 15px; color: #085041;
-            font-family: inherit; font-weight: 600;
-            -webkit-appearance: none; appearance: none;
-            outline: none;
-        }
-        .wiz-field input:focus, .wiz-field select:focus {
-            border-color: #0f6e56; background: #f0faf6;
-        }
-        .wiz-field input[readonly] {
-            background: #f4faf6; color: #7a8694; font-weight: 400;
-        }
-        .wiz-row { display: flex; gap: 10px; }
-        .wiz-row .wiz-field { flex: 1; }
-
-        .wiz-patient-info {
-            background: #e1f5ee; border-radius: 10px;
-            padding: 10px 12px; margin-bottom: 14px;
-            border-left: 3px solid #0f6e56;
-        }
-        .wiz-patient-info .name { font-size: 13px; font-weight: 700; color: #085041; }
-        .wiz-patient-info .meta { font-size: 10px; color: #0f6e56; margin-top: 2px; }
-
-        .wiz-footer {
-            background: white; padding: 12px 14px;
-            display: flex; gap: 10px;
-            border-top: 1px solid #a8d5b5;
-        }
-        .wiz-btn {
-            flex: 1; padding: 13px; border: none;
-            border-radius: 10px; font-size: 13px;
-            font-weight: 700; cursor: pointer;
-            font-family: inherit;
-        }
-        .wiz-btn-back { background: #e1f5ee; color: #0f6e56; }
-        .wiz-btn-next { background: #0f6e56; color: white; flex: 1.5; }
-        .wiz-btn-save { background: #1d9e75; color: white; flex: 1.5; }
-
-        .wiz-patients-bar {
-            background: #0f6e56; padding: 6px 14px;
-            display: flex; gap: 8px; overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .wiz-pat-btn {
-            background: rgba(255,255,255,0.15); color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 20px; padding: 4px 12px;
-            font-size: 10px; font-weight: 600; white-space: nowrap;
-            cursor: pointer; font-family: inherit;
-        }
-        .wiz-pat-btn.active { background: white; color: #0f6e56; }
-        .wiz-pat-btn-add { background: transparent; color: rgba(255,255,255,0.7); border: 1px dashed rgba(255,255,255,0.4); }
-
-        .wiz-cie-result {
-            background: #e1f5ee; border-radius: 6px;
-            padding: 6px 10px; margin-top: 4px;
-            font-size: 11px; color: #085041; font-weight: 600;
-            min-height: 30px;
-        }
-        .wiz-dni-found { color: #0f6e56; font-size: 10px; margin-top: 3px; font-weight: 600; }
-
+        .wiz-steps { display:flex; background:#0d2018; padding:8px 12px; gap:0; align-items:center; border-bottom:1px solid rgba(0,180,140,0.18); }
+        .wiz-step { flex:1; text-align:center; }
+        .wiz-step-num { width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin:0 auto 3px;transition:all 0.4s; }
+        .wiz-step.active .wiz-step-num { background:rgba(0,200,150,0.15);border:2px solid #00c896;color:#00c896;box-shadow:0 0 14px rgba(0,200,150,0.2); }
+        .wiz-step.done   .wiz-step-num { background:rgba(0,160,122,0.2);border:2px solid #00a07a;color:#00a07a; }
+        .wiz-step.pending .wiz-step-num { background:transparent;border:2px solid rgba(0,180,140,0.18);color:rgba(0,180,140,0.4); }
+        .wiz-step-label { font-size:8px;font-weight:700;letter-spacing:0.5px; }
+        .wiz-step.active .wiz-step-label { color:rgba(0,200,150,0.7); }
+        .wiz-step.done   .wiz-step-label { color:rgba(0,180,140,0.4); }
+        .wiz-step.pending .wiz-step-label { color:rgba(0,180,140,0.18); }
+        .wiz-line { flex:0.4;height:1px;background:rgba(0,180,140,0.18);margin-bottom:14px; }
+        .wiz-progress { height:2px;background:rgba(0,180,140,0.1); }
+        .wiz-progress-bar { height:100%;background:linear-gradient(90deg,#00a07a,#00c896);transition:width 0.5s ease;border-radius:0 2px 2px 0; }
+        .wiz-content { flex:1;overflow-y:auto;padding:14px 14px 120px;-webkit-overflow-scrolling:touch; }
+        .wiz-section-title { font-size:9px;font-weight:700;color:rgba(0,200,150,0.7);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;padding-bottom:5px;border-bottom:1px solid rgba(0,180,140,0.18);display:flex;justify-content:space-between;align-items:center; }
+        .wiz-badge { background:rgba(0,200,150,0.1);color:#00c896;border-radius:20px;padding:2px 8px;font-size:8px;font-weight:700;border:1px solid rgba(0,180,140,0.30); }
+        .wiz-field { margin-bottom:12px; }
+        .wiz-field label { display:block;font-size:9px;font-weight:700;color:rgba(0,200,150,0.7);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase; }
+        .wiz-field input, .wiz-field select { width:100%;background:#0d2018;border:1.5px solid rgba(0,180,140,0.30);border-radius:8px;padding:10px 12px;font-size:15px;color:rgba(200,255,240,0.9);font-family:'Rajdhani',sans-serif;font-weight:600;-webkit-appearance:none;appearance:none;outline:none;transition:all 0.2s; }
+        .wiz-field input:focus, .wiz-field select:focus { border-color:#00c896;background:rgba(0,200,150,0.05);box-shadow:0 0 0 3px rgba(0,200,150,0.2); }
+        .wiz-field input[readonly] { background:rgba(0,180,140,0.03);color:rgba(0,180,140,0.4);border-color:rgba(0,180,140,0.18); }
+        .wiz-row { display:flex;gap:10px; }
+        .wiz-row .wiz-field { flex:1; }
+        .wiz-patient-info { background:rgba(0,180,140,0.06);border-radius:10px;padding:10px 12px;margin-bottom:14px;border-left:2px solid #00a07a; }
+        .wiz-patient-info .name { font-size:13px;font-weight:700;color:rgba(200,255,240,0.9); }
+        .wiz-patient-info .meta { font-size:10px;color:rgba(0,200,150,0.7);margin-top:2px; }
+        .wiz-footer { background:#0d2018;padding:12px 14px;display:flex;gap:10px;border-top:1px solid rgba(0,180,140,0.18); }
+        .wiz-btn { flex:1;padding:13px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-btn-back { background:rgba(0,180,140,0.06);color:rgba(0,200,150,0.7);border:1.5px solid rgba(0,180,140,0.30); }
+        .wiz-btn-next { background:rgba(0,200,150,0.15);color:#00c896;border:1.5px solid rgba(0,180,140,0.30);flex:1.5;box-shadow:0 4px 20px rgba(0,200,150,0.2); }
+        .wiz-btn-save { background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;flex:1.5;font-weight:800; }
+        .wiz-patients-bar { background:#0d2018;padding:6px 14px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(0,180,140,0.18); }
+        .wiz-pat-btn { background:rgba(0,180,140,0.08);color:rgba(0,200,150,0.7);border:1px solid rgba(0,180,140,0.30);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-pat-btn.active { background:rgba(0,200,150,0.2);color:#00c896;border-color:#00a07a;box-shadow:0 0 10px rgba(0,200,150,0.2); }
+        .wiz-pat-btn-add { background:transparent;color:rgba(0,200,150,0.7);border:1px dashed rgba(0,180,140,0.30); }
+        .wiz-cie-result { background:rgba(0,180,140,0.06);border-radius:6px;padding:8px 10px;margin-top:4px;font-size:11px;color:rgba(0,200,150,0.7);font-weight:600;min-height:36px;border:1px solid rgba(0,180,140,0.18); }
+        .wiz-dni-found { color:#00c896;font-size:10px;margin-top:3px;font-weight:700; }
+        .campo-found { background:rgba(0,200,150,0.08) !important; }
+        .campo-notfound { background:rgba(255,60,60,0.06) !important; }
 
         /* ===== IMPRESIÓN ===== */
         @media print {
             @page { size: A4 landscape; margin: 8mm 6mm; }
-            body { margin:0; padding:0; background:white; font-size:7px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-            .his-container { border:none; box-shadow:none; border-radius:0; }
-            .his-header-bar { background:#0f6e56 !important; color:white !important; padding:5px; font-size:9px; }
+            body { margin:0;padding:0;background:white;font-size:7px;-webkit-print-color-adjust:exact;print-color-adjust:exact; }
+            .his-container { border:none;box-shadow:none;border-radius:0; }
+            .his-header-bar { background:#0a4a3a !important;color:white !important;padding:5px;font-size:9px; }
             .his-footer { display:none; }
+            .wizard-overlay { display:none !important; }
             table { margin-bottom:2px; }
-            th, td { border:0.4pt solid #a8d5b5 !important; height:14px !important; font-size:6.5px; padding:0 !important; }
-            tbody td { border:0.4pt solid #a8d5b5 !important; }
-            .fn-fur-row td { height:12px !important; border-top:0.8pt solid #0f6e56 !important; background-color:#e1f5ee !important; }
-            th { font-size:6px; padding:1px !important; background-color:#c5ebd8 !important; color:#085041 !important; }
-            .header-top th { background-color:#1d9e75 !important; color:white !important; }
-            input, select { font-size:6.5px; color:#000 !important; }
-            .antro-label, .fn-fur-label, .age-label { font-size:6px; background-color:#9fdfc2 !important; }
+            th, td { border:0.4pt solid #006b50 !important;height:14px !important;font-size:6.5px;padding:0 !important; }
+            tbody td { border:0.4pt solid #006b50 !important; }
+            .fn-fur-row td { height:12px !important;border-top:0.8pt solid #00a07a !important;background:white !important; }
+            th { font-size:6px;padding:1px !important;background:#d0ede5 !important;color:#004a38 !important; }
+            input, select { font-size:6.5px;color:#000 !important; }
+            .antro-label, .fn-fur-label, .age-label { font-size:6px;background:#d0ede5 !important;color:#004a38 !important; }
             input::placeholder { color:transparent !important; }
-            ::-webkit-input-placeholder { color:transparent !important; }
         }
     </style>
 </head>
@@ -677,7 +284,7 @@
             <tr>
                 <td><input type="number" value="2026"></td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="ENERO">ENERO</option>
                         <option value="FEBRERO">FEBRERO</option>
                         <option value="MARZO">MARZO</option>
@@ -693,7 +300,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="">-- SELECCIONAR --</option>
                         <option value="E.S PACAIPAMPA">E.S PACAIPAMPA</option>
                         <option value="P.S EL PUERTO">P.S EL PUERTO</option>
@@ -703,7 +310,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="MEDICINA">MEDICINA</option>
                         <option value="ENFERMERIA">ENFERMERÍA</option>
                         <option value="NUTRICION">NUTRICIÓN</option>
@@ -712,7 +319,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="">-- TURNO --</option>
                         <option value="MAÑANA">MAÑANA</option>
                         <option value="TARDE">TARDE</option>
@@ -762,7 +369,7 @@
                         </div>
                     </td>
                     <td colspan="4"></td>
-                    <td colspan="3" style="text-align:center; font-size:8px; font-weight:700; color:rgba(6,182,212,0.8); background:rgba(6,182,212,0.08);">FUR:</td>
+                    <td colspan="3" style="text-align:center;font-size:8px;font-weight:700;color:#00c896;background:rgba(0,200,150,0.08);">FUR:</td>
                     <td><input type="text" class="fn-fur-input" placeholder="dd/mm/aaaa"></td>
                 </tr>
 
@@ -779,10 +386,10 @@
                     <td><div class="antro-cell"><span class="antro-label">Talla</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.C.</span><input type="number" class="antro-input" step="0.1"></div></td>
 
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 1" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -798,14 +405,14 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Abd</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 2 / Proc." readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td class="cie-td"><input type="text" data-role="cie" autocomplete="off" style="pointer-events:auto; cursor:text;"></td>
                 </tr>
                 <tr class="patient-end">
-                    <td><select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
                     <td><div class="age-cell"><span class="age-label">D</span><input type="number" class="age-input"></div></td>
 
                     <!-- Fila 3 antro: HB | P.Preg -->
@@ -813,7 +420,7 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Preg</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 3 / Trat." readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -832,7 +439,7 @@
                         </div>
                     </td>
                     <td colspan="4"></td>
-                    <td colspan="3" style="text-align:center; font-size:8px; font-weight:700; color:rgba(6,182,212,0.8); background:rgba(6,182,212,0.08);">FUR:</td>
+                    <td colspan="3" style="text-align:center;font-size:8px;font-weight:700;color:#00c896;background:rgba(0,200,150,0.08);">FUR:</td>
                     <td><input type="text" class="fn-fur-input" placeholder="dd/mm/aaaa"></td>
                 </tr>
 
@@ -848,10 +455,10 @@
                     <td><div class="antro-cell"><span class="antro-label">Talla</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.C.</span><input type="number" class="antro-input" step="0.1"></div></td>
 
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -866,21 +473,21 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Abd</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td class="cie-td"><input type="text" data-role="cie" autocomplete="off" style="pointer-events:auto; cursor:text;"></td>
                 </tr>
                 <tr class="patient-end">
-                    <td><select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
                     <td><div class="age-cell"><span class="age-label">D</span><input type="number" class="age-input"></div></td>
 
                     <td><div class="antro-cell"><span class="antro-label">HB</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.Preg</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -891,17 +498,17 @@
         <div class="his-footer">
             <div style="display:flex; align-items:center; gap:8px;">
                 <label for="excelInput"
-                    style="padding:8px 14px; background:linear-gradient(135deg,rgba(6,182,212,0.2),rgba(168,85,247,0.2)); color:rgba(103,232,249,0.9); border:1px solid rgba(6,182,212,0.3);
-                           cursor:pointer; font-weight:700; font-size:11px; display:flex; align-items:center; gap:6px; border-radius:6px; font-family:'Rajdhani',sans-serif;">
-                    📂 CARGAR PACIENTES
+                    style="padding:8px 14px; background-color:#0f6e56; color:white; border:none;
+                           cursor:pointer; font-weight:700; font-size:11px; display:flex; align-items:center; gap:6px; border-radius:6px;">
+                    📂 CARGAR PACIENTES DESDE EXCEL
                 </label>
                 <input type="file" id="excelInput" accept=".xlsx,.xls" style="display:none;">
                 <span id="excelStatus" style="font-size:10px; color:#555; font-style:italic;"></span>
             </div>
 
             <button type="button" onclick="window.print()"
-                style="padding:9px 20px; background:linear-gradient(135deg,rgba(6,182,212,0.25),rgba(168,85,247,0.25)); color:rgba(192,132,252,0.9); border:1px solid rgba(168,85,247,0.4); cursor:pointer; font-weight:700; border-radius:6px; font-size:11px; font-family:'Rajdhani',sans-serif;">
-                🖨 IMPRIMIR
+                style="padding:9px 20px; background-color:#1d9e75; color:white; border:none; cursor:pointer; font-weight:700; border-radius:6px; font-size:11px;">
+                🖨 IMPRIMIR REGISTRO
             </button>
         </div></div>
     </form>
@@ -1021,25 +628,25 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         .dni-wrapper { position: relative; width: 100%; height: 100%; }
         .dni-dropdown {
             position: absolute; top: 100%; left: 0;
-            z-index: 9999; background: white;
-            border: 1px solid #b0b8c1; border-top: none;
+            z-index: 9999; background: #0d2018;
+            border: 1px solid rgba(0,180,140,0.30); border-top: none;
             min-width: 300px; max-height: 180px; overflow-y: auto;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 24px rgba(0,200,150,0.15);
             border-radius: 0 0 6px 6px; display: none;
         }
         .dni-dropdown.visible { display: block; }
         .dni-dropdown-item {
             padding: 5px 10px; font-size: 10px;
             font-family: 'Segoe UI', Arial, sans-serif;
-            color: #1a3a5c; cursor: pointer;
-            border-bottom: 1px solid #eef1f5;
-            text-transform: uppercase;
+            color: rgba(200,255,240,0.9); cursor: pointer;
+            border-bottom: 1px solid rgba(0,180,140,0.12);
+            text-transform: uppercase; font-family: Rajdhani,sans-serif;
         }
-        .dni-dropdown-item:hover { background-color: #d6e4f7; }
-        .dni-num { color: #7a8694; font-size: 9px; margin-right: 8px; }
-        .dni-not-found { padding:6px 10px; font-size:9px; color:#e05252; font-style:italic; }
-        .campo-found { background-color: #eaf6ee !important; }
-        .campo-notfound { background-color: #fff0f0 !important; }
+        .dni-dropdown-item:hover { background: rgba(0,200,150,0.08); }
+        .dni-num { color: rgba(0,200,150,0.6); font-size: 9px; margin-right: 8px; }
+        .dni-not-found { padding:6px 10px; font-size:9px; color:rgba(255,100,100,0.8); font-style:italic; }
+        .campo-found { background: rgba(0,200,150,0.08) !important; }
+        .campo-notfound { background: rgba(255,60,60,0.06) !important; }
     `;
     document.head.appendChild(style);
 
@@ -1511,10 +1118,10 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         // --- CIE: event delegation at document level ---
         var cieDD = document.createElement('div');
         cieDD.id = 'cieDD';
-        cieDD.style.cssText = 'position:fixed;z-index:99999;background:#0d0d20;border:2px solid rgba(168,85,247,0.5);width:520px;max-height:240px;overflow-y:auto;box-shadow:0 8px 24px rgba(15,110,86,0.2);border-radius:8px;display:none;font-family:Segoe UI,Arial,sans-serif;';
+        cieDD.style.cssText = 'position:fixed;z-index:99999;background:#0d2018;border:2px solid rgba(0,180,140,0.30);width:520px;max-height:240px;overflow-y:auto;box-shadow:0 8px 40px rgba(0,200,150,0.2);border-radius:8px;display:none;font-family:Rajdhani,sans-serif;';
 
         var cieDDHeader = document.createElement('div');
-        cieDDHeader.style.cssText = 'background:linear-gradient(135deg,rgba(6,182,212,0.3),rgba(168,85,247,0.3));color:rgba(192,132,252,0.9);padding:5px 12px;font-size:9px;font-weight:700;letter-spacing:0.05em;position:sticky;top:0;';
+        cieDDHeader.style.cssText = 'background:rgba(0,180,140,0.15);color:#00c896;padding:6px 14px;font-size:9px;font-weight:700;letter-spacing:0.12em;position:sticky;top:0;border-bottom:1px solid rgba(0,180,140,0.2);font-family:Orbitron,monospace;';
         cieDDHeader.textContent = 'BUSCAR CÓDIGO CIE-10';
         cieDD.appendChild(cieDDHeader);
 
@@ -1558,9 +1165,9 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                 for(var j=0; j<res.length; j++){
                     (function(item){
                         var it = document.createElement('div');
-                        it.style.cssText='padding:5px 12px;font-size:10px;color:#085041;cursor:pointer;border-bottom:1px solid #e1f5ee;';
-                        it.innerHTML='<b style="background:linear-gradient(90deg,#06b6d4,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-right:8px;min-width:42px;display:inline-block;">'+item.c+'</b><span style="color:rgba(220,220,255,0.8);">'+item.d+'</span>';
-                        it.onmouseover=function(){ it.style.background='rgba(168,85,247,0.1)'; };
+                        it.style.cssText='padding:5px 12px;font-size:10px;color:rgba(200,255,240,0.85);cursor:pointer;border-bottom:1px solid rgba(0,180,140,0.12);font-family:Rajdhani,sans-serif;';
+                        it.innerHTML='<b style="color:#00c896;margin-right:8px;min-width:42px;display:inline-block;font-family:Orbitron,monospace;font-size:9px;">'+item.c+'</b><span style="color:rgba(200,255,240,0.8);">'+item.d+'</span>';
+                        it.onmouseover=function(){ it.style.background='rgba(0,200,150,0.07)'; };
                         it.onmouseout =function(){ it.style.background=''; };
                         it.onmousedown=function(ev){
                             ev.preventDefault();
@@ -1622,14 +1229,6 @@ document.addEventListener('focusin', function(e) {
 
     <!-- ===== WIZARD MÓVIL ===== -->
     <div class="wizard-overlay" id="wizardApp">
-        <!-- Toolbar: cargar excel + pacientes -->
-        <div style="background:#085041; padding:6px 10px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #0f6e56;">
-            <label for="excelInputMobile" style="background:#1d9e75;color:white;padding:6px 10px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;">
-                📂 Cargar Pacientes
-            </label>
-            <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
-            <span id="wizExcelStatus" style="font-size:9px;color:rgba(255,255,255,0.8);font-style:italic;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
-        </div>
         <!-- Barra de pacientes -->
         <div class="wiz-patients-bar" id="wizPatBar">
             <button class="wiz-pat-btn active" onclick="wizSelectPat(0)">Paciente 1</button>
@@ -1815,46 +1414,39 @@ document.addEventListener('focusin', function(e) {
                 ${p.nombres ? '<div class="wiz-patient-info"><div class="name">' + p.nombres + '</div></div>' : ''}
                 <div class="wiz-section-title">Diagnósticos <span class="wiz-badge">Paso 3 de 3</span></div>
 
-                ${[1,2,3].map(function(n) {
+                ${Array.from({length:wizDiagCount},function(_,i){return i+1;}).map(function(n) {
                     var diag = p['diag'+n], tipo = p['tipo'+n], cie = p['cie'+n];
                     var lab1 = p['lab'+n+'a'], lab2 = p['lab'+n+'b'], lab3 = p['lab'+n+'c'];
-                    var diagText = diag || '<span style="color:#aaa;font-style:italic;">Se llena al ingresar código CIE</span>';
                     return `
-                    <div style="background:white;border:1.5px solid #a8d5b5;border-radius:10px;padding:12px;margin-bottom:12px;">
-                        <div style="font-size:10px;font-weight:700;color:#0f6e56;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e1f5ee;">
-                            DIAGNÓSTICO ${n}
+                    <div style="background:white;border:1px solid #a8d5b5;border-radius:8px;padding:10px;margin-bottom:10px;">
+                        <div style="font-size:9px;font-weight:700;color:#0f6e56;margin-bottom:8px;">DIAGNÓSTICO ${n}</div>
+                        <div class="wiz-field">
+                            <label>Código CIE-10</label>
+                            <input type="text" id="wCie${n}" value="${cie}" placeholder="Ej: Z349" oninput="wizCIE(this,${n})" style="text-transform:uppercase;">
                         </div>
-                        <div class="wiz-row" style="align-items:flex-end;">
-                            <div class="wiz-field" style="flex:0.6;">
-                                <label>Código CIE-10</label>
-                                <input type="text" id="wCie${n}" value="${cie}"
-                                    placeholder="Ej: Z349"
-                                    oninput="wizCIE(this,${n})"
-                                    style="text-transform:uppercase;font-size:16px;font-weight:700;letter-spacing:1px;">
-                            </div>
-                            <div class="wiz-field" style="flex:0.4;">
+                        <div class="wiz-field">
+                            <label>Descripción</label>
+                            <div class="wiz-cie-result" id="wDiag${n}">${diag || 'Se llena al ingresar código CIE'}</div>
+                        </div>
+                        <div class="wiz-row">
+                            <div class="wiz-field">
                                 <label>TIPO</label>
-                                <select id="wTipo${n}" onchange="wizSave()"
-                                    style="font-size:16px;font-weight:700;text-align:center;background:${tipo?'#eaf6ee':'white'};">
+                                <select id="wTipo${n}" onchange="wizSave()">
                                     <option value="">-</option>
                                     <option value="P" ${tipo==='P'?'selected':''}>P</option>
                                     <option value="D" ${tipo==='D'?'selected':''}>D</option>
                                     <option value="R" ${tipo==='R'?'selected':''}>R</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="wiz-field">
-                            <label>Descripción</label>
-                            <div class="wiz-cie-result" id="wDiag${n}"
-                                style="min-height:36px;font-size:11px;line-height:1.4;">${diagText}</div>
-                        </div>
-                        <div class="wiz-row">
-                            <div class="wiz-field"><label style="font-size:9px;">LAB 1</label><input type="text" id="wLab${n}a" value="${lab1}" onchange="wizSave()" style="font-size:14px;text-align:center;"></div>
-                            <div class="wiz-field"><label style="font-size:9px;">LAB 2</label><input type="text" id="wLab${n}b" value="${lab2}" onchange="wizSave()" style="font-size:14px;text-align:center;"></div>
-                            <div class="wiz-field"><label style="font-size:9px;">LAB 3</label><input type="text" id="wLab${n}c" value="${lab3}" onchange="wizSave()" style="font-size:14px;text-align:center;"></div>
+                            <div class="wiz-field"><label>LAB 1</label><input type="text" id="wLab${n}a" value="${lab1}" onchange="wizSave()"></div>
+                            <div class="wiz-field"><label>LAB 2</label><input type="text" id="wLab${n}b" value="${lab2}" onchange="wizSave()"></div>
+                            <div class="wiz-field"><label>LAB 3</label><input type="text" id="wLab${n}c" value="${lab3}" onchange="wizSave()"></div>
                         </div>
                     </div>`;
                 }).join('')}
+                + '<div style="text-align:center;margin-top:6px;">' +
+                  '<button onclick="wizAddDiag()" style="background:rgba(0,200,150,0.1);border:1px dashed rgba(0,200,150,0.3);border-radius:8px;color:#00c896;padding:8px 20px;font-family:Rajdhani,sans-serif;font-size:12px;font-weight:700;cursor:pointer;width:100%;">+ AGREGAR DIAGNÓSTICO</button>' +
+                '</div>'
             `;
         }
 
@@ -1903,6 +1495,24 @@ document.addEventListener('focusin', function(e) {
     }
 
     // =============================================
+    // ADD MORE DIAGNOSIS CARDS
+    // =============================================
+    var wizDiagCount = 3; // starts with 3
+
+    function wizAddDiag(){
+        wizDiagCount++;
+        var n = wizDiagCount;
+        var p = wizPat();
+        p['diag'+n]=''; p['tipo'+n]=''; p['cie'+n]='';
+        p['lab'+n+'a']=''; p['lab'+n+'b']=''; p['lab'+n+'c']='';
+        // Re-render step 3
+        WIZ.step = 3;
+        wizRender();
+        // Scroll to bottom
+        setTimeout(function(){ document.getElementById('wizContent').scrollTop = 99999; }, 100);
+    }
+
+    // =============================================
     // SAVE FORM VALUES TO DATA OBJECT
     // =============================================
     function wizSave() {
@@ -1917,7 +1527,7 @@ document.addEventListener('focusin', function(e) {
             p.pabd=g('wPabd'); p.hb=g('wHb'); p.ppreg=g('wPpreg');
             p.fur=g('wFur'); p.est=g('wEst'); p.ser=g('wSer');
         } else if (WIZ.step===3) {
-            for(var n=1;n<=3;n++){
+            for(var n=1;n<=wizDiagCount;n++){
                 p['diag'+n]=g('wDiag'+n)||''; p['tipo'+n]=g('wTipo'+n);
                 p['cie'+n]=g('wCie'+n);
                 p['lab'+n+'a']=g('wLab'+n+'a'); p['lab'+n+'b']=g('wLab'+n+'b'); p['lab'+n+'c']=g('wLab'+n+'c');
@@ -2081,158 +1691,79 @@ document.addEventListener('focusin', function(e) {
     }
 
     // =============================================
-    // LOAD EXCEL EN MÓVIL
-    // =============================================
-    function wizLoadExcel(inputEl) {
-        var file = inputEl.files[0];
-        if (!file) return;
-        var status = document.getElementById('wizExcelStatus');
-        status.textContent = '⏳ Cargando...';
-        // Reusar el mismo FileReader del input principal
-        var mainInput = document.getElementById('excelInput');
-        if (mainInput) {
-            // Trigger the same change handler as the desktop input
-            var dt = new DataTransfer();
-            dt.items.add(file);
-            mainInput.files = dt.files;
-            mainInput.dispatchEvent(new Event('change'));
-            // Monitor status
-            var check = setInterval(function() {
-                var s = document.getElementById('excelStatus');
-                if (s && s.textContent && s.textContent !== '⏳ Leyendo... puede tomar unos segundos.') {
-                    status.textContent = s.textContent;
-                    clearInterval(check);
-                }
-            }, 500);
-        }
-    }
-
-    // Fix: scroll active input into view above keyboard
-    document.addEventListener('focusin', function(e) {
-        if (!document.getElementById('wizardApp')) return;
-        var tag = e.target.tagName;
-        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') {
-            setTimeout(function() {
-                e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 400);
-        }
-    });
-
-    // =============================================
-    // INIT
+    // INIT + SOUND HOOK
     // =============================================
     wizRender();
 
-    // Override wizNext to add sound
-    var _wizNextOrig = wizNext;
-    window.wizNextWithSound = function(){
-        if(WIZ.step === 3){
-            if(typeof playSaveBip !== 'undefined') playSaveBip();
-        } else {
-            if(typeof playStepBip !== 'undefined') playStepBip();
-        }
-        _wizNextOrig();
+    var _origWizNext = window.wizNext;
+    window.wizNextSound = function(){
+        var s = WIZ && WIZ.step;
+        if(s===3){ if(typeof playSaveBip!=='undefined') playSaveBip(); }
+        else { if(typeof playStepBip!=='undefined') playStepBip(); }
+        if(_origWizNext) _origWizNext(); else wizNext();
     };
-    // Replace button onclick
-    var btnNext = document.getElementById('wizBtnNext');
-    if(btnNext) btnNext.setAttribute('onclick','wizNextWithSound()');
+    var nb = document.getElementById('wizBtnNext');
+    if(nb) nb.setAttribute('onclick','wizNextSound()');
     </script>
 
 
 <script>
-/* ============================================================
-   AURORA AMBIENT BACKGROUND
-   ============================================================ */
+/* === TEAL AURORA AMBIENT === */
 (function(){
-    var canvas = document.createElement('canvas');
-    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:0.6;';
-    document.body.appendChild(canvas);
-    var ctx = canvas.getContext('2d');
+    var cv = document.createElement('canvas');
+    cv.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;';
+    document.body.appendChild(cv);
+    var c = cv.getContext('2d');
     var orbs = [
-        {x:0.2, y:0.2, r:0.35, color:'rgba(6,182,212,0.06)', vx:0.0002, vy:0.0001},
-        {x:0.8, y:0.7, r:0.4,  color:'rgba(168,85,247,0.06)', vx:-0.0001, vy:0.0002},
-        {x:0.5, y:0.5, r:0.25, color:'rgba(124,58,237,0.04)', vx:0.00015, vy:-0.00015},
+        {x:0.15,y:0.2,r:0.3,col:'rgba(0,180,140,0.05)',vx:0.00018,vy:0.0001},
+        {x:0.85,y:0.75,r:0.35,col:'rgba(0,160,120,0.04)',vx:-0.00012,vy:0.00018},
+        {x:0.5,y:0.5,r:0.2,col:'rgba(0,200,150,0.03)',vx:0.0001,vy:-0.00015},
     ];
     function draw(){
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        cv.width=window.innerWidth; cv.height=window.innerHeight;
+        c.clearRect(0,0,cv.width,cv.height);
         orbs.forEach(function(o){
-            o.x += o.vx; o.y += o.vy;
-            if(o.x < 0 || o.x > 1) o.vx *= -1;
-            if(o.y < 0 || o.y > 1) o.vy *= -1;
-            var grd = ctx.createRadialGradient(
-                o.x*canvas.width, o.y*canvas.height, 0,
-                o.x*canvas.width, o.y*canvas.height, o.r*Math.min(canvas.width,canvas.height)
-            );
-            grd.addColorStop(0, o.color);
-            grd.addColorStop(1, 'transparent');
-            ctx.fillStyle = grd;
-            ctx.fillRect(0,0,canvas.width,canvas.height);
+            o.x+=o.vx; o.y+=o.vy;
+            if(o.x<0||o.x>1)o.vx*=-1; if(o.y<0||o.y>1)o.vy*=-1;
+            var g=c.createRadialGradient(o.x*cv.width,o.y*cv.height,0,o.x*cv.width,o.y*cv.height,o.r*Math.min(cv.width,cv.height));
+            g.addColorStop(0,o.col); g.addColorStop(1,'transparent');
+            c.fillStyle=g; c.fillRect(0,0,cv.width,cv.height);
         });
         requestAnimationFrame(draw);
     }
     draw();
-    window.addEventListener('resize', function(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
 })();
 
-/* ============================================================
-   AURORA SOUND — BIP AL AVANZAR PASOS
-   ============================================================ */
-var _audioCtx = null;
-function getAudioCtx(){
-    if(!_audioCtx) _audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    return _audioCtx;
-}
+/* === BIP AL AVANZAR PASOS === */
+var _ac=null;
+function _getAC(){ if(!_ac) _ac=new (window.AudioContext||window.webkitAudioContext)(); return _ac; }
 function playStepBip(){
     try{
-        var c = getAudioCtx();
-        // Two-tone ascending bip (aurora feel)
-        [[440,0],[660,0.1],[880,0.2]].forEach(function(pair){
-            var o = c.createOscillator();
-            var g = c.createGain();
-            o.connect(g); g.connect(c.destination);
-            o.type = 'sine';
-            o.frequency.value = pair[0];
-            g.gain.setValueAtTime(0, c.currentTime+pair[1]);
-            g.gain.linearRampToValueAtTime(0.1, c.currentTime+pair[1]+0.04);
-            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime+pair[1]+0.15);
-            o.start(c.currentTime+pair[1]);
-            o.stop(c.currentTime+pair[1]+0.2);
+        var c=_getAC();
+        [[440,0],[660,0.09],[880,0.18]].forEach(function(p){
+            var o=c.createOscillator(),g=c.createGain();
+            o.connect(g);g.connect(c.destination);
+            o.type='sine';o.frequency.value=p[0];
+            g.gain.setValueAtTime(0,c.currentTime+p[1]);
+            g.gain.linearRampToValueAtTime(0.08,c.currentTime+p[1]+0.03);
+            g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+p[1]+0.14);
+            o.start(c.currentTime+p[1]); o.stop(c.currentTime+p[1]+0.18);
         });
     }catch(e){}
 }
 function playSaveBip(){
     try{
-        var c = getAudioCtx();
+        var c=_getAC();
         [523,659,784,1046,1318].forEach(function(f,i){
-            var o = c.createOscillator();
-            var g = c.createGain();
-            o.connect(g); g.connect(c.destination);
-            o.type = 'sine';
-            o.frequency.value = f;
-            var t = c.currentTime + i*0.08;
-            g.gain.setValueAtTime(0.12, t);
-            g.gain.exponentialRampToValueAtTime(0.001, t+0.25);
-            o.start(t); o.stop(t+0.3);
+            var o=c.createOscillator(),g=c.createGain();
+            o.connect(g);g.connect(c.destination);
+            o.type='sine';o.frequency.value=f;
+            var t=c.currentTime+i*0.07;
+            g.gain.setValueAtTime(0.1,t);
+            g.gain.exponentialRampToValueAtTime(0.001,t+0.2);
+            o.start(t);o.stop(t+0.25);
         });
     }catch(e){}
-}
-/* Hook into wizard navigation buttons */
-document.addEventListener('click', function(e){
-    var btn = e.target.closest('button');
-    if(!btn) return;
-    if(btn.id === 'wizBtnNext') playStepBip();
-    if(btn.onclick && btn.textContent.includes('Guardar')) playSaveBip();
-});
-/* Also hook wizard save action */
-var _origWizNext = window.wizNext;
-if(typeof wizNext !== 'undefined'){
-    window.wizNext = function(){
-        var step = WIZ && WIZ.step;
-        if(step === 3) playSaveBip(); else playStepBip();
-        if(_origWizNext) _origWizNext();
-    };
 }
 </script>
 
