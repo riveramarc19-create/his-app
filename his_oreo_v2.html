@@ -310,6 +310,139 @@
             #cieDD { width: 92vw !important; left: 4vw !important; transform: none !important; top: 20vh !important; }
         }
 
+
+        /* ===== WIZARD MÓVIL ===== */
+        .wizard-overlay {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            /* En móvil: ocultar tabla, mostrar wizard */
+            #hisForm, .his-footer { display: none !important; }
+            .his-header-bar { font-size: 12px; padding: 10px; }
+            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #edf7f2; }
+        }
+
+        @media (min-width: 769px) {
+            /* En PC: ocultar wizard */
+            .wizard-overlay { display: none !important; }
+        }
+
+        /* WIZARD STYLES */
+        .wiz-steps {
+            display: flex;
+            background: #085041;
+            padding: 8px 12px;
+            gap: 0;
+            align-items: center;
+        }
+        .wiz-step {
+            flex: 1;
+            text-align: center;
+        }
+        .wiz-step-num {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700;
+            margin: 0 auto 3px;
+            transition: all 0.3s;
+        }
+        .wiz-step.active  .wiz-step-num { background: white; color: #0f6e56; }
+        .wiz-step.done    .wiz-step-num { background: #1d9e75; color: white; }
+        .wiz-step.pending .wiz-step-num { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
+        .wiz-step-label { font-size: 8px; color: rgba(255,255,255,0.6); }
+        .wiz-step.active  .wiz-step-label,
+        .wiz-step.done    .wiz-step-label { color: white; font-weight: 600; }
+        .wiz-line { flex: 0.4; height: 1px; background: rgba(255,255,255,0.2); margin-bottom: 14px; }
+
+        .wiz-progress { height: 4px; background: #c5ebd8; }
+        .wiz-progress-bar { height: 100%; background: #0f6e56; transition: width 0.4s ease; border-radius: 0 2px 2px 0; }
+
+        .wiz-content { flex: 1; overflow-y: auto; padding: 14px; -webkit-overflow-scrolling: touch; }
+
+        .wiz-section-title {
+            font-size: 10px; font-weight: 700; color: #0f6e56;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            margin-bottom: 12px; padding-bottom: 5px;
+            border-bottom: 1.5px solid #a8d5b5;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .wiz-badge {
+            background: #e1f5ee; color: #0f6e56;
+            border-radius: 20px; padding: 2px 8px;
+            font-size: 9px; font-weight: 600;
+        }
+
+        .wiz-field { margin-bottom: 12px; }
+        .wiz-field label {
+            display: block; font-size: 10px; font-weight: 600;
+            color: #085041; margin-bottom: 4px;
+        }
+        .wiz-field input, .wiz-field select {
+            width: 100%; background: white;
+            border: 1.5px solid #a8d5b5; border-radius: 8px;
+            padding: 10px 12px; font-size: 15px; color: #085041;
+            font-family: inherit; font-weight: 600;
+            -webkit-appearance: none; appearance: none;
+            outline: none;
+        }
+        .wiz-field input:focus, .wiz-field select:focus {
+            border-color: #0f6e56; background: #f0faf6;
+        }
+        .wiz-field input[readonly] {
+            background: #f4faf6; color: #7a8694; font-weight: 400;
+        }
+        .wiz-row { display: flex; gap: 10px; }
+        .wiz-row .wiz-field { flex: 1; }
+
+        .wiz-patient-info {
+            background: #e1f5ee; border-radius: 10px;
+            padding: 10px 12px; margin-bottom: 14px;
+            border-left: 3px solid #0f6e56;
+        }
+        .wiz-patient-info .name { font-size: 13px; font-weight: 700; color: #085041; }
+        .wiz-patient-info .meta { font-size: 10px; color: #0f6e56; margin-top: 2px; }
+
+        .wiz-footer {
+            background: white; padding: 12px 14px;
+            display: flex; gap: 10px;
+            border-top: 1px solid #a8d5b5;
+        }
+        .wiz-btn {
+            flex: 1; padding: 13px; border: none;
+            border-radius: 10px; font-size: 13px;
+            font-weight: 700; cursor: pointer;
+            font-family: inherit;
+        }
+        .wiz-btn-back { background: #e1f5ee; color: #0f6e56; }
+        .wiz-btn-next { background: #0f6e56; color: white; flex: 1.5; }
+        .wiz-btn-save { background: #1d9e75; color: white; flex: 1.5; }
+
+        .wiz-patients-bar {
+            background: #0f6e56; padding: 6px 14px;
+            display: flex; gap: 8px; overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .wiz-pat-btn {
+            background: rgba(255,255,255,0.15); color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px; padding: 4px 12px;
+            font-size: 10px; font-weight: 600; white-space: nowrap;
+            cursor: pointer; font-family: inherit;
+        }
+        .wiz-pat-btn.active { background: white; color: #0f6e56; }
+        .wiz-pat-btn-add { background: transparent; color: rgba(255,255,255,0.7); border: 1px dashed rgba(255,255,255,0.4); }
+
+        .wiz-cie-result {
+            background: #e1f5ee; border-radius: 6px;
+            padding: 6px 10px; margin-top: 4px;
+            font-size: 11px; color: #085041; font-weight: 600;
+            min-height: 30px;
+        }
+        .wiz-dni-found { color: #0f6e56; font-size: 10px; margin-top: 3px; font-weight: 600; }
+
+
         /* ===== IMPRESIÓN ===== */
         @media print {
             @page { size: A4 landscape; margin: 8mm 6mm; }
@@ -1294,5 +1427,454 @@ document.addEventListener('focusin', function(e) {
     }
 });
 </script>
+
+    <!-- ===== WIZARD MÓVIL ===== -->
+    <div class="wizard-overlay" id="wizardApp">
+        <!-- Barra de pacientes -->
+        <div class="wiz-patients-bar" id="wizPatBar">
+            <button class="wiz-pat-btn active" onclick="wizSelectPat(0)">Paciente 1</button>
+            <button class="wiz-pat-btn-add wiz-pat-btn" onclick="wizAddPatient()">+ Nuevo</button>
+        </div>
+
+        <!-- Progreso -->
+        <div class="wiz-progress"><div class="wiz-progress-bar" id="wizProgress" style="width:33%"></div></div>
+
+        <!-- Steps indicator -->
+        <div class="wiz-steps">
+            <div class="wiz-step active" id="ws1">
+                <div class="wiz-step-num">1</div>
+                <div class="wiz-step-label">Paciente</div>
+            </div>
+            <div class="wiz-line"></div>
+            <div class="wiz-step pending" id="ws2">
+                <div class="wiz-step-num">2</div>
+                <div class="wiz-step-label">Antropometría</div>
+            </div>
+            <div class="wiz-line"></div>
+            <div class="wiz-step pending" id="ws3">
+                <div class="wiz-step-num">3</div>
+                <div class="wiz-step-label">Diagnóstico</div>
+            </div>
+        </div>
+
+        <!-- Contenido del paso -->
+        <div class="wiz-content" id="wizContent"></div>
+
+        <!-- Footer navegación -->
+        <div class="wiz-footer" id="wizFooter">
+            <button class="wiz-btn wiz-btn-back" id="wizBtnBack" onclick="wizPrev()" style="display:none">← Atrás</button>
+            <button class="wiz-btn wiz-btn-next" id="wizBtnNext" onclick="wizNext()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+    // =============================================
+    // WIZARD DATA
+    // =============================================
+    var WIZ = {
+        step: 1,
+        patIdx: 0,
+        patients: [wizEmptyPatient()]
+    };
+
+    function wizEmptyPatient() {
+        return {
+            dni:'', nombres:'', fn:'', sexo:'', fin:'', hc:'',
+            distrito:'', direccion:'', edadA:'', edadM:'', edadD:'',
+            talla:'', peso:'', pc:'', pabd:'', hb:'', ppreg:'', fur:'',
+            est:'', ser:'',
+            diag1:'', tipo1:'', lab1a:'', lab1b:'', lab1c:'', cie1:'',
+            diag2:'', tipo2:'', lab2a:'', lab2b:'', lab2c:'', cie2:'',
+            diag3:'', tipo3:'', lab3a:'', lab3b:'', lab3c:'', cie3:''
+        };
+    }
+
+    function wizPat() { return WIZ.patients[WIZ.patIdx]; }
+
+    // =============================================
+    // RENDER STEPS
+    // =============================================
+    function wizRender() {
+        var p = wizPat();
+        var c = document.getElementById('wizContent');
+
+        // Update step indicators
+        [1,2,3].forEach(function(i) {
+            var el = document.getElementById('ws'+i);
+            el.className = 'wiz-step ' + (i < WIZ.step ? 'done' : i === WIZ.step ? 'active' : 'pending');
+            el.querySelector('.wiz-step-num').textContent = i < WIZ.step ? '✓' : i;
+        });
+        document.getElementById('wizProgress').style.width = (WIZ.step * 33.3) + '%';
+        document.getElementById('wizBtnBack').style.display = WIZ.step > 1 ? 'block' : 'none';
+
+        var nextBtn = document.getElementById('wizBtnNext');
+
+        if (WIZ.step === 1) {
+            nextBtn.className = 'wiz-btn wiz-btn-next';
+            nextBtn.textContent = 'Siguiente →';
+            c.innerHTML = `
+                <div class="wiz-section-title">Datos del paciente <span class="wiz-badge">Paso 1 de 3</span></div>
+                <div class="wiz-field">
+                    <label>DNI</label>
+                    <input type="number" id="wDni" value="${p.dni}" placeholder="Ingrese DNI" oninput="wizDNISearch(this.value)" onchange="wizSave()">
+                    <div class="wiz-dni-found" id="wDniFound">${p.nombres ? '✓ '+p.nombres : ''}</div>
+                </div>
+                <div class="wiz-field">
+                    <label>Apellidos y Nombres</label>
+                    <input type="text" id="wNombres" value="${p.nombres}" placeholder="Se llena automáticamente" onchange="wizSave()">
+                </div>
+                <div class="wiz-row">
+                    <div class="wiz-field">
+                        <label>Fecha Nacimiento</label>
+                        <input type="text" id="wFN" value="${p.fn}" placeholder="dd/mm/aaaa" onchange="wizSave();wizCalcEdad()">
+                    </div>
+                    <div class="wiz-field">
+                        <label>Sexo</label>
+                        <select id="wSexo" onchange="wizSave()">
+                            <option value="">-</option>
+                            <option value="M" ${p.sexo==='M'?'selected':''}>M</option>
+                            <option value="F" ${p.sexo==='F'?'selected':''}>F</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="wiz-row">
+                    <div class="wiz-field">
+                        <label>Edad (años)</label>
+                        <input type="number" id="wEdadA" value="${p.edadA}" readonly>
+                    </div>
+                    <div class="wiz-field">
+                        <label>Meses</label>
+                        <input type="number" id="wEdadM" value="${p.edadM}" readonly>
+                    </div>
+                    <div class="wiz-field">
+                        <label>Días</label>
+                        <input type="number" id="wEdadD" value="${p.edadD}" readonly>
+                    </div>
+                </div>
+                <div class="wiz-row">
+                    <div class="wiz-field">
+                        <label>Financiador</label>
+                        <input type="text" id="wFin" value="${p.fin}" placeholder="SIS, ESSALUD..." onchange="wizSave()">
+                    </div>
+                    <div class="wiz-field">
+                        <label>H.C.</label>
+                        <input type="text" id="wHc" value="${p.hc}" placeholder="Nro. H.C." onchange="wizSave()">
+                    </div>
+                </div>
+                <div class="wiz-field">
+                    <label>Distrito</label>
+                    <input type="text" id="wDistrito" value="${p.distrito}" placeholder="Distrito" onchange="wizSave()">
+                </div>
+                <div class="wiz-field">
+                    <label>Dirección</label>
+                    <input type="text" id="wDireccion" value="${p.direccion}" placeholder="Dirección exacta" onchange="wizSave()">
+                </div>
+            `;
+        } else if (WIZ.step === 2) {
+            nextBtn.className = 'wiz-btn wiz-btn-next';
+            nextBtn.textContent = 'Siguiente →';
+            c.innerHTML = `
+                ${p.nombres ? '<div class="wiz-patient-info"><div class="name">' + p.nombres + '</div><div class="meta">' + (p.edadA ? p.edadA + 'a ' : '') + (p.edadM ? p.edadM + 'm' : '') + ' · ' + (p.sexo||'-') + '</div></div>' : ''}
+                <div class="wiz-section-title">Datos Antropométricos <span class="wiz-badge">Paso 2 de 3</span></div>
+                <div class="wiz-row">
+                    <div class="wiz-field"><label>Talla (cm)</label><input type="number" id="wTalla" value="${p.talla}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
+                    <div class="wiz-field"><label>Peso (kg)</label><input type="number" id="wPeso" value="${p.peso}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
+                </div>
+                <div class="wiz-row">
+                    <div class="wiz-field"><label>P. Cefálico</label><input type="number" id="wPc" value="${p.pc}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
+                    <div class="wiz-field"><label>P. Abdominal</label><input type="number" id="wPabd" value="${p.pabd}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
+                </div>
+                <div class="wiz-row">
+                    <div class="wiz-field"><label>Hemoglobina</label><input type="number" id="wHb" value="${p.hb}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
+                    <div class="wiz-field"><label>P. Preg.</label><input type="number" id="wPpreg" value="${p.ppreg}" placeholder="0.0" step="0.1" onchange="wizSave()"></div>
+                </div>
+                <div class="wiz-field"><label>FUR</label><input type="text" id="wFur" value="${p.fur}" placeholder="dd/mm/aaaa" onchange="wizSave()"></div>
+                <div class="wiz-row">
+                    <div class="wiz-field"><label>EST</label>
+                        <select id="wEst" onchange="wizSave()">
+                            <option value="">-</option>
+                            <option value="N" ${p.est==='N'?'selected':''}>N</option>
+                            <option value="C" ${p.est==='C'?'selected':''}>C</option>
+                            <option value="R" ${p.est==='R'?'selected':''}>R</option>
+                        </select>
+                    </div>
+                    <div class="wiz-field"><label>SER</label>
+                        <select id="wSer" onchange="wizSave()">
+                            <option value="">-</option>
+                            <option value="N" ${p.ser==='N'?'selected':''}>N</option>
+                            <option value="C" ${p.ser==='C'?'selected':''}>C</option>
+                            <option value="R" ${p.ser==='R'?'selected':''}>R</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+        } else if (WIZ.step === 3) {
+            nextBtn.className = 'wiz-btn wiz-btn-save';
+            nextBtn.textContent = '✓ Guardar Paciente';
+            c.innerHTML = `
+                ${p.nombres ? '<div class="wiz-patient-info"><div class="name">' + p.nombres + '</div></div>' : ''}
+                <div class="wiz-section-title">Diagnósticos <span class="wiz-badge">Paso 3 de 3</span></div>
+
+                ${[1,2,3].map(function(n) {
+                    var diag = p['diag'+n], tipo = p['tipo'+n], cie = p['cie'+n];
+                    var lab1 = p['lab'+n+'a'], lab2 = p['lab'+n+'b'], lab3 = p['lab'+n+'c'];
+                    return `
+                    <div style="background:white;border:1px solid #a8d5b5;border-radius:8px;padding:10px;margin-bottom:10px;">
+                        <div style="font-size:9px;font-weight:700;color:#0f6e56;margin-bottom:8px;">DIAGNÓSTICO ${n}</div>
+                        <div class="wiz-field">
+                            <label>Código CIE-10</label>
+                            <input type="text" id="wCie${n}" value="${cie}" placeholder="Ej: Z349" oninput="wizCIE(this,${n})" style="text-transform:uppercase;">
+                        </div>
+                        <div class="wiz-field">
+                            <label>Descripción</label>
+                            <div class="wiz-cie-result" id="wDiag${n}">${diag || 'Se llena al ingresar código CIE'}</div>
+                        </div>
+                        <div class="wiz-row">
+                            <div class="wiz-field">
+                                <label>TIPO</label>
+                                <select id="wTipo${n}" onchange="wizSave()">
+                                    <option value="">-</option>
+                                    <option value="P" ${tipo==='P'?'selected':''}>P</option>
+                                    <option value="D" ${tipo==='D'?'selected':''}>D</option>
+                                    <option value="R" ${tipo==='R'?'selected':''}>R</option>
+                                </select>
+                            </div>
+                            <div class="wiz-field"><label>LAB 1</label><input type="text" id="wLab${n}a" value="${lab1}" onchange="wizSave()"></div>
+                            <div class="wiz-field"><label>LAB 2</label><input type="text" id="wLab${n}b" value="${lab2}" onchange="wizSave()"></div>
+                            <div class="wiz-field"><label>LAB 3</label><input type="text" id="wLab${n}c" value="${lab3}" onchange="wizSave()"></div>
+                        </div>
+                    </div>`;
+                }).join('')}
+            `;
+        }
+
+        // Scroll to top
+        document.getElementById('wizContent').scrollTop = 0;
+    }
+
+    // =============================================
+    // NAVIGATION
+    // =============================================
+    function wizNext() {
+        if (WIZ.step < 3) {
+            wizSave();
+            WIZ.step++;
+            wizRender();
+        } else {
+            wizSave();
+            wizCommitToTable();
+            wizShowSuccess();
+        }
+    }
+
+    function wizPrev() {
+        if (WIZ.step > 1) { WIZ.step--; wizRender(); }
+    }
+
+    function wizSelectPat(idx) {
+        wizSave();
+        WIZ.patIdx = idx;
+        WIZ.step = 1;
+        document.querySelectorAll('.wiz-pat-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+        wizRender();
+    }
+
+    function wizAddPatient() {
+        WIZ.patients.push(wizEmptyPatient());
+        var idx = WIZ.patients.length - 1;
+        var bar = document.getElementById('wizPatBar');
+        var addBtn = bar.querySelector('.wiz-pat-btn-add');
+        var btn = document.createElement('button');
+        btn.className = 'wiz-pat-btn';
+        btn.textContent = 'Paciente ' + (idx+1);
+        btn.onclick = (function(i){ return function(){ wizSelectPat(i); }; })(idx);
+        bar.insertBefore(btn, addBtn);
+        wizSelectPat(idx);
+    }
+
+    // =============================================
+    // SAVE FORM VALUES TO DATA OBJECT
+    // =============================================
+    function wizSave() {
+        var p = wizPat();
+        function g(id){ var el=document.getElementById(id); return el?el.value:''; }
+        if (WIZ.step===1) {
+            p.dni=g('wDni'); p.nombres=g('wNombres'); p.fn=g('wFN');
+            p.sexo=g('wSexo'); p.fin=g('wFin'); p.hc=g('wHc');
+            p.distrito=g('wDistrito'); p.direccion=g('wDireccion');
+        } else if (WIZ.step===2) {
+            p.talla=g('wTalla'); p.peso=g('wPeso'); p.pc=g('wPc');
+            p.pabd=g('wPabd'); p.hb=g('wHb'); p.ppreg=g('wPpreg');
+            p.fur=g('wFur'); p.est=g('wEst'); p.ser=g('wSer');
+        } else if (WIZ.step===3) {
+            for(var n=1;n<=3;n++){
+                p['diag'+n]=g('wDiag'+n)||''; p['tipo'+n]=g('wTipo'+n);
+                p['cie'+n]=g('wCie'+n);
+                p['lab'+n+'a']=g('wLab'+n+'a'); p['lab'+n+'b']=g('wLab'+n+'b'); p['lab'+n+'c']=g('wLab'+n+'c');
+            }
+        }
+    }
+
+    // =============================================
+    // DNI SEARCH
+    // =============================================
+    function wizDNISearch(val) {
+        var p = wizPat();
+        var v = String(val).trim().padStart(8,'0');
+        if (typeof PACIENTES_DB !== 'undefined' && val.length >= 6) {
+            var found = PACIENTES_DB[v] || PACIENTES_DB[val];
+            if (found) {
+                p.dni = val; p.nombres = found.nombres;
+                p.fn = found.fn; p.sexo = found.sexo;
+                p.fin = found.fin; p.hc = found.hc;
+                p.distrito = found.distrito; p.direccion = found.direccion;
+                p.talla = found.talla; p.peso = found.peso;
+                p.pc = found.pc; p.pabd = found.pabd;
+                p.hb = found.hb; p.ppreg = found.ppreg; p.fur = found.fur;
+                var nEl = document.getElementById('wNombres');
+                var fEl = document.getElementById('wDniFound');
+                if (nEl) nEl.value = found.nombres;
+                if (fEl) fEl.textContent = '✓ ' + found.nombres;
+                wizCalcEdad();
+            }
+        }
+    }
+
+    // =============================================
+    // EDAD
+    // =============================================
+    function wizCalcEdad() {
+        var p = wizPat();
+        var fn = (document.getElementById('wFN')||{}).value || p.fn;
+        if (!fn) return;
+        var parts = fn.split('/');
+        if (parts.length!==3) return;
+        var nac = new Date(parts[2], parts[1]-1, parts[0]);
+        var hoy = new Date();
+        var anios = hoy.getFullYear()-nac.getFullYear();
+        var meses = hoy.getMonth()-nac.getMonth();
+        var dias  = hoy.getDate()-nac.getDate();
+        if (dias<0){ meses--; dias+=new Date(hoy.getFullYear(),hoy.getMonth(),0).getDate(); }
+        if (meses<0){ anios--; meses+=12; }
+        p.edadA=anios; p.edadM=meses; p.edadD=dias;
+        var a=document.getElementById('wEdadA'), m=document.getElementById('wEdadM'), d=document.getElementById('wEdadD');
+        if(a) a.value=anios; if(m) m.value=meses; if(d) d.value=dias;
+    }
+
+    // =============================================
+    // CIE SEARCH IN WIZARD
+    // =============================================
+    function wizCIE(inp, n) {
+        var v = inp.value.toUpperCase();
+        var diagEl = document.getElementById('wDiag'+n);
+        var tipoEl = document.getElementById('wTipo'+n);
+        if (!diagEl) return;
+        if (typeof CIE_MAP !== 'undefined' && CIE_MAP[v]) {
+            diagEl.textContent = CIE_MAP[v];
+            diagEl.style.background = '#eaf6ee';
+            var p = wizPat();
+            p['cie'+n] = v; p['diag'+n] = CIE_MAP[v];
+            if (tipoEl) { tipoEl.style.backgroundColor='#ffe0e0'; tipoEl.focus(); }
+        } else {
+            diagEl.textContent = v.length>1 ? 'Código no encontrado...' : 'Se llena al ingresar código CIE';
+            diagEl.style.background = '#f4faf6';
+        }
+    }
+
+    // =============================================
+    // COMMIT TO TABLE
+    // =============================================
+    function wizCommitToTable() {
+        var p = wizPat();
+        var idx = WIZ.patIdx;
+        var fnRows = document.querySelectorAll('tr.fn-fur-row');
+        if (!fnRows[idx]) return;
+        var fnRow = fnRows[idx];
+        var fila1 = fnRow.nextElementSibling;
+        var fila2 = fila1 ? fila1.nextElementSibling : null;
+        var fila3 = fila2 ? fila2.nextElementSibling : null;
+
+        function setVal(tr, selector, val) {
+            if (!tr) return;
+            var el = tr.querySelector(selector);
+            if (el) el.value = val;
+        }
+
+        // fn-fur-row
+        var fnTds = fnRow.querySelectorAll('td');
+        if(fnTds[0]){ var ni=fnTds[0].querySelector('input'); if(ni) ni.value=p.nombres; }
+        if(fnTds[1]){ var fi=fnTds[1].querySelector('input'); if(fi) fi.value=p.fn; }
+        var furInp=fnTds[fnTds.length-1]?fnTds[fnTds.length-1].querySelector('input'):null;
+        if(furInp) furInp.value=p.fur;
+
+        if(fila1){
+            var t1=fila1.querySelectorAll('td');
+            if(t1[1]){ var di=t1[1].querySelector('input'); if(di) di.value=p.dni; }
+            if(t1[2]){ var fi2=t1[2].querySelector('input'); if(fi2) fi2.value=p.fin; }
+            if(t1[3]){ var di2=t1[3].querySelector('input'); if(di2) di2.value=p.distrito; }
+            if(t1[4]){ var ai=t1[4].querySelector('input.age-input'); if(ai) ai.value=p.edadA; }
+            if(t1[5]){ var si=t1[5].querySelector('input,select'); if(si) si.value=p.sexo; }
+            if(t1[6]){ var tli=t1[6].querySelector('input'); if(tli) tli.value=p.talla; }
+            if(t1[7]){ var pci=t1[7].querySelector('input'); if(pci) pci.value=p.pc; }
+            if(t1[8]){ var esti=t1[8].querySelector('select'); if(esti) esti.value=p.est; }
+            if(t1[9]){ var seri=t1[9].querySelector('select'); if(seri) seri.value=p.ser; }
+            if(t1[10]){ var d1=t1[10].querySelector('input'); if(d1) d1.value=p.diag1; }
+            if(t1[11]){ var tp1=t1[11].querySelector('select'); if(tp1) tp1.value=p.tipo1; }
+            if(t1[12]){ var l1=t1[12].querySelector('input'); if(l1) l1.value=p.lab1a; }
+            if(t1[13]){ var l2=t1[13].querySelector('input'); if(l2) l2.value=p.lab1b; }
+            if(t1[14]){ var l3=t1[14].querySelector('input'); if(l3) l3.value=p.lab1c; }
+            if(t1[15]){ var c1=t1[15].querySelector('input'); if(c1) c1.value=p.cie1; }
+        }
+        if(fila2){
+            var t2=fila2.querySelectorAll('td');
+            if(t2[0]){ var hci=t2[0].querySelector('input'); if(hci) hci.value=p.hc; }
+            if(t2[1]){ var diri=t2[1].querySelector('input'); if(diri) diri.value=p.direccion; }
+            if(t2[2]){ var mi=t2[2].querySelector('input.age-input'); if(mi) mi.value=p.edadM; }
+            if(t2[3]){ var pwi=t2[3].querySelector('input'); if(pwi) pwi.value=p.peso; }
+            if(t2[4]){ var pai=t2[4].querySelector('input'); if(pai) pai.value=p.pabd; }
+            if(t2[5]){ var d2=t2[5].querySelector('input'); if(d2) d2.value=p.diag2; }
+            if(t2[6]){ var tp2=t2[6].querySelector('select'); if(tp2) tp2.value=p.tipo2; }
+            if(t2[7]){ var l4=t2[7].querySelector('input'); if(l4) l4.value=p.lab2a; }
+            if(t2[8]){ var l5=t2[8].querySelector('input'); if(l5) l5.value=p.lab2b; }
+            if(t2[9]){ var l6=t2[9].querySelector('input'); if(l6) l6.value=p.lab2c; }
+            if(t2[10]){ var c2=t2[10].querySelector('input'); if(c2) c2.value=p.cie2; }
+        }
+        if(fila3){
+            var t3=fila3.querySelectorAll('td');
+            if(t3[1]){ var di3=t3[1].querySelector('input.age-input'); if(di3) di3.value=p.edadD; }
+            if(t3[2]){ var hbi=t3[2].querySelector('input'); if(hbi) hbi.value=p.hb; }
+            if(t3[3]){ var ppi=t3[3].querySelector('input'); if(ppi) ppi.value=p.ppreg; }
+            if(t3[4]){ var d3=t3[4].querySelector('input'); if(d3) d3.value=p.diag3; }
+            if(t3[5]){ var tp3=t3[5].querySelector('select'); if(tp3) tp3.value=p.tipo3; }
+            if(t3[6]){ var l7=t3[6].querySelector('input'); if(l7) l7.value=p.lab3a; }
+            if(t3[7]){ var l8=t3[7].querySelector('input'); if(l8) l8.value=p.lab3b; }
+            if(t3[8]){ var l9=t3[8].querySelector('input'); if(l9) l9.value=p.lab3c; }
+            if(t3[9]){ var c3=t3[9].querySelector('input'); if(c3) c3.value=p.cie3; }
+        }
+    }
+
+    // =============================================
+    // SUCCESS MESSAGE
+    // =============================================
+    function wizShowSuccess() {
+        var c = document.getElementById('wizContent');
+        c.innerHTML = `
+            <div style="text-align:center;padding:30px 20px;">
+                <div style="font-size:50px;margin-bottom:16px;">✅</div>
+                <div style="font-size:16px;font-weight:700;color:#085041;margin-bottom:8px;">Paciente guardado</div>
+                <div style="font-size:12px;color:#0f6e56;margin-bottom:24px;">${wizPat().nombres || 'Paciente ' + (WIZ.patIdx+1)}</div>
+                <button class="wiz-btn wiz-btn-next" style="width:100%;margin-bottom:10px;" onclick="wizAddPatient()">+ Agregar otro paciente</button>
+                <button class="wiz-btn" style="width:100%;background:#e1f5ee;color:#085041;" onclick="WIZ.step=1;wizRender()">✏️ Editar este paciente</button>
+            </div>
+        `;
+        document.getElementById('wizFooter').style.display = 'none';
+    }
+
+    // =============================================
+    // INIT
+    // =============================================
+    wizRender();
+    </script>
+
 </body>
 </html>
