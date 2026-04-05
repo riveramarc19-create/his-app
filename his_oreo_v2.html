@@ -359,7 +359,7 @@
         .wiz-progress { height: 4px; background: #c5ebd8; }
         .wiz-progress-bar { height: 100%; background: #0f6e56; transition: width 0.4s ease; border-radius: 0 2px 2px 0; }
 
-        .wiz-content { flex: 1; overflow-y: auto; padding: 14px; -webkit-overflow-scrolling: touch; }
+        .wiz-content { flex: 1; overflow-y: auto; padding: 14px 14px 120px 14px; -webkit-overflow-scrolling: touch; scroll-padding-bottom: 120px; }
 
         .wiz-section-title {
             font-size: 10px; font-weight: 700; color: #0f6e56;
@@ -1430,6 +1430,14 @@ document.addEventListener('focusin', function(e) {
 
     <!-- ===== WIZARD MÓVIL ===== -->
     <div class="wizard-overlay" id="wizardApp">
+        <!-- Toolbar: cargar excel + pacientes -->
+        <div style="background:#085041; padding:6px 10px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #0f6e56;">
+            <label for="excelInputMobile" style="background:#1d9e75;color:white;padding:6px 10px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;">
+                📂 Cargar Pacientes
+            </label>
+            <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
+            <span id="wizExcelStatus" style="font-size:9px;color:rgba(255,255,255,0.8);font-style:italic;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+        </div>
         <!-- Barra de pacientes -->
         <div class="wiz-patients-bar" id="wizPatBar">
             <button class="wiz-pat-btn active" onclick="wizSelectPat(0)">Paciente 1</button>
@@ -1618,30 +1626,40 @@ document.addEventListener('focusin', function(e) {
                 ${[1,2,3].map(function(n) {
                     var diag = p['diag'+n], tipo = p['tipo'+n], cie = p['cie'+n];
                     var lab1 = p['lab'+n+'a'], lab2 = p['lab'+n+'b'], lab3 = p['lab'+n+'c'];
+                    var diagText = diag || '<span style="color:#aaa;font-style:italic;">Se llena al ingresar código CIE</span>';
                     return `
-                    <div style="background:white;border:1px solid #a8d5b5;border-radius:8px;padding:10px;margin-bottom:10px;">
-                        <div style="font-size:9px;font-weight:700;color:#0f6e56;margin-bottom:8px;">DIAGNÓSTICO ${n}</div>
-                        <div class="wiz-field">
-                            <label>Código CIE-10</label>
-                            <input type="text" id="wCie${n}" value="${cie}" placeholder="Ej: Z349" oninput="wizCIE(this,${n})" style="text-transform:uppercase;">
+                    <div style="background:white;border:1.5px solid #a8d5b5;border-radius:10px;padding:12px;margin-bottom:12px;">
+                        <div style="font-size:10px;font-weight:700;color:#0f6e56;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e1f5ee;">
+                            DIAGNÓSTICO ${n}
                         </div>
-                        <div class="wiz-field">
-                            <label>Descripción</label>
-                            <div class="wiz-cie-result" id="wDiag${n}">${diag || 'Se llena al ingresar código CIE'}</div>
-                        </div>
-                        <div class="wiz-row">
-                            <div class="wiz-field">
+                        <div class="wiz-row" style="align-items:flex-end;">
+                            <div class="wiz-field" style="flex:0.6;">
+                                <label>Código CIE-10</label>
+                                <input type="text" id="wCie${n}" value="${cie}"
+                                    placeholder="Ej: Z349"
+                                    oninput="wizCIE(this,${n})"
+                                    style="text-transform:uppercase;font-size:16px;font-weight:700;letter-spacing:1px;">
+                            </div>
+                            <div class="wiz-field" style="flex:0.4;">
                                 <label>TIPO</label>
-                                <select id="wTipo${n}" onchange="wizSave()">
+                                <select id="wTipo${n}" onchange="wizSave()"
+                                    style="font-size:16px;font-weight:700;text-align:center;background:${tipo?'#eaf6ee':'white'};">
                                     <option value="">-</option>
                                     <option value="P" ${tipo==='P'?'selected':''}>P</option>
                                     <option value="D" ${tipo==='D'?'selected':''}>D</option>
                                     <option value="R" ${tipo==='R'?'selected':''}>R</option>
                                 </select>
                             </div>
-                            <div class="wiz-field"><label>LAB 1</label><input type="text" id="wLab${n}a" value="${lab1}" onchange="wizSave()"></div>
-                            <div class="wiz-field"><label>LAB 2</label><input type="text" id="wLab${n}b" value="${lab2}" onchange="wizSave()"></div>
-                            <div class="wiz-field"><label>LAB 3</label><input type="text" id="wLab${n}c" value="${lab3}" onchange="wizSave()"></div>
+                        </div>
+                        <div class="wiz-field">
+                            <label>Descripción</label>
+                            <div class="wiz-cie-result" id="wDiag${n}"
+                                style="min-height:36px;font-size:11px;line-height:1.4;">${diagText}</div>
+                        </div>
+                        <div class="wiz-row">
+                            <div class="wiz-field"><label style="font-size:9px;">LAB 1</label><input type="text" id="wLab${n}a" value="${lab1}" onchange="wizSave()" style="font-size:14px;text-align:center;"></div>
+                            <div class="wiz-field"><label style="font-size:9px;">LAB 2</label><input type="text" id="wLab${n}b" value="${lab2}" onchange="wizSave()" style="font-size:14px;text-align:center;"></div>
+                            <div class="wiz-field"><label style="font-size:9px;">LAB 3</label><input type="text" id="wLab${n}c" value="${lab3}" onchange="wizSave()" style="font-size:14px;text-align:center;"></div>
                         </div>
                     </div>`;
                 }).join('')}
@@ -1869,6 +1887,44 @@ document.addEventListener('focusin', function(e) {
         `;
         document.getElementById('wizFooter').style.display = 'none';
     }
+
+    // =============================================
+    // LOAD EXCEL EN MÓVIL
+    // =============================================
+    function wizLoadExcel(inputEl) {
+        var file = inputEl.files[0];
+        if (!file) return;
+        var status = document.getElementById('wizExcelStatus');
+        status.textContent = '⏳ Cargando...';
+        // Reusar el mismo FileReader del input principal
+        var mainInput = document.getElementById('excelInput');
+        if (mainInput) {
+            // Trigger the same change handler as the desktop input
+            var dt = new DataTransfer();
+            dt.items.add(file);
+            mainInput.files = dt.files;
+            mainInput.dispatchEvent(new Event('change'));
+            // Monitor status
+            var check = setInterval(function() {
+                var s = document.getElementById('excelStatus');
+                if (s && s.textContent && s.textContent !== '⏳ Leyendo... puede tomar unos segundos.') {
+                    status.textContent = s.textContent;
+                    clearInterval(check);
+                }
+            }, 500);
+        }
+    }
+
+    // Fix: scroll active input into view above keyboard
+    document.addEventListener('focusin', function(e) {
+        if (!document.getElementById('wizardApp')) return;
+        var tag = e.target.tagName;
+        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') {
+            setTimeout(function() {
+                e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 400);
+        }
+    });
 
     // =============================================
     // INIT
