@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.3, maximum-scale=3.0, user-scalable=yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -228,45 +228,86 @@
 
         /* ===== MÓVIL / PWA ===== */
         @media (max-width: 900px) {
-            body { margin: 8px; font-size: 10px; }
+            body {
+                margin: 4px;
+                font-size: 10px;
+                /* Permite scroll suave */
+                -webkit-overflow-scrolling: touch;
+            }
 
-            .his-header-bar { font-size: 11px; padding: 8px; }
-
-            th { font-size: 7px; padding: 2px; }
-
-            td, th { height: 28px; }
-
-            input, select { font-size: 11px; }
-
-            .fn-fur-input { font-size: 10px; }
-
-            .antro-label { width: 26px; font-size: 7px; }
-            .age-label   { width: 13px; font-size: 8px; }
-            .fn-fur-label{ width: 28px; font-size: 7px; }
-
-            /* Scroll horizontal para la tabla */
-            #hisForm { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            #hisForm table { min-width: 900px; }
-
-            /* Botones más grandes para touch */
-            .his-footer button,
-            .his-footer label {
-                padding: 12px 16px;
-                font-size: 12px;
+            .his-container {
                 border-radius: 8px;
             }
 
-            /* Panel CIE más angosto en móvil */
-            #cie-dropdown-panel { width: 90vw !important; }
+            .his-header-bar {
+                font-size: 11px;
+                padding: 8px;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
 
-            /* Inputs más altos para touch */
-            td input[type="text"],
-            td input[type="number"] { min-height: 28px; }
-        }
+            /* Wrapper scrollable horizontal */
+            .his-scroll-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x proximity;
+            }
 
-        /* Evitar zoom al hacer tap en inputs iOS */
-        @media screen and (-webkit-min-device-pixel-ratio: 0) {
-            input, select { font-size: 16px; }
+            /* La tabla mantiene su ancho real para ser legible */
+            .his-scroll-wrapper table {
+                min-width: 800px;
+            }
+
+            th {
+                font-size: 7.5px;
+                padding: 3px 2px;
+                white-space: nowrap;
+            }
+
+            td, th { height: 32px; }
+
+            input, select {
+                font-size: 13px !important; /* evita zoom iOS */
+                height: 32px;
+            }
+
+            .fn-fur-row td { height: 34px; }
+            .fn-fur-input  { font-size: 12px; }
+
+            .antro-label  { width: 28px; font-size: 7px; }
+            .age-label    { width: 14px; font-size: 8px; }
+            .fn-fur-label { width: 28px; font-size: 7px; }
+
+            /* Footer sticky abajo */
+            .his-footer {
+                position: sticky;
+                bottom: 0;
+                z-index: 100;
+                flex-direction: column;
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .his-footer button,
+            .his-footer label {
+                width: 100%;
+                padding: 14px;
+                font-size: 13px;
+                border-radius: 8px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Campo activo sube sobre el teclado */
+            input:focus, select:focus {
+                position: relative;
+                z-index: 10;
+                scroll-margin-bottom: 300px;
+            }
+
+            /* Panel CIE centrado en móvil */
+            #cieDD { width: 92vw !important; left: 4vw !important; transform: none !important; top: 20vh !important; }
         }
 
         /* ===== IMPRESIÓN ===== */
@@ -360,7 +401,7 @@
     </table>
 
     <!-- TABLA PRINCIPAL -->
-    <form id="hisForm">
+    <form id="hisForm"><div class="his-scroll-wrapper">
         <table>
             <thead>
                 <tr class="section-b-header">
@@ -537,7 +578,7 @@
                 style="padding:9px 20px; background-color:#1d9e75; color:white; border:none; cursor:pointer; font-weight:700; border-radius:6px; font-size:11px;">
                 🖨 IMPRIMIR REGISTRO
             </button>
-        </div>
+        </div></div>
     </form>
 </div>
 
@@ -1144,6 +1185,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
 
         // --- CIE: event delegation at document level ---
         var cieDD = document.createElement('div');
+        cieDD.id = 'cieDD';
         cieDD.style.cssText = 'position:fixed;z-index:99999;background:white;border:2px solid #1d9e75;width:520px;max-height:240px;overflow-y:auto;box-shadow:0 8px 24px rgba(15,110,86,0.2);border-radius:8px;display:none;font-family:Segoe UI,Arial,sans-serif;';
 
         var cieDDHeader = document.createElement('div');
@@ -1240,6 +1282,17 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                 .catch(function(err) { console.log('SW error:', err); });
         });
     }
+</script>
+
+<script>
+/* Hacer scroll al campo activo cuando aparece el teclado en móvil */
+document.addEventListener('focusin', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+        setTimeout(function() {
+            e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 350);
+    }
+});
 </script>
 </body>
 </html>
