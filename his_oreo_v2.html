@@ -196,7 +196,7 @@
         /* ===== WIZARD MÓVIL ===== */
         .wizard-overlay { display: none; }
         @media (max-width: 1024px) {
-            #hisForm, .his-footer { display: none !important; }
+            #hisForm { display: none !important; }
             .his-header-bar { font-size: 12px; padding: 10px; }
             .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060f0d; }
         }
@@ -1229,6 +1229,14 @@ document.addEventListener('focusin', function(e) {
 
     <!-- ===== WIZARD MÓVIL ===== -->
     <div class="wizard-overlay" id="wizardApp">
+        <div style="background:#0d2018;padding:7px 10px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(0,180,140,0.18);">
+            <label for="excelInputMobile" style="background:rgba(0,200,150,0.12);color:#00c896;padding:7px 12px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;border:1px solid rgba(0,180,140,0.30);font-family:Rajdhani,sans-serif;">
+                📂 Cargar Pacientes
+            </label>
+            <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
+            <span id="wizExcelStatus" style="font-size:9px;color:rgba(0,200,150,0.6);font-style:italic;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+            <button onclick="window.print()" style="background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:7px 12px;border-radius:6px;font-size:10px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;white-space:nowrap;">🖨 Imprimir</button>
+        </div>
         <!-- Barra de pacientes -->
         <div class="wiz-patients-bar" id="wizPatBar">
             <button class="wiz-pat-btn active" onclick="wizSelectPat(0)">Paciente 1</button>
@@ -1492,6 +1500,34 @@ document.addEventListener('focusin', function(e) {
         btn.onclick = (function(i){ return function(){ wizSelectPat(i); }; })(idx);
         bar.insertBefore(btn, addBtn);
         wizSelectPat(idx);
+    }
+
+    // =============================================
+    // LOAD EXCEL EN MÓVIL
+    // =============================================
+    function wizLoadExcel(inputEl) {
+        var file = inputEl.files[0];
+        if (!file) return;
+        var status = document.getElementById('wizExcelStatus');
+        status.textContent = '⏳ Cargando...';
+        var mainInput = document.getElementById('excelInput');
+        if (mainInput) {
+            try {
+                var dt = new DataTransfer();
+                dt.items.add(file);
+                mainInput.files = dt.files;
+                mainInput.dispatchEvent(new Event('change'));
+                var check = setInterval(function() {
+                    var s = document.getElementById('excelStatus');
+                    if (s && s.textContent && s.textContent.indexOf('⏳') === -1) {
+                        status.textContent = s.textContent;
+                        clearInterval(check);
+                    }
+                }, 500);
+            } catch(e) {
+                status.textContent = '⚠ Usa el botón en PC para cargar';
+            }
+        }
     }
 
     // =============================================
