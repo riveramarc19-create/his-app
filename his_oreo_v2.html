@@ -1813,9 +1813,15 @@ document.addEventListener('focusin', function(e) {
                 '</table>' +
               '</div>' +
               '<button class="wiz-suc-btn" onclick="wizAddPatient()">► NUEVO PACIENTE</button>' +
-              '<button class="wiz-suc-btn" style="margin-top:8px;background:transparent;" onclick="WIZ.step=1;document.getElementById('wizFooter').style.display='flex';wizRender()">✏ EDITAR</button>' +
+              '<button class="wiz-suc-btn" style="margin-top:8px;background:transparent;" onclick="wizEditarPaciente()">✏ EDITAR</button>' +
             '</div>';
         document.getElementById('wizFooter').style.display = 'none';
+    }
+
+    function wizEditarPaciente() {
+        WIZ.step = 1;
+        document.getElementById('wizFooter').style.display = 'flex';
+        wizRender();
     }
 
     // =============================================
