@@ -1,0 +1,24 @@
+{
+  "name": "HIS - Registro Diario de Atención",
+  "short_name": "HIS OREO",
+  "description": "Registro Diario de Atención - MINSA Pacaipampa",
+  "start_url": "./his_oreo_v2.html",
+  "display": "standalone",
+  "background_color": "#edf7f2",
+  "theme_color": "#0f6e56",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
