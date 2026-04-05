@@ -7,34 +7,47 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="HIS OREO">
-    <meta name="theme-color" content="#0f6e56">
+    <meta name="theme-color" content="#060610">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-192.png">
-    <title>HIS OREO - Formulario Final</title>
+    <title>HIS AURORA - Registro Diario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Rajdhani', 'Segoe UI', Arial, sans-serif;
             font-size: 11px;
             margin: 20px;
-            background-color: #edf7f2;
+            background: #060610;
         }
         .his-container {
             width: 100%;
-            background-color: white;
-            border: 1px solid #a8d5b5;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(168,85,247,0.25);
             padding: 0;
-            box-shadow: 0 4px 18px rgba(15,110,86,0.10);
-            border-radius: 12px;
+            box-shadow: 0 0 60px rgba(6,182,212,0.08), 0 0 120px rgba(168,85,247,0.06);
+            border-radius: 14px;
             overflow: visible;
         }
         .his-header-bar {
-            background: #0f6e56;
+            background: linear-gradient(135deg, #0a0a1a 0%, #130820 100%);
+            border-bottom: 1px solid rgba(168,85,247,0.2);
             color: white;
             text-align: center;
-            padding: 10px 16px;
+            padding: 12px 16px;
             font-size: 13px;
             font-weight: 700;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.15em;
+            font-family: 'Orbitron', monospace;
+            background-clip: text;
+            position: relative;
+        }
+        .his-header-bar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 20%; right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), rgba(168,85,247,0.5), transparent);
         }
         h2 { display: none; }
 
@@ -51,35 +64,37 @@
 
         th, td {
             border: none;
-            border-right: 1px solid #a8d5b5;
-            border-bottom: 1px solid #a8d5b5;
+            border-right: 1px solid rgba(168,85,247,0.15);
+            border-bottom: 1px solid rgba(168,85,247,0.15);
             padding: 0;
             text-align: center;
             vertical-align: middle;
             height: 26px;
             box-sizing: border-box;
         }
-        th:first-child, td:first-child { border-left: 1px solid #a8d5b5; }
-        thead tr:first-child th { border-top: 1px solid #a8d5b5; }
-        tbody tr:first-child td { border-top: 1px solid #a8d5b5; }
+        th:first-child, td:first-child { border-left: 1px solid rgba(168,85,247,0.15); }
+        thead tr:first-child th { border-top: 1px solid rgba(168,85,247,0.15); }
+        tbody tr:first-child td { border-top: 1px solid rgba(168,85,247,0.15); }
 
         tbody td {
-            border-right: 1px solid #a8d5b5 !important;
-            border-bottom: 1px solid #a8d5b5 !important;
+            border-right: 1px solid rgba(168,85,247,0.15) !important;
+            border-bottom: 1px solid rgba(168,85,247,0.15) !important;
         }
-        tbody td:first-child { border-left: 1px solid #a8d5b5 !important; }
+        tbody td:first-child { border-left: 1px solid rgba(168,85,247,0.15) !important; }
 
         th {
-            background-color: #c5ebd8;
+            background: rgba(6,182,212,0.08);
             padding: 4px;
             font-size: 9px;
             font-weight: 700;
-            color: #085041;
+            color: rgba(6,182,212,0.8);
             white-space: nowrap;
             overflow: visible;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.05em;
         }
-        .header-top th { background-color: #1d9e75; color: white; }
-        .section-b-header th { background-color: #9fdfc2; color: #054033; }
+        .header-top th { background: rgba(168,85,247,0.15); color: rgba(192,132,252,0.9); }
+        .section-b-header th { background: rgba(6,182,212,0.1); color: rgba(103,232,249,0.8); }
 
         input {
             width: 100%;
@@ -87,17 +102,17 @@
             border: none;
             outline: none;
             text-align: center;
-            font-family: inherit;
+            font-family: 'Rajdhani', inherit;
             font-size: 10px;
-            color: #085041;
+            color: rgba(220,220,255,0.85);
             background: transparent;
             font-weight: 600;
             text-transform: uppercase;
             box-sizing: border-box;
             max-width: 100%;
         }
-        input:focus { background-color: #e1f5ee; }
-        input::placeholder { color: #a8d5b5; font-weight: normal; font-size: 9px; }
+        input:focus { background: rgba(168,85,247,0.08); }
+        input::placeholder { color: rgba(168,85,247,0.25); font-weight: normal; font-size: 9px; }
 
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -105,8 +120,8 @@
 
         input[readonly] {
             cursor: default;
-            color: #085041;
-            background-color: #f4faf6;
+            color: rgba(6,182,212,0.4);
+            background: rgba(6,182,212,0.03);
         }
         input:not([readonly]) {
             pointer-events: auto;
@@ -119,9 +134,9 @@
             height: 100%;
             border: none;
             outline: none;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             font-size: 10px;
-            color: #085041;
+            color: rgba(220,220,255,0.85);
             font-weight: 600;
             background: transparent;
             text-align: center;
@@ -130,7 +145,8 @@
             -moz-appearance: none;
             appearance: none;
         }
-        select:focus { background-color: #e1f5ee; }
+        select:focus { background: rgba(168,85,247,0.08); }
+        select option { background: #0d0d20; color: #e0e0ff; }
 
         .fn-fur-row td {
             background-color: #e1f5ee;
@@ -147,9 +163,9 @@
             width: 32px;
             font-size: 8px;
             font-weight: 700;
-            color: #085041;
-            background-color: #9fdfc2;
-            border-right: 1px solid #a8d5b5;
+            color: rgba(6,182,212,0.8);
+            background: rgba(6,182,212,0.08);
+            border-right: 1px solid rgba(6,182,212,0.15);
             padding: 0;
             height: 100%;
             display: flex;
@@ -161,7 +177,7 @@
         .fn-fur-input {
             flex-grow: 1;
             font-size: 9px;
-            color: #085041;
+            color: rgba(220,220,255,0.8);
             font-weight: 600;
             text-align: left;
             padding-left: 3px;
@@ -171,14 +187,14 @@
         .age-cell { display: flex; align-items: center; height: 100%; }
         .age-label {
             width: 15px;
-            background-color: #c5ebd8;
-            border-right: 1px solid #a8d5b5;
+            background: rgba(168,85,247,0.1);
+            border-right: 1px solid rgba(168,85,247,0.15);
             font-size: 9px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #085041;
+            color: rgba(192,132,252,0.8);
             flex-shrink: 0;
             font-weight: 700;
         }
@@ -188,15 +204,15 @@
         .antro-cell { display: flex; align-items: center; height: 100%; }
         .antro-label {
             width: 32px;
-            background-color: #9fdfc2;
-            border-right: 1px solid #a8d5b5;
+            background: rgba(6,182,212,0.08);
+            border-right: 1px solid rgba(6,182,212,0.15);
             font-size: 8px;
             font-weight: 700;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #054033;
+            color: rgba(6,182,212,0.7);
             flex-shrink: 0;
         }
         .antro-input { flex-grow: 1; }
@@ -221,8 +237,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f4faf6;
-            border-top: 1px solid #a8d5b5;
+            background: rgba(6,182,212,0.03);
+            border-top: 1px solid rgba(168,85,247,0.15);
         }
 
 
@@ -317,14 +333,190 @@
         }
 
         @media (max-width: 1024px) {
-            /* En móvil: ocultar tabla, mostrar wizard */
             #hisForm, .his-footer { display: none !important; }
             .his-header-bar { font-size: 12px; padding: 10px; }
-            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #edf7f2; }
+            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060610; }
         }
 
         @media (min-width: 1025px) {
-            /* En PC: ocultar wizard */
+            .wizard-overlay { display: none !important; }
+        }
+
+
+        /* AURORA WIZARD STYLES */
+        .wiz-steps { display:flex; background:#08081a; padding:8px 12px; gap:0; align-items:center; border-bottom:1px solid rgba(168,85,247,0.1); }
+        .wiz-step { flex:1; text-align:center; }
+        .wiz-step-num { width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin:0 auto 3px;transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .wiz-step.active .wiz-step-num { background:rgba(168,85,247,0.2);border:2px solid #a855f7;color:#c084fc;box-shadow:0 0 16px rgba(168,85,247,0.4); }
+        .wiz-step.done   .wiz-step-num { background:rgba(6,182,212,0.15);border:2px solid #06b6d4;color:#67e8f9; }
+        .wiz-step.pending .wiz-step-num { background:transparent;border:2px solid rgba(168,85,247,0.15);color:rgba(168,85,247,0.25); }
+        .wiz-step-label { font-size:8px;font-weight:700;letter-spacing:0.5px; }
+        .wiz-step.active .wiz-step-label { color:rgba(192,132,252,0.9); }
+        .wiz-step.done   .wiz-step-label { color:rgba(6,182,212,0.6); }
+        .wiz-step.pending .wiz-step-label { color:rgba(168,85,247,0.2); }
+        .wiz-line { flex:0.4;height:1px;background:rgba(168,85,247,0.15);margin-bottom:14px; }
+
+        .wiz-progress { height:2px;background:rgba(168,85,247,0.1); }
+        .wiz-progress-bar { height:100%;background:linear-gradient(90deg,#06b6d4,#a855f7);transition:width 0.5s ease;border-radius:0 2px 2px 0; }
+
+        .wiz-content { flex:1;overflow-y:auto;padding:14px 14px 120px 14px;-webkit-overflow-scrolling:touch;scroll-padding-bottom:120px; }
+        .wiz-content::-webkit-scrollbar { width:2px; }
+        .wiz-content::-webkit-scrollbar-thumb { background:rgba(168,85,247,0.2);border-radius:2px; }
+
+        .wiz-section-title { font-size:9px;font-weight:700;color:rgba(6,182,212,0.7);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;padding-bottom:5px;border-bottom:1px solid rgba(168,85,247,0.1);display:flex;justify-content:space-between;align-items:center; }
+        .wiz-badge { background:rgba(168,85,247,0.12);color:rgba(192,132,252,0.8);border-radius:20px;padding:2px 8px;font-size:8px;font-weight:700;border:1px solid rgba(168,85,247,0.2); }
+
+        .wiz-field { margin-bottom:12px; }
+        .wiz-field label { display:block;font-size:9px;font-weight:700;color:rgba(6,182,212,0.6);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase; }
+        .wiz-field input, .wiz-field select { width:100%;background:rgba(255,255,255,0.03);border:1.5px solid rgba(168,85,247,0.2);border-radius:8px;padding:10px 12px;font-size:15px;color:rgba(220,220,255,0.9);font-family:'Rajdhani',sans-serif;font-weight:600;-webkit-appearance:none;appearance:none;outline:none;transition:all 0.2s; }
+        .wiz-field input:focus, .wiz-field select:focus { border-color:#a855f7;background:rgba(168,85,247,0.06);box-shadow:0 0 0 3px rgba(168,85,247,0.1); }
+        .wiz-field input[readonly] { background:rgba(6,182,212,0.03);color:rgba(6,182,212,0.4);border-color:rgba(6,182,212,0.1); }
+        .wiz-row { display:flex;gap:10px; }
+        .wiz-row .wiz-field { flex:1; }
+
+        .wiz-patient-info { background:rgba(168,85,247,0.06);border-radius:10px;padding:10px 12px;margin-bottom:14px;border-left:2px solid rgba(168,85,247,0.4); }
+        .wiz-patient-info .name { font-size:13px;font-weight:700;color:rgba(220,220,255,0.9); }
+        .wiz-patient-info .meta { font-size:10px;color:rgba(6,182,212,0.6);margin-top:2px; }
+
+        .wiz-footer { background:rgba(6,182,212,0.03);padding:12px 14px;display:flex;gap:10px;border-top:1px solid rgba(168,85,247,0.1); }
+        .wiz-btn { flex:1;padding:13px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-btn-back { background:rgba(255,255,255,0.03);color:rgba(168,85,247,0.7);border:1.5px solid rgba(168,85,247,0.2); }
+        .wiz-btn-next { background:linear-gradient(135deg,rgba(6,182,212,0.2),rgba(168,85,247,0.2));color:rgba(192,132,252,0.9);border:1.5px solid rgba(168,85,247,0.4);flex:1.5;box-shadow:0 4px 20px rgba(168,85,247,0.15); }
+        .wiz-btn-save { background:linear-gradient(135deg,#0891b2,#7c3aed);color:white;flex:1.5;box-shadow:0 4px 20px rgba(124,58,237,0.3); }
+
+        .wiz-patients-bar { background:#06060f;padding:6px 14px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(168,85,247,0.1); }
+        .wiz-pat-btn { background:rgba(168,85,247,0.08);color:rgba(192,132,252,0.7);border:1px solid rgba(168,85,247,0.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.2s; }
+        .wiz-pat-btn.active { background:rgba(168,85,247,0.2);color:#c084fc;border-color:rgba(168,85,247,0.5);box-shadow:0 0 10px rgba(168,85,247,0.2); }
+        .wiz-pat-btn-add { background:transparent;color:rgba(6,182,212,0.5);border:1px dashed rgba(6,182,212,0.25); }
+
+        .wiz-cie-result { background:rgba(168,85,247,0.06);border-radius:6px;padding:8px 10px;margin-top:4px;font-size:11px;color:rgba(192,132,252,0.8);font-weight:600;min-height:36px;border:1px solid rgba(168,85,247,0.15); }
+        .wiz-dni-found { color:rgba(6,182,212,0.8);font-size:10px;margin-top:3px;font-weight:700; }
+
+        .campo-found { background:rgba(6,182,212,0.08) !important; }
+        .campo-notfound { background:rgba(255,60,60,0.08) !important; }
+
+        /* ANCHOS */
+        .w-dia   { width: 2.5%; }
+        .w-dni   { width: 6.5%; }
+        .w-fin   { width: 2.5%; }
+        .w-dist  { width: 11%; }
+        .w-edad  { width: 4%; }
+        .w-sex   { width: 1.5%; }
+        .w-antro { width: 10.5%; }
+        .w-cond  { width: 1.5%; }
+        .w-dx    { width: 24%; }
+        .w-tipo  { width: 3%; }
+        .w-lab   { width: 1.8%; }
+        .w-cie   { width: 6%; }
+
+        /* BOTONES */
+        .his-footer {
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(6,182,212,0.03);
+            border-top: 1px solid rgba(168,85,247,0.15);
+        }
+
+
+        /* ===== MÓVIL / PWA ===== */
+        @media (max-width: 900px) {
+            body {
+                margin: 4px;
+                font-size: 10px;
+                /* Permite scroll suave */
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .his-container {
+                border-radius: 8px;
+            }
+
+            .his-header-bar {
+                font-size: 11px;
+                padding: 8px;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+
+            /* Wrapper scrollable horizontal */
+            .his-scroll-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x proximity;
+            }
+
+            /* La tabla mantiene su ancho real para ser legible */
+            .his-scroll-wrapper table {
+                min-width: 800px;
+            }
+
+            th {
+                font-size: 7.5px;
+                padding: 3px 2px;
+                white-space: nowrap;
+            }
+
+            td, th { height: 32px; }
+
+            input, select {
+                font-size: 13px !important; /* evita zoom iOS */
+                height: 32px;
+            }
+
+            .fn-fur-row td { height: 34px; }
+            .fn-fur-input  { font-size: 12px; }
+
+            .antro-label  { width: 28px; font-size: 7px; }
+            .age-label    { width: 14px; font-size: 8px; }
+            .fn-fur-label { width: 28px; font-size: 7px; }
+
+            /* Footer sticky abajo */
+            .his-footer {
+                position: sticky;
+                bottom: 0;
+                z-index: 100;
+                flex-direction: column;
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .his-footer button,
+            .his-footer label {
+                width: 100%;
+                padding: 14px;
+                font-size: 13px;
+                border-radius: 8px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Campo activo sube sobre el teclado */
+            input:focus, select:focus {
+                position: relative;
+                z-index: 10;
+                scroll-margin-bottom: 300px;
+            }
+
+            /* Panel CIE centrado en móvil */
+            #cieDD { width: 92vw !important; left: 4vw !important; transform: none !important; top: 20vh !important; }
+        }
+
+
+        /* ===== WIZARD MÓVIL ===== */
+        .wizard-overlay {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            #hisForm, .his-footer { display: none !important; }
+            .his-header-bar { font-size: 12px; padding: 10px; }
+            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060610; }
+        }
+
+        @media (min-width: 1025px) {
             .wizard-overlay { display: none !important; }
         }
 
@@ -485,7 +677,7 @@
             <tr>
                 <td><input type="number" value="2026"></td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:inherit; font-size:10px; color:#1a3a5c; font-weight:bold; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
                         <option value="ENERO">ENERO</option>
                         <option value="FEBRERO">FEBRERO</option>
                         <option value="MARZO">MARZO</option>
@@ -501,7 +693,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:inherit; font-size:10px; color:#1a3a5c; font-weight:bold; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
                         <option value="">-- SELECCIONAR --</option>
                         <option value="E.S PACAIPAMPA">E.S PACAIPAMPA</option>
                         <option value="P.S EL PUERTO">P.S EL PUERTO</option>
@@ -511,7 +703,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:inherit; font-size:10px; color:#1a3a5c; font-weight:bold; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
                         <option value="MEDICINA">MEDICINA</option>
                         <option value="ENFERMERIA">ENFERMERÍA</option>
                         <option value="NUTRICION">NUTRICIÓN</option>
@@ -520,7 +712,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%; height:100%; border:none; outline:none; font-family:inherit; font-size:10px; color:#1a3a5c; font-weight:bold; background:transparent; text-align:center; cursor:pointer;">
+                    <select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;">
                         <option value="">-- TURNO --</option>
                         <option value="MAÑANA">MAÑANA</option>
                         <option value="TARDE">TARDE</option>
@@ -570,7 +762,7 @@
                         </div>
                     </td>
                     <td colspan="4"></td>
-                    <td colspan="3" style="text-align:center; font-size:8px; font-weight:700; color:#054033; background-color:#9fdfc2;">FUR:</td>
+                    <td colspan="3" style="text-align:center; font-size:8px; font-weight:700; color:rgba(6,182,212,0.8); background:rgba(6,182,212,0.08);">FUR:</td>
                     <td><input type="text" class="fn-fur-input" placeholder="dd/mm/aaaa"></td>
                 </tr>
 
@@ -587,10 +779,10 @@
                     <td><div class="antro-cell"><span class="antro-label">Talla</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.C.</span><input type="number" class="antro-input" step="0.1"></div></td>
 
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 1" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -606,14 +798,14 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Abd</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 2 / Proc." readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td class="cie-td"><input type="text" data-role="cie" autocomplete="off" style="pointer-events:auto; cursor:text;"></td>
                 </tr>
                 <tr class="patient-end">
-                    <td><select style="width:100%; height:100%; border:none; outline:none; font-family:inherit; font-size:10px; color:#1a3a5c; font-weight:bold; background:transparent; text-align:center; cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
+                    <td><select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
                     <td><div class="age-cell"><span class="age-label">D</span><input type="number" class="age-input"></div></td>
 
                     <!-- Fila 3 antro: HB | P.Preg -->
@@ -621,7 +813,7 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Preg</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 3 / Trat." readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -640,7 +832,7 @@
                         </div>
                     </td>
                     <td colspan="4"></td>
-                    <td colspan="3" style="text-align:center; font-size:8px; font-weight:700; color:#054033; background-color:#9fdfc2;">FUR:</td>
+                    <td colspan="3" style="text-align:center; font-size:8px; font-weight:700; color:rgba(6,182,212,0.8); background:rgba(6,182,212,0.08);">FUR:</td>
                     <td><input type="text" class="fn-fur-input" placeholder="dd/mm/aaaa"></td>
                 </tr>
 
@@ -656,10 +848,10 @@
                     <td><div class="antro-cell"><span class="antro-label">Talla</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.C.</span><input type="number" class="antro-input" step="0.1"></div></td>
 
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -674,21 +866,21 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Abd</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td class="cie-td"><input type="text" data-role="cie" autocomplete="off" style="pointer-events:auto; cursor:text;"></td>
                 </tr>
                 <tr class="patient-end">
-                    <td><select style="width:100%; height:100%; border:none; outline:none; font-family:inherit; font-size:10px; color:#1a3a5c; font-weight:bold; background:transparent; text-align:center; cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
+                    <td><select style="width:100%; height:100%; border:none; outline:none; font-family:Rajdhani,sans-serif; font-size:10px; color:rgba(192,132,252,0.8); font-weight:700; background:transparent; text-align:center; cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
                     <td><div class="age-cell"><span class="age-label">D</span><input type="number" class="age-input"></div></td>
 
                     <td><div class="antro-cell"><span class="antro-label">HB</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.Preg</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(220,220,255,0.85);font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -699,17 +891,17 @@
         <div class="his-footer">
             <div style="display:flex; align-items:center; gap:8px;">
                 <label for="excelInput"
-                    style="padding:8px 14px; background-color:#0f6e56; color:white; border:none;
-                           cursor:pointer; font-weight:700; font-size:11px; display:flex; align-items:center; gap:6px; border-radius:6px;">
-                    📂 CARGAR PACIENTES DESDE EXCEL
+                    style="padding:8px 14px; background:linear-gradient(135deg,rgba(6,182,212,0.2),rgba(168,85,247,0.2)); color:rgba(103,232,249,0.9); border:1px solid rgba(6,182,212,0.3);
+                           cursor:pointer; font-weight:700; font-size:11px; display:flex; align-items:center; gap:6px; border-radius:6px; font-family:'Rajdhani',sans-serif;">
+                    📂 CARGAR PACIENTES
                 </label>
                 <input type="file" id="excelInput" accept=".xlsx,.xls" style="display:none;">
                 <span id="excelStatus" style="font-size:10px; color:#555; font-style:italic;"></span>
             </div>
 
             <button type="button" onclick="window.print()"
-                style="padding:9px 20px; background-color:#1d9e75; color:white; border:none; cursor:pointer; font-weight:700; border-radius:6px; font-size:11px;">
-                🖨 IMPRIMIR REGISTRO
+                style="padding:9px 20px; background:linear-gradient(135deg,rgba(6,182,212,0.25),rgba(168,85,247,0.25)); color:rgba(192,132,252,0.9); border:1px solid rgba(168,85,247,0.4); cursor:pointer; font-weight:700; border-radius:6px; font-size:11px; font-family:'Rajdhani',sans-serif;">
+                🖨 IMPRIMIR
             </button>
         </div></div>
     </form>
@@ -1319,10 +1511,10 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         // --- CIE: event delegation at document level ---
         var cieDD = document.createElement('div');
         cieDD.id = 'cieDD';
-        cieDD.style.cssText = 'position:fixed;z-index:99999;background:white;border:2px solid #1d9e75;width:520px;max-height:240px;overflow-y:auto;box-shadow:0 8px 24px rgba(15,110,86,0.2);border-radius:8px;display:none;font-family:Segoe UI,Arial,sans-serif;';
+        cieDD.style.cssText = 'position:fixed;z-index:99999;background:#0d0d20;border:2px solid rgba(168,85,247,0.5);width:520px;max-height:240px;overflow-y:auto;box-shadow:0 8px 24px rgba(15,110,86,0.2);border-radius:8px;display:none;font-family:Segoe UI,Arial,sans-serif;';
 
         var cieDDHeader = document.createElement('div');
-        cieDDHeader.style.cssText = 'background:#1d9e75;color:white;padding:5px 12px;font-size:9px;font-weight:700;letter-spacing:0.05em;position:sticky;top:0;';
+        cieDDHeader.style.cssText = 'background:linear-gradient(135deg,rgba(6,182,212,0.3),rgba(168,85,247,0.3));color:rgba(192,132,252,0.9);padding:5px 12px;font-size:9px;font-weight:700;letter-spacing:0.05em;position:sticky;top:0;';
         cieDDHeader.textContent = 'BUSCAR CÓDIGO CIE-10';
         cieDD.appendChild(cieDDHeader);
 
@@ -1367,8 +1559,8 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                     (function(item){
                         var it = document.createElement('div');
                         it.style.cssText='padding:5px 12px;font-size:10px;color:#085041;cursor:pointer;border-bottom:1px solid #e1f5ee;';
-                        it.innerHTML='<b style="color:#0f6e56;margin-right:8px;min-width:42px;display:inline-block;">'+item.c+'</b>'+item.d;
-                        it.onmouseover=function(){ it.style.background='#e1f5ee'; };
+                        it.innerHTML='<b style="background:linear-gradient(90deg,#06b6d4,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-right:8px;min-width:42px;display:inline-block;">'+item.c+'</b><span style="color:rgba(220,220,255,0.8);">'+item.d+'</span>';
+                        it.onmouseover=function(){ it.style.background='rgba(168,85,247,0.1)'; };
                         it.onmouseout =function(){ it.style.background=''; };
                         it.onmousedown=function(ev){
                             ev.preventDefault();
@@ -1930,7 +2122,119 @@ document.addEventListener('focusin', function(e) {
     // INIT
     // =============================================
     wizRender();
+
+    // Override wizNext to add sound
+    var _wizNextOrig = wizNext;
+    window.wizNextWithSound = function(){
+        if(WIZ.step === 3){
+            if(typeof playSaveBip !== 'undefined') playSaveBip();
+        } else {
+            if(typeof playStepBip !== 'undefined') playStepBip();
+        }
+        _wizNextOrig();
+    };
+    // Replace button onclick
+    var btnNext = document.getElementById('wizBtnNext');
+    if(btnNext) btnNext.setAttribute('onclick','wizNextWithSound()');
     </script>
+
+
+<script>
+/* ============================================================
+   AURORA AMBIENT BACKGROUND
+   ============================================================ */
+(function(){
+    var canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:0.6;';
+    document.body.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+    var orbs = [
+        {x:0.2, y:0.2, r:0.35, color:'rgba(6,182,212,0.06)', vx:0.0002, vy:0.0001},
+        {x:0.8, y:0.7, r:0.4,  color:'rgba(168,85,247,0.06)', vx:-0.0001, vy:0.0002},
+        {x:0.5, y:0.5, r:0.25, color:'rgba(124,58,237,0.04)', vx:0.00015, vy:-0.00015},
+    ];
+    function draw(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        orbs.forEach(function(o){
+            o.x += o.vx; o.y += o.vy;
+            if(o.x < 0 || o.x > 1) o.vx *= -1;
+            if(o.y < 0 || o.y > 1) o.vy *= -1;
+            var grd = ctx.createRadialGradient(
+                o.x*canvas.width, o.y*canvas.height, 0,
+                o.x*canvas.width, o.y*canvas.height, o.r*Math.min(canvas.width,canvas.height)
+            );
+            grd.addColorStop(0, o.color);
+            grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd;
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+    window.addEventListener('resize', function(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+})();
+
+/* ============================================================
+   AURORA SOUND — BIP AL AVANZAR PASOS
+   ============================================================ */
+var _audioCtx = null;
+function getAudioCtx(){
+    if(!_audioCtx) _audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    return _audioCtx;
+}
+function playStepBip(){
+    try{
+        var c = getAudioCtx();
+        // Two-tone ascending bip (aurora feel)
+        [[440,0],[660,0.1],[880,0.2]].forEach(function(pair){
+            var o = c.createOscillator();
+            var g = c.createGain();
+            o.connect(g); g.connect(c.destination);
+            o.type = 'sine';
+            o.frequency.value = pair[0];
+            g.gain.setValueAtTime(0, c.currentTime+pair[1]);
+            g.gain.linearRampToValueAtTime(0.1, c.currentTime+pair[1]+0.04);
+            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime+pair[1]+0.15);
+            o.start(c.currentTime+pair[1]);
+            o.stop(c.currentTime+pair[1]+0.2);
+        });
+    }catch(e){}
+}
+function playSaveBip(){
+    try{
+        var c = getAudioCtx();
+        [523,659,784,1046,1318].forEach(function(f,i){
+            var o = c.createOscillator();
+            var g = c.createGain();
+            o.connect(g); g.connect(c.destination);
+            o.type = 'sine';
+            o.frequency.value = f;
+            var t = c.currentTime + i*0.08;
+            g.gain.setValueAtTime(0.12, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t+0.25);
+            o.start(t); o.stop(t+0.3);
+        });
+    }catch(e){}
+}
+/* Hook into wizard navigation buttons */
+document.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn) return;
+    if(btn.id === 'wizBtnNext') playStepBip();
+    if(btn.onclick && btn.textContent.includes('Guardar')) playSaveBip();
+});
+/* Also hook wizard save action */
+var _origWizNext = window.wizNext;
+if(typeof wizNext !== 'undefined'){
+    window.wizNext = function(){
+        var step = WIZ && WIZ.step;
+        if(step === 3) playSaveBip(); else playStepBip();
+        if(_origWizNext) _origWizNext();
+    };
+}
+</script>
 
 </body>
 </html>
