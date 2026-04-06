@@ -976,7 +976,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                 });
 
                 status.style.color = '#1a6e3c';
-                status.textContent = `✔ ${count.toLocaleString()} pacientes cargados.`;
+                status.textContent = `✔ ${count.toLocaleString()} pacientes cargados.`; status.style.fontSize="15px";
 
             } catch(err) {
                 status.style.color = '#e05252';
@@ -1606,7 +1606,7 @@ document.addEventListener('focusin', function(e) {
         <div style="background:#0a1a16;padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid rgba(0,180,140,0.18);flex-shrink:0;">
             <label for="excelInputMobile" id="lblCargar" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:22px 10px;border-radius:16px;font-size:26px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1.2;">
                 <span>📂 Cargar Pacientes</span>
-                <span id="wizExcelStatus" style="font-size:11px;color:rgba(0,200,150,0.9);font-style:italic;font-weight:600;display:none;"></span>
+                <span id="wizExcelStatus" style="font-size:16px;color:rgba(0,200,150,0.9);font-style:italic;font-weight:700;display:none;"></span>
             </label>
             <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
             <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:22px 10px;border-radius:16px;font-size:26px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
@@ -1752,7 +1752,10 @@ document.addEventListener('focusin', function(e) {
                   '<div class="b-field"><span class="b-lbl">DNI</span>' +
                     '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="color:#ffffff;" oninput="wizDNISearch(this.value)" onchange="wizSave()">' +
                   '</div>' +
-                  '<div class="b-field"><span class="b-lbl">Apellidos y Nombres</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:#ffffff;"></div>' +
+                  '<div class="b-field" style="position:relative;"><span class="b-lbl">Apellidos y Nombres</span>' +
+                    '<input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" placeholder="Buscar por nombre..." style="color:#ffffff;" oninput="wizNombreSearch(this.value)" onchange="wizSave()" autocomplete="off">' +
+                    '<div id="wNombresDrop" style="display:none;position:absolute;left:0;right:0;top:100%;z-index:999;background:#0d2018;border:2px solid rgba(0,180,140,0.3);border-radius:12px;max-height:220px;overflow-y:auto;margin-top:4px;"></div>' +
+                  '</div>' +
                   '<div class="b-field"><span class="b-lbl">Financiador</span><input class="b-val" id="wFin" value="'+(p.fin||'')+'" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">H. Clínica</span><input class="b-val" id="wHc" value="'+(p.hc||'')+'" onchange="wizSave()"></div>' +
                 '</div>' +
@@ -1836,6 +1839,49 @@ document.addEventListener('focusin', function(e) {
         });
     }
 
+
+    // NOMBRE SEARCH
+    function wizNombreSearch(val) {
+        var drop = document.getElementById('wNombresDrop');
+        if (!drop) return;
+        var v = val.trim().toUpperCase();
+        if (!v || v.length < 2) { drop.style.display='none'; return; }
+        if (typeof PACIENTES_DB === 'undefined') { drop.style.display='none'; return; }
+
+        var results = [];
+        Object.keys(PACIENTES_DB).forEach(function(dni) {
+            var p = PACIENTES_DB[dni];
+            if (p.nombres && p.nombres.toUpperCase().indexOf(v) !== -1) {
+                results.push(p);
+            }
+        });
+        results = results.slice(0, 10);
+
+        if (!results.length) { drop.style.display='none'; return; }
+
+        drop.innerHTML = results.map(function(p) {
+            return '<div onclick="wizSelectNombre(''+p.dni+'')" style="padding:12px 14px;border-bottom:1px solid rgba(0,180,140,0.1);cursor:pointer;font-family:Rajdhani,sans-serif;font-size:18px;color:#ffffff;font-weight:600;" onmouseover="this.style.background='rgba(0,180,140,0.1)'" onmouseout="this.style.background=''">' +
+                '<span style="color:#00c896;font-size:14px;margin-right:8px;">' + p.dni + '</span>' + p.nombres +
+            '</div>';
+        }).join('');
+        drop.style.display = 'block';
+    }
+
+    function wizSelectNombre(dni) {
+        var drop = document.getElementById('wNombresDrop');
+        if (drop) drop.style.display = 'none';
+        wizDNISearch(dni);
+        var dniEl = document.getElementById('wDni');
+        if (dniEl) dniEl.value = dni;
+    }
+
+    // Close nombre dropdown on outside click
+    document.addEventListener('click', function(e) {
+        var drop = document.getElementById('wNombresDrop');
+        if (drop && !drop.contains(e.target) && e.target.id !== 'wNombres') {
+            drop.style.display = 'none';
+        }
+    });
 
     // Toggle button handler (Option B)
     function wizTog(btn) {
