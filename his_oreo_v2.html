@@ -367,18 +367,18 @@
 
 
         /* CUSTOM CALENDAR */
-        .wiz-cal-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:16px; }
-        .wiz-cal-title { font-size:22px;font-weight:800;color:#00c896;text-transform:uppercase;letter-spacing:1px; }
-        .wiz-cal-nav { background:rgba(0,200,150,0.15);border:1.5px solid rgba(0,200,150,0.3);color:#00c896;border-radius:8px;padding:6px 14px;font-size:20px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif; }
-        .wiz-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px; }
-        .wiz-cal-dayname { text-align:center;font-size:14px;font-weight:900;color:rgba(0,200,150,0.6);text-transform:uppercase;padding:4px 0; }
-        .wiz-cal-day { text-align:center;padding:10px 2px;border-radius:8px;font-size:20px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
+        .wiz-cal-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:20px; }
+        .wiz-cal-title { font-size:36px;font-weight:900;color:#00c896;text-transform:uppercase;letter-spacing:1px; }
+        .wiz-cal-nav { background:rgba(0,200,150,0.15);border:1.5px solid rgba(0,200,150,0.3);color:#00c896;border-radius:8px;padding:12px 24px;font-size:34px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif; }
+        .wiz-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px; }
+        .wiz-cal-dayname { text-align:center;font-size:22px;font-weight:900;color:rgba(0,200,150,0.7);text-transform:uppercase;padding:8px 0; }
+        .wiz-cal-day { text-align:center;padding:16px 4px;border-radius:12px;font-size:30px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
         .wiz-cal-day:hover { background:rgba(0,200,150,0.2); }
         .wiz-cal-day.today { border:1.5px solid rgba(0,200,150,0.5);color:#00c896; }
         .wiz-cal-day.selected { background:#00c896;color:#060f0d;font-weight:900; }
         .wiz-cal-day.empty { cursor:default; }
-        .wiz-cal-footer { display:flex;gap:10px;margin-top:16px; }
-        .wiz-cal-btn { flex:1;padding:12px;border-radius:10px;font-size:18px;font-weight:800;cursor:pointer;font-family:Rajdhani,sans-serif;border:none; }
+        .wiz-cal-footer { display:flex;gap:14px;margin-top:20px; }
+        .wiz-cal-btn { flex:1;padding:18px;border-radius:14px;font-size:28px;font-weight:800;cursor:pointer;font-family:Rajdhani,sans-serif;border:none; }
         .wiz-cal-ok { background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d; }
         .wiz-cal-cancel { background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1) !important; }
 
@@ -1825,12 +1825,13 @@ document.addEventListener('focusin', function(e) {
             var el = document.getElementById('ws'+i);
             if (!el) return;
             el.className = 'wiz-step ' + (i < WIZ.step ? 'done' : i === WIZ.step ? 'active' : 'pending');
-            el.querySelector('.wiz-step-num').textContent = i < WIZ.step ? '✓' : i;
+            var sn = el.querySelector('.wiz-step-num'); if (sn) sn.textContent = i < WIZ.step ? '✓' : i;
         });
         document.getElementById('wizProgress').style.width = (WIZ.step / 4 * 100) + '%';
         document.getElementById('wizBtnBack').style.display = WIZ.step > 1 ? 'block' : 'none';
 
         var nextBtn = document.getElementById('wizBtnNext');
+        if (!nextBtn) return;
 
         function tog(opts, val, field) {
             return opts.map(function(v) {
@@ -1853,14 +1854,14 @@ document.addEventListener('focusin', function(e) {
                     '<div class="b-field b-half"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" onchange="wizSaveEstab()"></div>' +
                     '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '</div>' +
-                  '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="">-- Seleccionar --</option>'+mesOpts+'</select></div>' +
+                  '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="" disabled selected style="display:none;"></option>'+mesOpts+'</select></div>' +
                   '<div class="b-field" onclick="wizOpenCal()" style="cursor:pointer;"><span class="b-lbl">FECHA ATENCIÓN</span><div class="b-val" id="wFechaDisplay" style="display:flex;align-items:center;justify-content:center;height:125px;font-size:56px;font-weight:700;color:#ffffff;cursor:pointer;">'+(est.fechaAtencion ? wizFmtDate(est.fechaAtencion) : 'SELECCIONAR')+'</div></div>' +
                   '<div id="wizCalPanel" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:#0a1a16;border:2px solid #00c896;border-radius:20px;padding:20px;width:320px;box-shadow:0 0 40px rgba(0,200,150,0.3);font-family:Rajdhani,sans-serif;"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Establecimiento</div>' +
-                  '<div class="b-field"><span class="b-lbl">Establecimiento</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wEstab"><option value="">-- Seleccionar --</option>'+estabOpts+'</select></div>' +
-                  '<div class="b-field"><span class="b-lbl">UPS</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wUps"><option value="">-- Seleccionar --</option>'+upsOpts+'</select></div>' +
+                  '<div class="b-field"><span class="b-lbl">Establecimiento</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wEstab"><option value="" disabled selected style="display:none;"></option>'+estabOpts+'</select></div>' +
+                  '<div class="b-field"><span class="b-lbl">UPS</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wUps"><option value="" disabled selected style="display:none;"></option>'+upsOpts+'</select></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Responsable</div>' +
@@ -2496,7 +2497,7 @@ document.addEventListener('focusin', function(e) {
     var _calSelected = null;
 
     function wizFmtDate(iso) {
-        if (!iso) return 'SELECCIONAR';
+        if (!iso) return '';
         var p = iso.split('-');
         if (p.length !== 3) return iso;
         var months = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
