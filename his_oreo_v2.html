@@ -237,10 +237,15 @@
         .wizard-overlay { display: none; }
         @media (max-width: 1024px) {
             #hisForm { display: none !important; }
-            .his-header-bar { font-size: 12px; padding: 10px; }
-            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060f0d; }
+            #pcHeader { display: none !important; }
+            #pcTitleBar { display: none !important; }
+            .wizard-overlay { display: flex; flex-direction: column; height: 100vh; background: #060f0d; }
         }
-        @media (min-width: 1025px) { .wizard-overlay { display: none !important; } }
+        @media (min-width: 1025px) {
+            .wizard-overlay { display: none !important; }
+            #pcHeader { display: block !important; }
+            #pcTitleBar { display: block !important; }
+        }
 
         /* WIZARD STYLES — PROPOSAL 3 */
         .wiz-steps { display:flex; background:#0a1a16; padding:10px 18px; gap:0; align-items:center; border-bottom:1px solid rgba(0,180,140,0.12); }
@@ -392,10 +397,15 @@
         .wizard-overlay { display: none; }
         @media (max-width: 1024px) {
             #hisForm { display: none !important; }
-            .his-header-bar { font-size: 12px; padding: 10px; }
-            .wizard-overlay { display: flex; flex-direction: column; height: calc(100vh - 50px); background: #060f0d; }
+            #pcHeader { display: none !important; }
+            #pcTitleBar { display: none !important; }
+            .wizard-overlay { display: flex; flex-direction: column; height: 100vh; background: #060f0d; }
         }
-        @media (min-width: 1025px) { .wizard-overlay { display: none !important; } }
+        @media (min-width: 1025px) {
+            .wizard-overlay { display: none !important; }
+            #pcHeader { display: block !important; }
+            #pcTitleBar { display: block !important; }
+        }
 
         /* WIZARD STYLES */
         .wiz-steps { display:flex; background:#0d2018; padding:8px 12px; gap:0; align-items:center; border-bottom:1px solid rgba(0,180,140,0.18); }
@@ -433,9 +443,10 @@
 <body>
 
 <div class="his-container">
-<div class="his-header-bar">HIS · REGISTRO DIARIO DE ATENCIÓN</div>
+<div class="his-header-bar" id="pcTitleBar">HIS · REGISTRO DIARIO DE ATENCIÓN</div>
 
     <!-- CABECERA -->
+    <div id="pcHeader">
     <table>
         <thead>
             <tr class="header-top">
@@ -500,7 +511,9 @@
         </tbody>
     </table>
 
-    <!-- TABLA PRINCIPAL -->
+    </div>
+
+        <!-- TABLA PRINCIPAL -->
     <form id="hisForm"><div class="his-scroll-wrapper">
         <table>
             <thead>
