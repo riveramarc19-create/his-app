@@ -1568,7 +1568,7 @@ document.addEventListener('focusin', function(e) {
             </label>
             <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
             <span id="wizExcelStatus" style="font-size:9px;color:rgba(0,200,150,0.6);font-style:italic;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
-            <button onclick="window.print()" style="background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:7px 12px;border-radius:6px;font-size:10px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;white-space:nowrap;">🖨 Imprimir</button>
+            <button onclick="wizPrintAll()" style="background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:7px 12px;border-radius:6px;font-size:10px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;white-space:nowrap;">🖨 Imprimir</button>
         </div>
         <!-- Barra de pacientes -->
         <div class="wiz-patients-bar" id="wizPatBar">
@@ -1711,8 +1711,7 @@ document.addEventListener('focusin', function(e) {
                   '<div class="b-field"><span class="b-lbl">DNI</span>' +
                     '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="font-size:18px;font-weight:800;color:#00c896;" oninput="wizDNISearch(this.value)" onchange="wizSave()">' +
                   '</div>' +
-                  '<div class="b-field" id="rowDniFound" style="'+(p.nombres?'':'display:none;')+'"><span class="b-lbl"></span><span class="b-hint" id="wDniFound">'+(p.nombres?'✓ '+p.nombres:'')+'</span></div>' +
-                  '<div class="b-field"><span class="b-lbl">Nombre</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:rgba(0,200,150,0.4);font-size:13px;"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Apellidos y Nombres</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:rgba(0,200,150,0.6);"></div>' +
                   '<div class="b-field"><span class="b-lbl">Financiador</span><input class="b-val" id="wFin" value="'+(p.fin||'')+'" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">H. Clínica</span><input class="b-val" id="wHc" value="'+(p.hc||'')+'" onchange="wizSave()"></div>' +
                 '</div>' +
@@ -2004,10 +2003,8 @@ document.addEventListener('focusin', function(e) {
                 });
 
                 // Show found row
-                var foundRow = document.getElementById('rowDniFound');
-                var foundSpan = document.getElementById('wDniFound');
-                if (foundRow) foundRow.style.display = 'flex';
-                if (foundSpan) foundSpan.textContent = '✓ ' + p.nombres;
+                var nEl = document.getElementById('wNombres');
+                if (nEl) nEl.value = p.nombres;
 
                 // Sexo toggle
                 document.querySelectorAll('#wizContent .b-t[data-field="sexo"]').forEach(function(b) {
@@ -2161,6 +2158,8 @@ document.addEventListener('focusin', function(e) {
     // SUCCESS MESSAGE
     // =============================================
     function wizShowSuccess() {
+        // Auto-commit this patient to table on save
+        wizCommitToTable();
         var c = document.getElementById('wizContent');
         var p = wizPat();
         var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
@@ -2186,6 +2185,25 @@ document.addEventListener('focusin', function(e) {
         WIZ.step = 1;
         document.getElementById('wizFooter').style.display = 'flex';
         wizRender();
+    }
+
+    // =============================================
+    // PRINT ALL — commit all patients then print
+    // =============================================
+    function wizPrintAll() {
+        // Save current step data
+        wizSave();
+        // Commit all patients to table
+        var savedIdx = WIZ.patIdx;
+        for (var i = 0; i < WIZ.patients.length; i++) {
+            WIZ.patIdx = i;
+            wizCommitToTable();
+        }
+        WIZ.patIdx = savedIdx;
+        // Sync establecimiento to PC header
+        wizSaveEstab();
+        // Print
+        setTimeout(function() { window.print(); }, 200);
     }
 
     // =============================================
