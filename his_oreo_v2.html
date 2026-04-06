@@ -175,32 +175,41 @@
 
 
         /* ===== OPCIÓN B: LISTA LIMPIA ===== */
-        .b-group { margin-bottom:18px; }
-        .b-group-ttl { font-size:8px;font-weight:700;color:rgba(0,200,150,0.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px; }
+        .b-group { margin-bottom:14px; }
+
+        .b-row2 { display:flex;gap:8px;width:100%; }
+        .b-half { flex:1; }
+
+        .b-group-ttl { font-size:8px;font-weight:700;color:rgba(0,200,150,0.35);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px; }
         .b-group-ttl::after { content:'';flex:1;height:1px;background:rgba(0,180,140,0.1); }
-        .b-field { display:flex;align-items:center;padding:11px 0;border-bottom:1px solid rgba(0,180,140,0.07);gap:10px; }
+        .b-field { display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 10px;border-bottom:1px solid rgba(0,180,140,0.07);gap:6px;background:rgba(0,180,140,0.025);border-radius:10px;margin-bottom:6px; }
         .b-field:last-child { border-bottom:none; }
-        .b-lbl { font-size:10px;font-weight:700;color:rgba(0,200,150,0.5);width:90px;flex-shrink:0; }
-        .b-val { flex:1;font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;min-width:0; }
-        .b-hint { font-size:9px;color:rgba(0,200,150,0.6);font-weight:700;text-align:right;flex:1; }
-        .b-toggle { display:flex;gap:5px;margin-left:auto; }
-        .b-t { padding:7px 11px;border-radius:7px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.15s; }
+        .b-lbl { font-size:10px;font-weight:700;color:rgba(0,200,150,0.5);text-transform:uppercase;letter-spacing:1px; }
+        .b-val { width:100%;font-size:18px;color:rgba(200,255,240,0.95);font-weight:700;font-family:'Rajdhani',sans-serif;background:transparent;border:none;border-bottom:1.5px solid rgba(0,180,140,0.2);outline:none;text-align:center;padding:4px 0; }
+        .b-val:focus { border-bottom-color:#00c896; }
+        .b-hint { font-size:10px;color:rgba(0,200,150,0.7);font-weight:700;text-align:center; }
+        .b-toggle { display:flex;gap:8px;justify-content:center;width:100%; }
+        .b-t { padding:10px 18px;border-radius:9px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.15s; }
         .b-t.sel { background:rgba(0,200,150,0.18);border:1.5px solid #00c896;color:#00c896; }
         .b-t.off { background:rgba(0,180,140,0.04);border:1px solid rgba(0,180,140,0.1);color:rgba(0,180,140,0.25); }
-        .b-age-row { display:flex;gap:6px;margin-left:auto; }
-        .b-age-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.15);border-radius:8px;padding:5px 10px;text-align:center; }
-        .b-age-lbl { font-size:7px;color:rgba(0,200,150,0.3);margin-bottom:2px;letter-spacing:1px;font-weight:700; }
-        .b-age-val { font-size:15px;font-weight:800;color:#00c896; }
+        .b-age-row { display:flex;gap:8px;justify-content:center;width:100%; }
+        .b-age-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:10px;padding:8px 14px;text-align:center;min-width:60px; }
+        .b-age-lbl { font-size:8px;color:rgba(0,200,150,0.4);margin-bottom:4px;letter-spacing:1px;font-weight:700;text-transform:uppercase; }
+        .b-age-val { font-size:20px;font-weight:800;color:#00c896; }
         .b-pat-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px; }
         .b-pat-av { width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:1.5px solid rgba(0,200,150,0.35);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#00c896; }
         .b-pat-name { font-size:13px;font-weight:700;color:rgba(200,255,240,0.9); }
         .b-pat-meta { font-size:9px;color:rgba(0,200,150,0.5);margin-top:2px; }
         .b-diag-card { border-bottom:1px solid rgba(0,180,140,0.1);padding-bottom:14px;margin-bottom:14px; }
         .b-diag-card:last-of-type { border-bottom:none; }
-        .b-diag-desc { flex:1;font-size:12px;color:rgba(0,200,150,0.6);font-weight:600;text-align:right; }
-        .b-diag-desc.filled { color:rgba(200,255,240,0.8); }
+        .b-diag-desc { width:100%;font-size:13px;color:rgba(0,200,150,0.6);font-weight:600;text-align:center;padding:4px 0; }
+        .b-diag-desc.filled { color:rgba(200,255,240,0.85); }
 
-        .b-sel { font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;cursor:pointer;-webkit-appearance:none;max-width:100%;flex:1; }
+
+        /* DATE INPUT */
+        .b-date { width:100%;font-size:17px;color:rgba(200,255,240,0.95);font-weight:700;font-family:'Rajdhani',sans-serif;background:transparent;border:none;border-bottom:1.5px solid rgba(0,180,140,0.2);outline:none;text-align:center;padding:4px 0;color-scheme:dark; }
+        .b-date::-webkit-calendar-picker-indicator { filter:invert(1) sepia(1) saturate(3) hue-rotate(100deg);cursor:pointer;opacity:0.7; }
+        .b-sel { width:100%;font-size:18px;color:rgba(200,255,240,0.95);font-weight:700;font-family:'Rajdhani',sans-serif;background:transparent;border:none;border-bottom:1.5px solid rgba(0,180,140,0.2);outline:none;text-align:center;cursor:pointer;-webkit-appearance:none;padding:4px 0; }
         .b-sel option { background:#0d2018;color:rgba(200,255,240,0.9); }
         .b-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:8px;font-family:'Rajdhani',sans-serif; }
 
@@ -321,32 +330,41 @@
 
 
         /* ===== OPCIÓN B: LISTA LIMPIA ===== */
-        .b-group { margin-bottom:18px; }
-        .b-group-ttl { font-size:8px;font-weight:700;color:rgba(0,200,150,0.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px; }
+        .b-group { margin-bottom:14px; }
+
+        .b-row2 { display:flex;gap:8px;width:100%; }
+        .b-half { flex:1; }
+
+        .b-group-ttl { font-size:8px;font-weight:700;color:rgba(0,200,150,0.35);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px; }
         .b-group-ttl::after { content:'';flex:1;height:1px;background:rgba(0,180,140,0.1); }
-        .b-field { display:flex;align-items:center;padding:11px 0;border-bottom:1px solid rgba(0,180,140,0.07);gap:10px; }
+        .b-field { display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 10px;border-bottom:1px solid rgba(0,180,140,0.07);gap:6px;background:rgba(0,180,140,0.025);border-radius:10px;margin-bottom:6px; }
         .b-field:last-child { border-bottom:none; }
-        .b-lbl { font-size:10px;font-weight:700;color:rgba(0,200,150,0.5);width:90px;flex-shrink:0; }
-        .b-val { flex:1;font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;min-width:0; }
-        .b-hint { font-size:9px;color:rgba(0,200,150,0.6);font-weight:700;text-align:right;flex:1; }
-        .b-toggle { display:flex;gap:5px;margin-left:auto; }
-        .b-t { padding:7px 11px;border-radius:7px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.15s; }
+        .b-lbl { font-size:10px;font-weight:700;color:rgba(0,200,150,0.5);text-transform:uppercase;letter-spacing:1px; }
+        .b-val { width:100%;font-size:18px;color:rgba(200,255,240,0.95);font-weight:700;font-family:'Rajdhani',sans-serif;background:transparent;border:none;border-bottom:1.5px solid rgba(0,180,140,0.2);outline:none;text-align:center;padding:4px 0; }
+        .b-val:focus { border-bottom-color:#00c896; }
+        .b-hint { font-size:10px;color:rgba(0,200,150,0.7);font-weight:700;text-align:center; }
+        .b-toggle { display:flex;gap:8px;justify-content:center;width:100%; }
+        .b-t { padding:10px 18px;border-radius:9px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.15s; }
         .b-t.sel { background:rgba(0,200,150,0.18);border:1.5px solid #00c896;color:#00c896; }
         .b-t.off { background:rgba(0,180,140,0.04);border:1px solid rgba(0,180,140,0.1);color:rgba(0,180,140,0.25); }
-        .b-age-row { display:flex;gap:6px;margin-left:auto; }
-        .b-age-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.15);border-radius:8px;padding:5px 10px;text-align:center; }
-        .b-age-lbl { font-size:7px;color:rgba(0,200,150,0.3);margin-bottom:2px;letter-spacing:1px;font-weight:700; }
-        .b-age-val { font-size:15px;font-weight:800;color:#00c896; }
+        .b-age-row { display:flex;gap:8px;justify-content:center;width:100%; }
+        .b-age-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:10px;padding:8px 14px;text-align:center;min-width:60px; }
+        .b-age-lbl { font-size:8px;color:rgba(0,200,150,0.4);margin-bottom:4px;letter-spacing:1px;font-weight:700;text-transform:uppercase; }
+        .b-age-val { font-size:20px;font-weight:800;color:#00c896; }
         .b-pat-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px; }
         .b-pat-av { width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:1.5px solid rgba(0,200,150,0.35);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#00c896; }
         .b-pat-name { font-size:13px;font-weight:700;color:rgba(200,255,240,0.9); }
         .b-pat-meta { font-size:9px;color:rgba(0,200,150,0.5);margin-top:2px; }
         .b-diag-card { border-bottom:1px solid rgba(0,180,140,0.1);padding-bottom:14px;margin-bottom:14px; }
         .b-diag-card:last-of-type { border-bottom:none; }
-        .b-diag-desc { flex:1;font-size:12px;color:rgba(0,200,150,0.6);font-weight:600;text-align:right; }
-        .b-diag-desc.filled { color:rgba(200,255,240,0.8); }
+        .b-diag-desc { width:100%;font-size:13px;color:rgba(0,200,150,0.6);font-weight:600;text-align:center;padding:4px 0; }
+        .b-diag-desc.filled { color:rgba(200,255,240,0.85); }
 
-        .b-sel { font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;cursor:pointer;-webkit-appearance:none;max-width:100%;flex:1; }
+
+        /* DATE INPUT */
+        .b-date { width:100%;font-size:17px;color:rgba(200,255,240,0.95);font-weight:700;font-family:'Rajdhani',sans-serif;background:transparent;border:none;border-bottom:1.5px solid rgba(0,180,140,0.2);outline:none;text-align:center;padding:4px 0;color-scheme:dark; }
+        .b-date::-webkit-calendar-picker-indicator { filter:invert(1) sepia(1) saturate(3) hue-rotate(100deg);cursor:pointer;opacity:0.7; }
+        .b-sel { width:100%;font-size:18px;color:rgba(200,255,240,0.95);font-weight:700;font-family:'Rajdhani',sans-serif;background:transparent;border:none;border-bottom:1.5px solid rgba(0,180,140,0.2);outline:none;text-align:center;cursor:pointer;-webkit-appearance:none;padding:4px 0; }
         .b-sel option { background:#0d2018;color:rgba(200,255,240,0.9); }
         .b-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:8px;font-family:'Rajdhani',sans-serif; }
 
@@ -1444,7 +1462,8 @@ document.addEventListener('focusin', function(e) {
             ups: '',
             turno: '',
             dniResp: '',
-            nombresResp: ''
+            nombresResp: '',
+            fechaAtencion: ''
         }
     };
 
@@ -1493,37 +1512,28 @@ document.addEventListener('focusin', function(e) {
         if (WIZ.step === 1) {
             nextBtn.className = 'wiz-btn wiz-btn-next';
             nextBtn.textContent = 'SIGUIENTE →';
+            var mesOpts = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"].map(function(m){return "<option value='"+m+"'"+(m===est.mes?" selected":"")+">"+m+"</option>";}).join("");
+            var estabOpts = ["E.S PACAIPAMPA","P.S EL PUERTO","P.S LAGUNAS DE SAN PABLO","P.S CUMBICUS","P.S CACHIACO","P.S FRÍAS"].map(function(v){return "<option value='"+v+"'"+(v===est.establecimiento?" selected":"")+">"+v+"</option>";}).join("");
+            var upsOpts = ["MEDICINA","ENFERMERIA","NUTRICION","OBSTETRICIA","ODONTOLOGIA"].map(function(v){return "<option value='"+v+"'"+(v===est.ups?" selected":"")+">"+v+"</option>";}).join("");
             c.innerHTML =
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Fecha y turno</div>' +
-                  '<div class="b-field"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSaveEstab()"></div>' +
-                  '<div class="b-field"><span class="b-lbl">Mes</span>' +
-                    '<select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes">' +
-                      '<option value="">-- Seleccionar --</option>' +
-                      ''+["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"].map(function(m){return "<option value='"+m+"'"+(m===est.mes?" selected":"")+">"+m+"</option>";}).join("")+'' +
-                    '</select>' +
+                  '<div class="b-row2">' +
+                    '<div class="b-field b-half"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" onchange="wizSaveEstab()"></div>' +
+                    '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '</div>' +
-                  '<div class="b-field"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
+                  '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="">-- Seleccionar --</option>'+mesOpts+'</select></div>' +
+                  '<div class="b-field"><span class="b-lbl">Fecha de Atención</span><input class="b-date" id="wFechaAt" type="date" value="'+(est.fechaAtencion||new Date().toISOString().slice(0,10))+'" onchange="wizSaveEstab();wizRecalcEdades()"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Establecimiento</div>' +
-                  '<div class="b-field"><span class="b-lbl">Estab.</span>' +
-                    '<select class="b-val b-sel" onchange="wizSaveEstab()" id="wEstab">' +
-                      '<option value="">-- Seleccionar --</option>' +
-                      ''+["E.S PACAIPAMPA","P.S EL PUERTO","P.S LAGUNAS DE SAN PABLO","P.S CUMBICUS","P.S CACHIACO","P.S FRÍAS"].map(function(e){return "<option value='"+e+"'"+(e===est.establecimiento?" selected":"")+">"+e+"</option>";}).join("")+'' +
-                    '</select>' +
-                  '</div>' +
-                  '<div class="b-field"><span class="b-lbl">UPS</span>' +
-                    '<select class="b-val b-sel" onchange="wizSaveEstab()" id="wUps">' +
-                      '<option value="">-- Seleccionar --</option>' +
-                      ''+["MEDICINA","ENFERMERIA","NUTRICION","OBSTETRICIA","ODONTOLOGIA"].map(function(u){return "<option value='"+u+"'"+(u===est.ups?" selected":"")+">"+u+"</option>";}).join("")+'' +
-                    '</select>' +
-                  '</div>' +
+                  '<div class="b-field"><span class="b-lbl">Establecimiento</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wEstab"><option value="">-- Seleccionar --</option>'+estabOpts+'</select></div>' +
+                  '<div class="b-field"><span class="b-lbl">UPS</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wUps"><option value="">-- Seleccionar --</option>'+upsOpts+'</select></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Responsable</div>' +
-                  '<div class="b-field"><span class="b-lbl">DNI</span><input class="b-val" id="wDniResp" value="'+(est.dniResp||'')+'" type="text" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSaveEstab()"></div>' +
-                  '<div class="b-field"><span class="b-lbl">Nombres</span><input class="b-val" id="wNombresResp" value="'+(est.nombresResp||'')+'" onchange="wizSaveEstab()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">DNI Responsable</span><input class="b-val" id="wDniResp" value="'+(est.dniResp||'')+'" type="text" onchange="wizSaveEstab()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Apellidos y Nombres</span><input class="b-val" id="wNombresResp" value="'+(est.nombresResp||'')+'" onchange="wizSaveEstab()"></div>' +
                 '</div>';
 
         /* ===================== STEP 2: PACIENTE ===================== */
@@ -1706,9 +1716,16 @@ document.addEventListener('focusin', function(e) {
         e.ups            = g('wUps');
         e.dniResp        = g('wDniResp');
         e.nombresResp    = g('wNombresResp');
+        e.fechaAtencion  = g('wFechaAt');
         // Also sync to PC header selects
         var anioInp = document.querySelector('table:first-of-type tbody input[type="number"]');
         if (anioInp && e.anio) anioInp.value = e.anio;
+        // Sync DIA from fechaAtencion
+        if (e.fechaAtencion) {
+            var fa = new Date(e.fechaAtencion);
+            var diaInputs = document.querySelectorAll('tr.fn-fur-row ~ tr td:first-child input');
+            diaInputs.forEach(function(di){ if(di && !di.value) di.value = fa.getDate(); });
+        }
         var mesSel  = document.querySelector('table:first-of-type tbody select');
         if (mesSel  && e.mes) mesSel.value  = e.mes;
         // Sync turno/ups/estab via the PC selects
@@ -1846,16 +1863,41 @@ document.addEventListener('focusin', function(e) {
         if (!fn) return;
         var parts = fn.split('/');
         if (parts.length!==3) return;
-        var nac = new Date(parts[2], parts[1]-1, parts[0]);
-        var hoy = new Date();
-        var anios = hoy.getFullYear()-nac.getFullYear();
-        var meses = hoy.getMonth()-nac.getMonth();
-        var dias  = hoy.getDate()-nac.getDate();
-        if (dias<0){ meses--; dias+=new Date(hoy.getFullYear(),hoy.getMonth(),0).getDate(); }
+        var nac = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+        // Use fecha de atención if set, otherwise today
+        var fa = WIZ.estab && WIZ.estab.fechaAtencion ? new Date(WIZ.estab.fechaAtencion) : new Date();
+        var anios = fa.getFullYear()-nac.getFullYear();
+        var meses = fa.getMonth()-nac.getMonth();
+        var dias  = fa.getDate()-nac.getDate();
+        if (dias<0){ meses--; dias+=new Date(fa.getFullYear(),fa.getMonth(),0).getDate(); }
         if (meses<0){ anios--; meses+=12; }
         p.edadA=anios; p.edadM=meses; p.edadD=dias;
+        // Update visible age elements
         var a=document.getElementById('wEdadA'), m=document.getElementById('wEdadM'), d=document.getElementById('wEdadD');
-        if(a) a.value=anios; if(m) m.value=meses; if(d) d.value=dias;
+        if(a){ if(a.tagName==='INPUT') a.value=anios; else a.textContent=anios; }
+        if(m){ if(m.tagName==='INPUT') m.value=meses; else m.textContent=meses; }
+        if(d){ if(d.tagName==='INPUT') d.value=dias;  else d.textContent=dias;  }
+    }
+
+    // Recalculate all patient ages when fecha atención changes
+    function wizRecalcEdades() {
+        WIZ.patients.forEach(function(p) {
+            if (p.fn) {
+                var parts = p.fn.split('/');
+                if (parts.length === 3) {
+                    var nac = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+                    var fa = WIZ.estab && WIZ.estab.fechaAtencion ? new Date(WIZ.estab.fechaAtencion) : new Date();
+                    var anios = fa.getFullYear()-nac.getFullYear();
+                    var meses = fa.getMonth()-nac.getMonth();
+                    var dias  = fa.getDate()-nac.getDate();
+                    if (dias<0){ meses--; dias+=new Date(fa.getFullYear(),fa.getMonth(),0).getDate(); }
+                    if (meses<0){ anios--; meses+=12; }
+                    p.edadA=anios; p.edadM=meses; p.edadD=dias;
+                }
+            }
+        });
+        // Re-render if on step 2
+        if (WIZ.step === 2) wizRender();
     }
 
     // =============================================
