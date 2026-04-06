@@ -213,6 +213,8 @@
             text-transform:uppercase;
             letter-spacing:2px;
             line-height:1.3;
+            text-align:left;
+            width:100%;
         }
 
         /* INPUT — número grande centrado */
@@ -236,7 +238,7 @@
 
         .b-hint {
             font-size:18px;color:#ffffff;
-            font-weight:700;padding:6px 0;
+            font-weight:700;padding:6px 0;text-align:left;width:100%;
         }
 
         /* SELECT */
@@ -277,7 +279,7 @@
         .b-date:focus { border-bottom-color:#00c896; }
         .b-date::-webkit-calendar-picker-indicator {
             filter:invert(1) sepia(1) saturate(3) hue-rotate(100deg);
-            cursor:pointer;width:28px;height:28px;
+            cursor:pointer;width:40px;height:40px;opacity:0.9;
         }
 
         /* FILA de 2 campos */
@@ -1729,7 +1731,7 @@ document.addEventListener('focusin', function(e) {
                     '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '</div>' +
                   '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="">-- Seleccionar --</option>'+mesOpts+'</select></div>' +
-                  '<div class="b-field"><span class="b-lbl">Fecha de Atención</span><input class="b-date" id="wFechaAt" type="date" value="'+(est.fechaAtencion||new Date().toISOString().slice(0,10))+'" onchange="wizSaveEstab();wizRecalcEdades()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">📅 Fecha de Atención</span><input class="b-date" id="wFechaAt" type="date" value="'+(est.fechaAtencion||new Date().toISOString().slice(0,10))+'" onchange="wizSaveEstab();wizRecalcEdades()" min="2020-01-01" max="2030-12-31"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Establecimiento</div>' +
@@ -2059,6 +2061,24 @@ document.addEventListener('focusin', function(e) {
     // =============================================
     // DNI SEARCH
     // =============================================
+    function wizValidateDNI(inp) {
+        var val = inp.value.replace(/\D/g,'');
+        if (val.length > 8) val = val.slice(0,8);
+        inp.value = val;
+        var errEl = document.getElementById('wDniError');
+        if (errEl) {
+            if (val.length > 0 && val.length < 8) {
+                errEl.style.display = 'block';
+                errEl.textContent = '⚠ DNI debe tener 8 dígitos (' + val.length + '/8)';
+                inp.style.borderBottomColor = '#ff6b6b';
+            } else {
+                errEl.style.display = 'none';
+                inp.style.borderBottomColor = val.length === 8 ? '#00c896' : 'rgba(0,180,140,0.25)';
+            }
+        }
+        if (val.length === 8) wizDNISearch(val);
+    }
+
     function wizDNISearch(val) {
         var p = wizPat();
         var v = String(val).trim().padStart(8,'0');
