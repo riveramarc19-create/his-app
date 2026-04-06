@@ -199,6 +199,9 @@
         .b-diag-card:last-of-type { border-bottom:none; }
         .b-diag-desc { flex:1;font-size:12px;color:rgba(0,200,150,0.6);font-weight:600;text-align:right; }
         .b-diag-desc.filled { color:rgba(200,255,240,0.8); }
+
+        .b-sel { font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;cursor:pointer;-webkit-appearance:none;max-width:100%;flex:1; }
+        .b-sel option { background:#0d2018;color:rgba(200,255,240,0.9); }
         .b-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:8px;font-family:'Rajdhani',sans-serif; }
 
         /* ANCHOS */
@@ -342,6 +345,9 @@
         .b-diag-card:last-of-type { border-bottom:none; }
         .b-diag-desc { flex:1;font-size:12px;color:rgba(0,200,150,0.6);font-weight:600;text-align:right; }
         .b-diag-desc.filled { color:rgba(200,255,240,0.8); }
+
+        .b-sel { font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;cursor:pointer;-webkit-appearance:none;max-width:100%;flex:1; }
+        .b-sel option { background:#0d2018;color:rgba(200,255,240,0.9); }
         .b-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:8px;font-family:'Rajdhani',sans-serif; }
 
         /* ANCHOS */
@@ -1394,17 +1400,22 @@ document.addEventListener('focusin', function(e) {
         <div class="wiz-steps">
             <div class="wiz-step active" id="ws1">
                 <div class="wiz-step-num">1</div>
-                <div class="wiz-step-label">Paciente</div>
+                <div class="wiz-step-label">Estab.</div>
             </div>
             <div class="wiz-line"></div>
             <div class="wiz-step pending" id="ws2">
                 <div class="wiz-step-num">2</div>
-                <div class="wiz-step-label">Antropometría</div>
+                <div class="wiz-step-label">Paciente</div>
             </div>
             <div class="wiz-line"></div>
             <div class="wiz-step pending" id="ws3">
                 <div class="wiz-step-num">3</div>
-                <div class="wiz-step-label">Diagnóstico</div>
+                <div class="wiz-step-label">Antro</div>
+            </div>
+            <div class="wiz-line"></div>
+            <div class="wiz-step pending" id="ws4">
+                <div class="wiz-step-num">4</div>
+                <div class="wiz-step-label">Diagnóst.</div>
             </div>
         </div>
 
@@ -1425,7 +1436,16 @@ document.addEventListener('focusin', function(e) {
     var WIZ = {
         step: 1,
         patIdx: 0,
-        patients: [wizEmptyPatient()]
+        patients: [wizEmptyPatient()],
+        estab: {
+            anio: new Date().getFullYear(),
+            mes: '',
+            establecimiento: '',
+            ups: '',
+            turno: '',
+            dniResp: '',
+            nombresResp: ''
+        }
     };
 
     function wizEmptyPatient() {
@@ -1446,19 +1466,22 @@ document.addEventListener('focusin', function(e) {
     // RENDER STEPS
     // =============================================
     function wizRender() {
-        var p = wizPat();
-        var c = document.getElementById('wizContent');
+        var p   = wizPat();
+        var est = WIZ.estab;
+        var c   = document.getElementById('wizContent');
 
-        [1,2,3].forEach(function(i) {
+        // Update 4 step indicators
+        [1,2,3,4].forEach(function(i) {
             var el = document.getElementById('ws'+i);
+            if (!el) return;
             el.className = 'wiz-step ' + (i < WIZ.step ? 'done' : i === WIZ.step ? 'active' : 'pending');
             el.querySelector('.wiz-step-num').textContent = i < WIZ.step ? '✓' : i;
         });
-        document.getElementById('wizProgress').style.width = (WIZ.step * 33.3) + '%';
+        document.getElementById('wizProgress').style.width = (WIZ.step / 4 * 100) + '%';
         document.getElementById('wizBtnBack').style.display = WIZ.step > 1 ? 'block' : 'none';
+
         var nextBtn = document.getElementById('wizBtnNext');
 
-        // Helper: toggle buttons
         function tog(opts, val, field) {
             return opts.map(function(v) {
                 var cls = v===val ? 'b-t sel' : 'b-t off';
@@ -1466,29 +1489,55 @@ document.addEventListener('focusin', function(e) {
             }).join('');
         }
 
-        // Helper: label+input row
-        function row(lbl, id, val, opts) {
-            opts = opts || {};
-            var inputStyle = opts.big ? 'font-size:16px;font-weight:800;color:#00c896;' : '';
-            var ro = opts.readonly ? ' readonly' : '';
-            var type = opts.type || 'text';
-            var ph = opts.placeholder ? ' placeholder="'+opts.placeholder+'"' : '';
-            var onch = opts.onchange ? ' onchange="'+opts.onchange+'"' : ' onchange="wizSave()"';
-            var oninp = opts.oninput ? ' oninput="'+opts.oninput+'"' : '';
-            return '<div class="b-field">' +
-                '<span class="b-lbl">'+lbl+'</span>' +
-                '<input class="b-val" id="'+id+'" value="'+(val||'')+'" type="'+type+'"'+ro+ph+onch+oninp+' style="'+inputStyle+'">' +
-                '</div>';
-        }
-
+        /* ===================== STEP 1: ESTABLECIMIENTO ===================== */
         if (WIZ.step === 1) {
             nextBtn.className = 'wiz-btn wiz-btn-next';
             nextBtn.textContent = 'SIGUIENTE →';
             c.innerHTML =
                 '<div class="b-group">' +
+                  '<div class="b-group-ttl">Fecha y turno</div>' +
+                  '<div class="b-field"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSaveEstab()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Mes</span>' +
+                    '<select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes">' +
+                      '<option value="">-- Seleccionar --</option>' +
+                      ''+["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"].map(function(m){return "<option value='"+m+"'"+(m===est.mes?" selected":"")+">"+m+"</option>";}).join("")+'' +
+                    '</select>' +
+                  '</div>' +
+                  '<div class="b-field"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
+                '</div>' +
+                '<div class="b-group">' +
+                  '<div class="b-group-ttl">Establecimiento</div>' +
+                  '<div class="b-field"><span class="b-lbl">Estab.</span>' +
+                    '<select class="b-val b-sel" onchange="wizSaveEstab()" id="wEstab">' +
+                      '<option value="">-- Seleccionar --</option>' +
+                      ''+["E.S PACAIPAMPA","P.S EL PUERTO","P.S LAGUNAS DE SAN PABLO","P.S CUMBICUS","P.S CACHIACO","P.S FRÍAS"].map(function(e){return "<option value='"+e+"'"+(e===est.establecimiento?" selected":"")+">"+e+"</option>";}).join("")+'' +
+                    '</select>' +
+                  '</div>' +
+                  '<div class="b-field"><span class="b-lbl">UPS</span>' +
+                    '<select class="b-val b-sel" onchange="wizSaveEstab()" id="wUps">' +
+                      '<option value="">-- Seleccionar --</option>' +
+                      ''+["MEDICINA","ENFERMERIA","NUTRICION","OBSTETRICIA","ODONTOLOGIA"].map(function(u){return "<option value='"+u+"'"+(u===est.ups?" selected":"")+">"+u+"</option>";}).join("")+'' +
+                    '</select>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="b-group">' +
+                  '<div class="b-group-ttl">Responsable</div>' +
+                  '<div class="b-field"><span class="b-lbl">DNI</span><input class="b-val" id="wDniResp" value="'+(est.dniResp||'')+'" type="text" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSaveEstab()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Nombres</span><input class="b-val" id="wNombresResp" value="'+(est.nombresResp||'')+'" onchange="wizSaveEstab()"></div>' +
+                '</div>';
+
+        /* ===================== STEP 2: PACIENTE ===================== */
+        } else if (WIZ.step === 2) {
+            nextBtn.className = 'wiz-btn wiz-btn-next';
+            nextBtn.textContent = 'SIGUIENTE →';
+            c.innerHTML =
+                '<div class="b-group">' +
                   '<div class="b-group-ttl">Identificación</div>' +
-                  '<div class="b-field"><span class="b-lbl">DNI</span><input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="font-size:16px;font-weight:800;color:#00c896;" oninput="wizDNISearch(this.value)" onchange="wizSave()"><span class="b-hint" id="wDniFound">'+(p.nombres?'✓ '+p.nombres:'')+'</span></div>' +
-                  '<div class="b-field"><span class="b-lbl">Nombre</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:rgba(0,200,150,0.35);font-size:12px;"></div>' +
+                  '<div class="b-field"><span class="b-lbl">DNI</span>' +
+                    '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="font-size:18px;font-weight:800;color:#00c896;" oninput="wizDNISearch(this.value)" onchange="wizSave()">' +
+                  '</div>' +
+                  '<div class="b-field" id="rowDniFound" style="'+(p.nombres?'':'display:none;')+'"><span class="b-lbl"></span><span class="b-hint" id="wDniFound">'+(p.nombres?'✓ '+p.nombres:'')+'</span></div>' +
+                  '<div class="b-field"><span class="b-lbl">Nombre</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:rgba(0,200,150,0.4);font-size:13px;"></div>' +
                   '<div class="b-field"><span class="b-lbl">Financiador</span><input class="b-val" id="wFin" value="'+(p.fin||'')+'" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">H. Clínica</span><input class="b-val" id="wHc" value="'+(p.hc||'')+'" onchange="wizSave()"></div>' +
                 '</div>' +
@@ -1507,7 +1556,8 @@ document.addEventListener('focusin', function(e) {
                   '<div class="b-field"><span class="b-lbl">Dirección</span><input class="b-val" id="wDireccion" value="'+(p.direccion||'')+'" onchange="wizSave()"></div>' +
                 '</div>';
 
-        } else if (WIZ.step === 2) {
+        /* ===================== STEP 3: ANTROPOMETRÍA ===================== */
+        } else if (WIZ.step === 3) {
             nextBtn.className = 'wiz-btn wiz-btn-next';
             nextBtn.textContent = 'SIGUIENTE →';
             var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
@@ -1515,45 +1565,45 @@ document.addEventListener('focusin', function(e) {
                 '<div class="b-pat-chip">' +
                   '<div class="b-pat-av">'+initials+'</div>' +
                   '<div><div class="b-pat-name">'+(p.nombres||'PACIENTE')+'</div>' +
-                  '<div class="b-pat-meta">'+(p.edadA?p.edadA+'a · ':'')+''+(p.sexo||'')+(p.distrito?' · '+p.distrito:'')+'</div></div>' +
+                  '<div class="b-pat-meta">'+(p.edadA?p.edadA+'a':'')+' '+(p.sexo?'· '+p.sexo:'')+' '+(p.fin?'· '+p.fin:'')+'</div></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Medidas corporales</div>' +
-                  '<div class="b-field"><span class="b-lbl">Talla (cm)</span><input class="b-val" id="wTalla" value="'+(p.talla||'')+'" type="number" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
-                  '<div class="b-field"><span class="b-lbl">Peso (kg)</span><input class="b-val" id="wPeso" value="'+(p.peso||'')+'" type="number" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Talla (cm)</span><input class="b-val" id="wTalla" value="'+(p.talla||'')+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Peso (kg)</span><input class="b-val" id="wPeso" value="'+(p.peso||'')+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Cefálico</span><input class="b-val" id="wPc" value="'+(p.pc||'')+'" type="number" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Abdominal</span><input class="b-val" id="wPabd" value="'+(p.pabd||'')+'" type="number" onchange="wizSave()"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Laboratorio</div>' +
-                  '<div class="b-field"><span class="b-lbl">Hemoglobina</span><input class="b-val" id="wHb" value="'+(p.hb||'')+'" type="number" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Hemoglobina</span><input class="b-val" id="wHb" value="'+(p.hb||'')+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Preg.</span><input class="b-val" id="wPpreg" value="'+(p.ppreg||'')+'" type="number" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">FUR</span><input class="b-val" id="wFur" value="'+(p.fur||'')+'" placeholder="dd/mm/aaaa" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">EST</span><div class="b-toggle">'+tog(['N','C','R'], p.est, 'est')+'</div></div>' +
                   '<div class="b-field"><span class="b-lbl">SER</span><div class="b-toggle">'+tog(['N','C','R'], p.ser, 'ser')+'</div></div>' +
                 '</div>';
 
-        } else if (WIZ.step === 3) {
+        /* ===================== STEP 4: DIAGNÓSTICO ===================== */
+        } else if (WIZ.step === 4) {
             nextBtn.className = 'wiz-btn wiz-btn-save';
             nextBtn.textContent = '✓ GUARDAR';
-            var initials3 = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
+            var initials4 = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
             var diagsHtml = '';
             for (var n = 1; n <= wizDiagCount; n++) {
                 var cie = p['cie'+n]||'', diag = p['diag'+n]||'', tipo = p['tipo'+n]||'';
                 diagsHtml +=
                     '<div class="b-diag-card">' +
                       '<div class="b-group-ttl">Diagnóstico '+n+'</div>' +
-                      '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-size:16px;font-weight:800;color:#00c896;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-size:18px;font-weight:800;color:#00c896;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
                       '<div class="b-field"><span class="b-lbl">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'—')+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Tipo</span><div class="b-toggle">'+tog(['P','D','R'], tipo, 'tipo'+n)+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Lab 1</span><input class="b-val" id="wLab'+n+'a" value="'+(p['lab'+n+'a']||'')+'" onchange="wizSave()"></div>' +
                       '<div class="b-field"><span class="b-lbl">Lab 2</span><input class="b-val" id="wLab'+n+'b" value="'+(p['lab'+n+'b']||'')+'" onchange="wizSave()"></div>' +
                     '</div>';
             }
-            var initials3b = initials3;
             c.innerHTML =
                 '<div class="b-pat-chip">' +
-                  '<div class="b-pat-av">'+initials3b+'</div>' +
+                  '<div class="b-pat-av">'+initials4+'</div>' +
                   '<div><div class="b-pat-name">'+(p.nombres||'PACIENTE')+'</div>' +
                   '<div class="b-pat-meta">Talla '+(p.talla||'—')+' · Peso '+(p.peso||'—')+' · HB '+(p.hb||'—')+'</div></div>' +
                 '</div>' +
@@ -1562,6 +1612,13 @@ document.addEventListener('focusin', function(e) {
         }
 
         document.getElementById('wizContent').scrollTop = 0;
+
+        // Auto-scroll field into view on focus
+        document.querySelectorAll('#wizContent input, #wizContent select').forEach(function(el) {
+            el.addEventListener('focus', function() {
+                setTimeout(function() { el.scrollIntoView({behavior:'smooth', block:'center'}); }, 350);
+            }, {once: true});
+        });
     }
 
 
@@ -1607,15 +1664,9 @@ document.addEventListener('focusin', function(e) {
     // NAVIGATION
     // =============================================
     function wizNext() {
-        if (WIZ.step < 3) {
-            wizSave();
-            WIZ.step++;
-            wizRender();
-        } else {
-            wizSave();
-            wizCommitToTable();
-            wizShowSuccess();
-        }
+        if (WIZ.step === 1) { wizSaveEstab(); WIZ.step++; wizRender(); }
+        else if (WIZ.step < 4) { wizSave(); WIZ.step++; wizRender(); }
+        else { wizSave(); wizCommitToTable(); wizShowSuccess(); }
     }
 
     function wizPrev() {
@@ -1625,7 +1676,7 @@ document.addEventListener('focusin', function(e) {
     function wizSelectPat(idx) {
         wizSave();
         WIZ.patIdx = idx;
-        WIZ.step = 1;
+        WIZ.step = 2;
         document.querySelectorAll('.wiz-pat-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); });
         wizRender();
     }
@@ -1641,6 +1692,30 @@ document.addEventListener('focusin', function(e) {
         btn.onclick = (function(i){ return function(){ wizSelectPat(i); }; })(idx);
         bar.insertBefore(btn, addBtn);
         wizSelectPat(idx);
+    }
+
+    // =============================================
+    // SAVE ESTABLECIMIENTO DATA
+    // =============================================
+    function wizSaveEstab() {
+        var e = WIZ.estab;
+        function g(id){ var el=document.getElementById(id); return el?el.value:''; }
+        e.anio           = g('wAnio');
+        e.mes            = g('wMes');
+        e.establecimiento= g('wEstab');
+        e.ups            = g('wUps');
+        e.dniResp        = g('wDniResp');
+        e.nombresResp    = g('wNombresResp');
+        // Also sync to PC header selects
+        var anioInp = document.querySelector('table:first-of-type tbody input[type="number"]');
+        if (anioInp && e.anio) anioInp.value = e.anio;
+        var mesSel  = document.querySelector('table:first-of-type tbody select');
+        if (mesSel  && e.mes) mesSel.value  = e.mes;
+        // Sync turno/ups/estab via the PC selects
+        document.querySelectorAll('table select').forEach(function(sel) {
+            if (sel.querySelector('option[value="MEDICINA"]') && e.ups) sel.value = e.ups;
+            if (sel.querySelector('option[value="M"]') && e.turno) sel.value = e.turno;
+        });
     }
 
     // =============================================
@@ -1682,8 +1757,7 @@ document.addEventListener('focusin', function(e) {
         var p = wizPat();
         p['diag'+n]=''; p['tipo'+n]=''; p['cie'+n]='';
         p['lab'+n+'a']=''; p['lab'+n+'b']=''; p['lab'+n+'c']='';
-        // Re-render step 3
-        WIZ.step = 3;
+        WIZ.step = 4;
         wizRender();
         // Scroll to bottom
         setTimeout(function(){ document.getElementById('wizContent').scrollTop = 99999; }, 100);
@@ -1695,16 +1769,15 @@ document.addEventListener('focusin', function(e) {
     function wizSave() {
         var p = wizPat();
         function g(id){ var el=document.getElementById(id); return el?el.value:''; }
-        if (WIZ.step===1) {
+        if (WIZ.step===2) {
             p.dni=g('wDni'); p.nombres=g('wNombres'); p.fn=g('wFN');
             p.fin=g('wFin'); p.hc=g('wHc');
             p.distrito=g('wDistrito'); p.direccion=g('wDireccion');
-            // sexo saved by wizToggle
-        } else if (WIZ.step===2) {
+        } else if (WIZ.step===3) {
             p.talla=g('wTalla'); p.peso=g('wPeso'); p.pc=g('wPc');
             p.pabd=g('wPabd'); p.hb=g('wHb'); p.ppreg=g('wPpreg');
-            p.fur=g('wFur'); p.est=g('wEst'); p.ser=g('wSer');
-        } else if (WIZ.step===3) {
+            p.fur=g('wFur');
+        } else if (WIZ.step===4) {
             for(var n=1;n<=wizDiagCount;n++){
                 p['diag'+n]=g('wDiag'+n)||''; p['tipo'+n]=g('wTipo'+n);
                 p['cie'+n]=g('wCie'+n);
@@ -1720,19 +1793,45 @@ document.addEventListener('focusin', function(e) {
         var p = wizPat();
         var v = String(val).trim().padStart(8,'0');
         if (typeof PACIENTES_DB !== 'undefined' && val.length >= 6) {
-            var found = PACIENTES_DB[v] || PACIENTES_DB[val];
+            var found = PACIENTES_DB[v] || PACIENTES_DB[String(val).trim()];
             if (found) {
-                p.dni = val; p.nombres = found.nombres;
-                p.fn = found.fn; p.sexo = found.sexo;
-                p.fin = found.fin; p.hc = found.hc;
-                p.distrito = found.distrito; p.direccion = found.direccion;
-                p.talla = found.talla; p.peso = found.peso;
-                p.pc = found.pc; p.pabd = found.pabd;
-                p.hb = found.hb; p.ppreg = found.ppreg; p.fur = found.fur;
-                var nEl = document.getElementById('wNombres');
-                var fEl = document.getElementById('wDniFound');
-                if (nEl) nEl.value = found.nombres;
-                if (fEl) fEl.textContent = '✓ ' + found.nombres;
+                p.dni = val;
+                p.nombres   = found.nombres   || '';
+                p.fn        = found.fn         || '';
+                p.sexo      = found.sexo       || '';
+                p.fin       = found.fin        || '';
+                p.hc        = found.hc         || '';
+                p.distrito  = found.distrito   || '';
+                p.direccion = found.direccion  || '';
+                p.talla     = found.talla      || '';
+                p.peso      = found.peso       || '';
+                p.pc        = found.pc         || '';
+                p.pabd      = found.pabd       || '';
+                p.hb        = found.hb         || '';
+                p.ppreg     = found.ppreg      || '';
+                p.fur       = found.fur        || '';
+
+                // Update visible fields immediately
+                var fields = {
+                    'wNombres': p.nombres, 'wFin': p.fin, 'wHc': p.hc,
+                    'wFN': p.fn, 'wDistrito': p.distrito, 'wDireccion': p.direccion
+                };
+                Object.keys(fields).forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.value = fields[id];
+                });
+
+                // Show found row
+                var foundRow = document.getElementById('rowDniFound');
+                var foundSpan = document.getElementById('wDniFound');
+                if (foundRow) foundRow.style.display = 'flex';
+                if (foundSpan) foundSpan.textContent = '✓ ' + p.nombres;
+
+                // Sexo toggle
+                document.querySelectorAll('#wizContent .b-t[data-field="sexo"]').forEach(function(b) {
+                    b.className = b.getAttribute('data-val') === p.sexo ? 'b-t sel' : 'b-t off';
+                });
+
                 wizCalcEdad();
             }
         }
