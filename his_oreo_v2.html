@@ -174,93 +174,190 @@
         .antro-input { flex-grow: 1; }
 
 
-        /* ===== FORMULARIO ESTILO GOOGLE — GRANDE ===== */
-        .b-group { margin-bottom:24px; }
+        /* ===== FORMULARIO — ETIQUETA IZQUIERDA / VALOR DERECHA ===== */
+        .b-group { margin-bottom:20px; }
         .b-group-ttl {
-            font-size:26px;font-weight:900;
-            color:rgba(0,200,150,0.8);
+            font-size:47px;font-weight:900;
+            color:rgba(0,200,150,0.65);
             letter-spacing:2px;text-transform:uppercase;
-            margin-bottom:18px;
-            display:flex;align-items:center;gap:10px;
+            margin-bottom:10px;
+            display:flex;align-items:center;gap:8px;
         }
-        .b-group-ttl::after {
-            content:'';flex:1;height:1px;
-            background:rgba(0,180,140,0.15);
-        }
+        .b-group-ttl::after { content:'';flex:1;height:2px;background:rgba(0,180,140,0.2); }
 
-        /* CADA CAMPO: como tarjeta Google Form */
+        /* FILA: etiqueta | valor */
         .b-field {
-            display:flex;flex-direction:column;
-            align-items:flex-start;
-            padding:22px 20px 18px;
-            background:rgba(0,180,140,0.04);
-            border:2px solid rgba(0,180,140,0.15);
-            border-radius:22px;
-            margin-bottom:14px;
-            gap:8px;
-            transition:border-color 0.25s, background 0.25s;
-            min-height:120px;
-            justify-content:center;
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            min-height:80px;
+            margin-bottom:8px;
+            border-radius:14px;
+            overflow:hidden;
+            border:1.5px solid rgba(0,180,140,0.2);
         }
-        .b-field:focus-within {
-            border-color:rgba(0,200,150,0.5);
-            background:rgba(0,180,140,0.07);
-        }
+        .b-field:focus-within { border-color:#00c896; }
 
-        /* ETIQUETA — bien grande y legible */
+        /* ETIQUETA — lado izquierdo verde */
         .b-lbl {
-            font-size:36px;font-weight:900;
+            background:#0a3d2e;
             color:rgba(0,200,150,0.95);
+            font-size:22px;font-weight:900;
             text-transform:uppercase;
-            letter-spacing:2px;
-            line-height:1.3;
-            text-align:left;
-            width:100%;
+            letter-spacing:1px;
+            padding:0 16px;
+            min-width:160px;
+            max-width:160px;
+            height:100%;
+            min-height:80px;
+            display:flex;
+            align-items:center;
+            line-height:1.2;
+            flex-shrink:0;
+            border-right:2px solid rgba(0,180,140,0.3);
         }
 
-        /* INPUT — número grande centrado */
+        /* VALOR — lado derecho oscuro */
         .b-val {
-            width:100%;
+            flex:1;
             font-size:36px;
             color:#ffffff;
             font-weight:700;
             font-family:'Rajdhani',sans-serif;
-            background:transparent;
+            background:#060f0d;
             border:none;
-            border-bottom:2px solid rgba(0,180,140,0.25);
             outline:none;
-            text-align:left;
-            padding:6px 0;
-            line-height:1.2;
-            transition:border-color 0.2s;
+            text-align:center;
+            padding:0 16px;
+            height:80px;
+            min-height:80px;
+            transition:background 0.2s;
         }
-        .b-val:focus { border-bottom-color:#00c896; }
-        .b-val::placeholder { color:rgba(0,180,140,0.25);font-size:22px; }
-
-        .b-hint {
-            font-size:18px;color:#ffffff;
-            font-weight:700;padding:6px 0;text-align:left;width:100%;
-        }
+        .b-val:focus { background:rgba(0,180,140,0.06); }
+        .b-val::placeholder { color:rgba(0,180,140,0.3);font-size:26px; }
 
         /* SELECT */
         .b-sel {
-            width:100%;
+            flex:1;
             font-size:36px;
             color:#ffffff;
             font-weight:700;
             font-family:'Rajdhani',sans-serif;
-            background:transparent;
+            background:#060f0d;
             border:none;
-            border-bottom:2px solid rgba(0,180,140,0.25);
             outline:none;
-            text-align:left;
+            text-align:center;
             cursor:pointer;
             -webkit-appearance:none;
-            padding:6px 0;
-            transition:border-color 0.2s;
+            padding:0 16px;
+            height:80px;
         }
-        .b-sel:focus { border-bottom-color:#00c896; }
-        .b-sel option { background:#0d2018;color:#ffffff;font-size:16px; }
+        .b-sel option { background:#0d2018;color:#ffffff;font-size:20px; }
+        .b-sel:focus { background:rgba(0,180,140,0.06); }
+
+        /* DATE */
+        .b-date {
+            flex:1;
+            font-size:36px;
+            color:#ffffff;
+            font-weight:700;
+            font-family:'Rajdhani',sans-serif;
+            background:#060f0d;
+            border:none;
+            outline:none;
+            text-align:center;
+            padding:0 16px;
+            height:80px;
+            color-scheme:dark;
+        }
+        .b-date:focus { background:rgba(0,180,140,0.06); }
+        .b-date::-webkit-calendar-picker-indicator {
+            filter:invert(1) sepia(1) saturate(3) hue-rotate(100deg);
+            cursor:pointer;width:40px;height:40px;opacity:0.9;
+        }
+
+        /* TOGGLE BUTTONS (M/T/N, F/M, P/D/R, N/C/R) */
+        .b-toggle {
+            flex:1;
+            display:flex;
+            gap:8px;
+            align-items:center;
+            justify-content:center;
+            padding:0 12px;
+            background:#060f0d;
+            height:80px;
+        }
+        .b-t {
+            flex:1;
+            height:56px;
+            border-radius:10px;
+            font-size:30px;font-weight:900;
+            cursor:pointer;
+            font-family:'Rajdhani',sans-serif;
+            transition:all 0.18s;
+            text-align:center;
+            display:flex;align-items:center;justify-content:center;
+        }
+        .b-t.sel {
+            background:rgba(0,200,150,0.2);
+            border:2.5px solid #00c896;
+            color:#ffffff;
+            box-shadow:0 0 12px rgba(0,200,150,0.2);
+        }
+        .b-t.off {
+            background:rgba(0,180,140,0.05);
+            border:1.5px solid rgba(0,180,140,0.2);
+            color:rgba(255,255,255,0.3);
+        }
+
+        /* CHIPS DE EDAD */
+        .b-age-row {
+            flex:1;
+            display:flex;
+            gap:6px;
+            align-items:center;
+            justify-content:center;
+            padding:0 10px;
+            background:#060f0d;
+            height:80px;
+        }
+        .b-age-chip {
+            flex:1;
+            background:#0a1a16;
+            border:1.5px solid rgba(0,180,140,0.25);
+            border-radius:10px;
+            padding:8px 4px;
+            text-align:center;
+            height:64px;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+        }
+        .b-age-lbl { font-size:12px;color:rgba(0,200,150,0.5);letter-spacing:1px;font-weight:900;text-transform:uppercase; }
+        .b-age-val { font-size:30px;font-weight:900;color:#ffffff;line-height:1; }
+
+        /* FILA DE 2 CAMPOS */
+        .b-row2 { display:flex;gap:8px;width:100%; }
+        .b-half { flex:1; }
+
+        /* HINT (DNI encontrado) */
+        .b-hint { flex:1;font-size:22px;color:#ffffff;font-weight:700;padding:0 16px;background:#060f0d;display:flex;align-items:center; }
+
+        /* CHIP PACIENTE */
+        .b-pat-chip {
+            background:#0a1a16;border:1.5px solid rgba(0,180,140,0.2);
+            border-radius:14px;padding:14px 18px;
+            display:flex;align-items:center;gap:14px;margin-bottom:14px;
+        }
+        .b-pat-av { width:50px;height:50px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:2px solid rgba(0,200,150,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#00c896; }
+        .b-pat-name { font-size:20px;font-weight:700;color:#ffffff;line-height:1.3; }
+        .b-pat-meta { font-size:14px;color:rgba(0,200,150,0.6);margin-top:3px; }
+
+        /* TARJETA DIAGNÓSTICO */
+        .b-diag-card { border-radius:14px;overflow:hidden;margin-bottom:12px;border:1.5px solid rgba(0,180,140,0.2); }
+        .b-diag-desc { width:100%;font-size:36px;color:rgba(0,200,150,0.6);font-weight:600;text-align:center;padding:14px 16px;line-height:1.4;background:#060f0d; }
+        .b-diag-desc.filled { color:#ffffff; }
+
+        /* BOTÓN AGREGAR */
+        .b-add-diag { border:2px dashed rgba(0,180,140,0.3);border-radius:14px;padding:20px;text-align:center;font-size:24px;color:rgba(0,200,150,0.6);font-weight:800;cursor:pointer;margin-top:10px;font-family:'Rajdhani',sans-serif;letter-spacing:1px; }
 
         /* DATE INPUT */
         .b-date {
