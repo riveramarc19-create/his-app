@@ -173,6 +173,34 @@
         }
         .antro-input { flex-grow: 1; }
 
+
+        /* ===== OPCIÓN B: LISTA LIMPIA ===== */
+        .b-group { margin-bottom:18px; }
+        .b-group-ttl { font-size:8px;font-weight:700;color:rgba(0,200,150,0.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px; }
+        .b-group-ttl::after { content:'';flex:1;height:1px;background:rgba(0,180,140,0.1); }
+        .b-field { display:flex;align-items:center;padding:11px 0;border-bottom:1px solid rgba(0,180,140,0.07);gap:10px; }
+        .b-field:last-child { border-bottom:none; }
+        .b-lbl { font-size:10px;font-weight:700;color:rgba(0,200,150,0.5);width:90px;flex-shrink:0; }
+        .b-val { flex:1;font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;min-width:0; }
+        .b-hint { font-size:9px;color:rgba(0,200,150,0.6);font-weight:700;text-align:right;flex:1; }
+        .b-toggle { display:flex;gap:5px;margin-left:auto; }
+        .b-t { padding:7px 11px;border-radius:7px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.15s; }
+        .b-t.sel { background:rgba(0,200,150,0.18);border:1.5px solid #00c896;color:#00c896; }
+        .b-t.off { background:rgba(0,180,140,0.04);border:1px solid rgba(0,180,140,0.1);color:rgba(0,180,140,0.25); }
+        .b-age-row { display:flex;gap:6px;margin-left:auto; }
+        .b-age-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.15);border-radius:8px;padding:5px 10px;text-align:center; }
+        .b-age-lbl { font-size:7px;color:rgba(0,200,150,0.3);margin-bottom:2px;letter-spacing:1px;font-weight:700; }
+        .b-age-val { font-size:15px;font-weight:800;color:#00c896; }
+        .b-pat-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px; }
+        .b-pat-av { width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:1.5px solid rgba(0,200,150,0.35);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#00c896; }
+        .b-pat-name { font-size:13px;font-weight:700;color:rgba(200,255,240,0.9); }
+        .b-pat-meta { font-size:9px;color:rgba(0,200,150,0.5);margin-top:2px; }
+        .b-diag-card { border-bottom:1px solid rgba(0,180,140,0.1);padding-bottom:14px;margin-bottom:14px; }
+        .b-diag-card:last-of-type { border-bottom:none; }
+        .b-diag-desc { flex:1;font-size:12px;color:rgba(0,200,150,0.6);font-weight:600;text-align:right; }
+        .b-diag-desc.filled { color:rgba(200,255,240,0.8); }
+        .b-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:8px;font-family:'Rajdhani',sans-serif; }
+
         /* ANCHOS */
         .w-dia   { width: 2.5%; } .w-dni  { width: 6.5%; } .w-fin  { width: 2.5%; }
         .w-dist  { width: 11%; }  .w-edad { width: 4%; }   .w-sex  { width: 1.5%; }
@@ -287,6 +315,34 @@
         .wiz-dni-found { color:rgba(0,200,150,0.8);font-size:10px;margin-top:3px;font-weight:700; }
         .campo-found { background:rgba(0,200,150,0.08) !important; }
         .campo-notfound { background:rgba(255,60,60,0.06) !important; }
+
+
+        /* ===== OPCIÓN B: LISTA LIMPIA ===== */
+        .b-group { margin-bottom:18px; }
+        .b-group-ttl { font-size:8px;font-weight:700;color:rgba(0,200,150,0.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px; }
+        .b-group-ttl::after { content:'';flex:1;height:1px;background:rgba(0,180,140,0.1); }
+        .b-field { display:flex;align-items:center;padding:11px 0;border-bottom:1px solid rgba(0,180,140,0.07);gap:10px; }
+        .b-field:last-child { border-bottom:none; }
+        .b-lbl { font-size:10px;font-weight:700;color:rgba(0,200,150,0.5);width:90px;flex-shrink:0; }
+        .b-val { flex:1;font-size:14px;color:rgba(200,255,240,0.9);font-weight:600;font-family:'Rajdhani',sans-serif;background:transparent;border:none;outline:none;text-align:right;min-width:0; }
+        .b-hint { font-size:9px;color:rgba(0,200,150,0.6);font-weight:700;text-align:right;flex:1; }
+        .b-toggle { display:flex;gap:5px;margin-left:auto; }
+        .b-t { padding:7px 11px;border-radius:7px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all 0.15s; }
+        .b-t.sel { background:rgba(0,200,150,0.18);border:1.5px solid #00c896;color:#00c896; }
+        .b-t.off { background:rgba(0,180,140,0.04);border:1px solid rgba(0,180,140,0.1);color:rgba(0,180,140,0.25); }
+        .b-age-row { display:flex;gap:6px;margin-left:auto; }
+        .b-age-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.15);border-radius:8px;padding:5px 10px;text-align:center; }
+        .b-age-lbl { font-size:7px;color:rgba(0,200,150,0.3);margin-bottom:2px;letter-spacing:1px;font-weight:700; }
+        .b-age-val { font-size:15px;font-weight:800;color:#00c896; }
+        .b-pat-chip { background:#0a1a16;border:1px solid rgba(0,180,140,0.2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px; }
+        .b-pat-av { width:36px;height:36px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:1.5px solid rgba(0,200,150,0.35);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#00c896; }
+        .b-pat-name { font-size:13px;font-weight:700;color:rgba(200,255,240,0.9); }
+        .b-pat-meta { font-size:9px;color:rgba(0,200,150,0.5);margin-top:2px; }
+        .b-diag-card { border-bottom:1px solid rgba(0,180,140,0.1);padding-bottom:14px;margin-bottom:14px; }
+        .b-diag-card:last-of-type { border-bottom:none; }
+        .b-diag-desc { flex:1;font-size:12px;color:rgba(0,200,150,0.6);font-weight:600;text-align:right; }
+        .b-diag-desc.filled { color:rgba(200,255,240,0.8); }
+        .b-add-diag { border:1px dashed rgba(0,180,140,0.25);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:rgba(0,200,150,0.5);font-weight:700;cursor:pointer;margin-top:8px;font-family:'Rajdhani',sans-serif; }
 
         /* ANCHOS */
         .w-dia   { width: 2.5%; } .w-dni  { width: 6.5%; } .w-fin  { width: 2.5%; }
@@ -1393,84 +1449,88 @@ document.addEventListener('focusin', function(e) {
         var p = wizPat();
         var c = document.getElementById('wizContent');
 
-        // Update step indicators
         [1,2,3].forEach(function(i) {
             var el = document.getElementById('ws'+i);
             el.className = 'wiz-step ' + (i < WIZ.step ? 'done' : i === WIZ.step ? 'active' : 'pending');
             el.querySelector('.wiz-step-num').textContent = i < WIZ.step ? '✓' : i;
         });
-
         document.getElementById('wizProgress').style.width = (WIZ.step * 33.3) + '%';
         document.getElementById('wizBtnBack').style.display = WIZ.step > 1 ? 'block' : 'none';
-
         var nextBtn = document.getElementById('wizBtnNext');
 
-        function toggleBtn(group, val) {
-            return group.map(function(v) {
-                var sel = v===val?' sel':'';
-                return '<div class="wiz-toggle-btn'+sel+'" data-val="'+v+'" onclick="wizToggle(this)">'+v+'</div>';
+        // Helper: toggle buttons
+        function tog(opts, val, field) {
+            return opts.map(function(v) {
+                var cls = v===val ? 'b-t sel' : 'b-t off';
+                return '<span class="'+cls+'" data-field="'+field+'" data-val="'+v+'" onclick="wizTog(this)">'+v+'</span>';
             }).join('');
+        }
+
+        // Helper: label+input row
+        function row(lbl, id, val, opts) {
+            opts = opts || {};
+            var inputStyle = opts.big ? 'font-size:16px;font-weight:800;color:#00c896;' : '';
+            var ro = opts.readonly ? ' readonly' : '';
+            var type = opts.type || 'text';
+            var ph = opts.placeholder ? ' placeholder="'+opts.placeholder+'"' : '';
+            var onch = opts.onchange ? ' onchange="'+opts.onchange+'"' : ' onchange="wizSave()"';
+            var oninp = opts.oninput ? ' oninput="'+opts.oninput+'"' : '';
+            return '<div class="b-field">' +
+                '<span class="b-lbl">'+lbl+'</span>' +
+                '<input class="b-val" id="'+id+'" value="'+(val||'')+'" type="'+type+'"'+ro+ph+onch+oninp+' style="'+inputStyle+'">' +
+                '</div>';
         }
 
         if (WIZ.step === 1) {
             nextBtn.className = 'wiz-btn wiz-btn-next';
             nextBtn.textContent = 'SIGUIENTE →';
-            var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
             c.innerHTML =
-                '<div class="wiz-section">' +
-                  '<div class="wiz-sec-title">Identificación</div>' +
-                  '<div class="wiz-field"><label>DNI</label><input class="wiz-accent" id="wDni" value="'+p.dni+'" type="text" oninput="wizDNISearch(this.value)" onchange="wizSave()"><div class="wiz-dni-found" id="wDniFound">'+(p.nombres?'✓ '+p.nombres:'')+'</div></div>' +
-                  '<div class="wiz-field"><label>Apellidos y Nombres</label><input id="wNombres" value="'+p.nombres+'" readonly style="font-size:14px;"></div>' +
-                  '<div class="wiz-field"><label>Financiador</label><input id="wFin" value="'+p.fin+'" onchange="wizSave()"></div>' +
+                '<div class="b-group">' +
+                  '<div class="b-group-ttl">Identificación</div>' +
+                  '<div class="b-field"><span class="b-lbl">DNI</span><input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="font-size:16px;font-weight:800;color:#00c896;" oninput="wizDNISearch(this.value)" onchange="wizSave()"><span class="b-hint" id="wDniFound">'+(p.nombres?'✓ '+p.nombres:'')+'</span></div>' +
+                  '<div class="b-field"><span class="b-lbl">Nombre</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:rgba(0,200,150,0.35);font-size:12px;"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Financiador</span><input class="b-val" id="wFin" value="'+(p.fin||'')+'" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">H. Clínica</span><input class="b-val" id="wHc" value="'+(p.hc||'')+'" onchange="wizSave()"></div>' +
                 '</div>' +
-                '<div class="wiz-section">' +
-                  '<div class="wiz-sec-title">Datos personales</div>' +
-                  '<div class="wiz-row">' +
-                    '<div class="wiz-field"><label>Fecha Nacimiento</label><input id="wFN" value="'+p.fn+'" placeholder="dd/mm/aaaa" onchange="wizSave();wizCalcEdad()"></div>' +
-                    '<div class="wiz-field"><label>Sexo</label><div class="wiz-toggle-group">' + toggleBtn(['F','M'], p.sexo) + '</div></div>' +
-                  '</div>' +
-                  '<div class="wiz-field"><label>Edad calculada</label>' +
-                    '<div class="wiz-age-grid">' +
-                      '<div class="wiz-age-box"><div class="wiz-age-lbl">Años</div><div class="wiz-age-val" id="wEdadA">'+(p.edadA||'—')+'</div></div>' +
-                      '<div class="wiz-age-box"><div class="wiz-age-lbl">Meses</div><div class="wiz-age-val" id="wEdadM">'+(p.edadM||'—')+'</div></div>' +
-                      '<div class="wiz-age-box"><div class="wiz-age-lbl">Días</div><div class="wiz-age-val" id="wEdadD">'+(p.edadD||'—')+'</div></div>' +
+                '<div class="b-group">' +
+                  '<div class="b-group-ttl">Datos personales</div>' +
+                  '<div class="b-field"><span class="b-lbl">F. Nacimiento</span><input class="b-val" id="wFN" value="'+(p.fn||'')+'" placeholder="dd/mm/aaaa" onchange="wizSave();wizCalcEdad()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Sexo</span><div class="b-toggle">'+tog(['F','M'], p.sexo, 'sexo')+'</div></div>' +
+                  '<div class="b-field"><span class="b-lbl">Edad</span>' +
+                    '<div class="b-age-row">' +
+                      '<div class="b-age-chip"><div class="b-age-lbl">AÑOS</div><div class="b-age-val" id="wEdadA">'+(p.edadA||'—')+'</div></div>' +
+                      '<div class="b-age-chip"><div class="b-age-lbl">MES</div><div class="b-age-val" id="wEdadM">'+(p.edadM||'—')+'</div></div>' +
+                      '<div class="b-age-chip"><div class="b-age-lbl">DÍA</div><div class="b-age-val" id="wEdadD">'+(p.edadD||'—')+'</div></div>' +
                     '</div>' +
                   '</div>' +
-                  '<div class="wiz-row">' +
-                    '<div class="wiz-field"><label>H.C.</label><input id="wHc" value="'+p.hc+'" onchange="wizSave()"></div>' +
-                    '<div class="wiz-field"><label>Distrito</label><input id="wDistrito" value="'+p.distrito+'" onchange="wizSave()"></div>' +
-                  '</div>' +
-                  '<div class="wiz-field"><label>Dirección</label><input id="wDireccion" value="'+p.direccion+'" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Distrito</span><input class="b-val" id="wDistrito" value="'+(p.distrito||'')+'" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Dirección</span><input class="b-val" id="wDireccion" value="'+(p.direccion||'')+'" onchange="wizSave()"></div>' +
                 '</div>';
 
         } else if (WIZ.step === 2) {
             nextBtn.className = 'wiz-btn wiz-btn-next';
             nextBtn.textContent = 'SIGUIENTE →';
-            var initials2 = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
+            var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
             c.innerHTML =
-                '<div class="wiz-pat-chip"><div class="wiz-pat-av">'+initials2+'</div><div><div class="wiz-pat-name">'+(p.nombres||'PACIENTE')+'</div><div class="wiz-pat-meta">'+(p.edadA?p.edadA+'a':'')+' · '+(p.sexo||'?')+' · '+(p.distrito||'')+'</div></div></div>' +
-                '<div class="wiz-section">' +
-                  '<div class="wiz-sec-title">Medidas corporales</div>' +
-                  '<div class="wiz-row">' +
-                    '<div class="wiz-field"><label>Talla (cm)</label><input class="wiz-accent" id="wTalla" value="'+p.talla+'" type="number" onchange="wizSave()"></div>' +
-                    '<div class="wiz-field"><label>Peso (kg)</label><input class="wiz-accent" id="wPeso" value="'+p.peso+'" type="number" onchange="wizSave()"></div>' +
-                  '</div>' +
-                  '<div class="wiz-row">' +
-                    '<div class="wiz-field"><label>P. Cefálico</label><input id="wPc" value="'+p.pc+'" type="number" onchange="wizSave()"></div>' +
-                    '<div class="wiz-field"><label>P. Abdominal</label><input id="wPabd" value="'+p.pabd+'" type="number" onchange="wizSave()"></div>' +
-                  '</div>' +
+                '<div class="b-pat-chip">' +
+                  '<div class="b-pat-av">'+initials+'</div>' +
+                  '<div><div class="b-pat-name">'+(p.nombres||'PACIENTE')+'</div>' +
+                  '<div class="b-pat-meta">'+(p.edadA?p.edadA+'a · ':'')+''+(p.sexo||'')+(p.distrito?' · '+p.distrito:'')+'</div></div>' +
                 '</div>' +
-                '<div class="wiz-section">' +
-                  '<div class="wiz-sec-title">Laboratorio</div>' +
-                  '<div class="wiz-row">' +
-                    '<div class="wiz-field"><label>Hemoglobina</label><input class="wiz-accent" id="wHb" value="'+p.hb+'" type="number" onchange="wizSave()"></div>' +
-                    '<div class="wiz-field"><label>P. Preg.</label><input id="wPpreg" value="'+p.ppreg+'" type="number" onchange="wizSave()"></div>' +
-                  '</div>' +
-                  '<div class="wiz-row">' +
-                    '<div class="wiz-field"><label>FUR</label><input id="wFur" value="'+p.fur+'" onchange="wizSave()"></div>' +
-                    '<div class="wiz-field"><label>EST</label><div class="wiz-toggle-group">' + toggleBtn(['N','C','R'], p.est) + '</div></div>' +
-                  '</div>' +
-                  '<div class="wiz-field"><label>SER</label><div class="wiz-toggle-group">' + toggleBtn(['N','C','R'], p.ser) + '</div></div>' +
+                '<div class="b-group">' +
+                  '<div class="b-group-ttl">Medidas corporales</div>' +
+                  '<div class="b-field"><span class="b-lbl">Talla (cm)</span><input class="b-val" id="wTalla" value="'+(p.talla||'')+'" type="number" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Peso (kg)</span><input class="b-val" id="wPeso" value="'+(p.peso||'')+'" type="number" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">P. Cefálico</span><input class="b-val" id="wPc" value="'+(p.pc||'')+'" type="number" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">P. Abdominal</span><input class="b-val" id="wPabd" value="'+(p.pabd||'')+'" type="number" onchange="wizSave()"></div>' +
+                '</div>' +
+                '<div class="b-group">' +
+                  '<div class="b-group-ttl">Laboratorio</div>' +
+                  '<div class="b-field"><span class="b-lbl">Hemoglobina</span><input class="b-val" id="wHb" value="'+(p.hb||'')+'" type="number" style="font-size:16px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">P. Preg.</span><input class="b-val" id="wPpreg" value="'+(p.ppreg||'')+'" type="number" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">FUR</span><input class="b-val" id="wFur" value="'+(p.fur||'')+'" placeholder="dd/mm/aaaa" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">EST</span><div class="b-toggle">'+tog(['N','C','R'], p.est, 'est')+'</div></div>' +
+                  '<div class="b-field"><span class="b-lbl">SER</span><div class="b-toggle">'+tog(['N','C','R'], p.ser, 'ser')+'</div></div>' +
                 '</div>';
 
         } else if (WIZ.step === 3) {
@@ -1479,54 +1539,52 @@ document.addEventListener('focusin', function(e) {
             var initials3 = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
             var diagsHtml = '';
             for (var n = 1; n <= wizDiagCount; n++) {
-                var cie = p['cie'+n]||'', diag = p['diag'+n]||'';
-                var tipo = p['tipo'+n]||'';
+                var cie = p['cie'+n]||'', diag = p['diag'+n]||'', tipo = p['tipo'+n]||'';
                 diagsHtml +=
-                    '<div class="wiz-diag-card">' +
-                      '<div class="wiz-diag-title">DIAGNÓSTICO ' + n + '</div>' +
-                      '<div class="wiz-field"><label>Código CIE-10</label>' +
-                        '<input class="wiz-accent" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" oninput="wizCIESearch(this,'+n+')" style="letter-spacing:3px;"></div>' +
-                      '<div class="wiz-diag-result'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'Escribe un código CIE-10...')+'</div>' +
-                      '<div class="wiz-field" style="margin-bottom:0;"><label>Tipo</label>' +
-                        '<div class="wiz-toggle-group">' + toggleBtn(['P','D','R'], tipo) + '</div>' +
-                      '</div>' +
+                    '<div class="b-diag-card">' +
+                      '<div class="b-group-ttl">Diagnóstico '+n+'</div>' +
+                      '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-size:16px;font-weight:800;color:#00c896;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'—')+'</div></div>' +
+                      '<div class="b-field"><span class="b-lbl">Tipo</span><div class="b-toggle">'+tog(['P','D','R'], tipo, 'tipo'+n)+'</div></div>' +
+                      '<div class="b-field"><span class="b-lbl">Lab 1</span><input class="b-val" id="wLab'+n+'a" value="'+(p['lab'+n+'a']||'')+'" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">Lab 2</span><input class="b-val" id="wLab'+n+'b" value="'+(p['lab'+n+'b']||'')+'" onchange="wizSave()"></div>' +
                     '</div>';
             }
+            var initials3b = initials3;
             c.innerHTML =
-                '<div class="wiz-pat-chip"><div class="wiz-pat-av">'+initials3+'</div><div><div class="wiz-pat-name">'+(p.nombres||'PACIENTE')+'</div><div class="wiz-pat-meta">Talla '+(p.talla||'—')+' · Peso '+(p.peso||'—')+' · HB '+(p.hb||'—')+'</div></div></div>' +
+                '<div class="b-pat-chip">' +
+                  '<div class="b-pat-av">'+initials3b+'</div>' +
+                  '<div><div class="b-pat-name">'+(p.nombres||'PACIENTE')+'</div>' +
+                  '<div class="b-pat-meta">Talla '+(p.talla||'—')+' · Peso '+(p.peso||'—')+' · HB '+(p.hb||'—')+'</div></div>' +
+                '</div>' +
                 diagsHtml +
-                '<div class="wiz-add-diag" onclick="wizAddDiag()">+ AGREGAR DIAGNÓSTICO</div>';
+                '<div class="b-add-diag" onclick="wizAddDiag()">+ AGREGAR DIAGNÓSTICO</div>';
         }
 
         document.getElementById('wizContent').scrollTop = 0;
     }
 
-    // Toggle button handler
-    function wizToggle(btn) {
+
+    // Toggle button handler (Option B)
+    function wizTog(btn) {
         var val = btn.getAttribute('data-val');
+        var field = btn.getAttribute('data-field');
         var group = btn.parentElement;
-        group.querySelectorAll('.wiz-toggle-btn').forEach(function(b){ b.className='wiz-toggle-btn'; });
-        btn.className = 'wiz-toggle-btn sel';
+        group.querySelectorAll('.b-t').forEach(function(b){
+            b.className = 'b-t off';
+        });
+        btn.className = 'b-t sel';
         var p = wizPat();
-        var field = group.closest('.wiz-field');
-        if (field) {
-            var lbl = field.querySelector('label');
-            if (lbl) {
-                var t = lbl.textContent.trim();
-                if (t==='Sexo') p.sexo = val;
-                else if (t==='EST') p.est = val;
-                else if (t==='SER') p.ser = val;
-                else if (t==='Tipo') {
-                    var card = group.closest('.wiz-diag-card');
-                    if (card) {
-                        var title = card.querySelector('.wiz-diag-title').textContent;
-                        var n = parseInt(title.replace('DIAGNÓSTICO ',''));
-                        if (!isNaN(n)) p['tipo'+n] = val;
-                    }
-                }
-            }
+        if (field === 'sexo') p.sexo = val;
+        else if (field === 'est') p.est = val;
+        else if (field === 'ser') p.ser = val;
+        else if (field && field.indexOf('tipo') === 0) {
+            var n = parseInt(field.replace('tipo',''));
+            if (!isNaN(n)) p['tipo'+n] = val;
         }
     }
+
+    function wizToggle(btn) { wizTog(btn); }
 
     // CIE search in wizard
     function wizCIESearch(inp, n) {
