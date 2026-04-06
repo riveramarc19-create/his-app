@@ -419,6 +419,10 @@
             #pcTitleBar { display: none !important; }
             .wizard-overlay { display: flex; flex-direction: column; height: 100dvh; background: #060f0d; overflow: hidden; }
         }
+        @media screen and (orientation: landscape) and (max-width: 1024px) {
+            .wizard-overlay { height: 100dvh; }
+            .wiz-content { padding-bottom: 80px; }
+        }
         @media (min-width: 1025px) {
             .wizard-overlay { display: none !important; }
             #pcHeader { display: block !important; }
@@ -502,10 +506,10 @@
         .wiz-suc-btn { width:100%;padding:14px;background:rgba(0,200,150,0.12);border:1.5px solid rgba(0,180,140,0.3);border-radius:12px;color:#00c896;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:1px; }
 
         /* PATIENTS BAR */
-        .wiz-patients-bar { background:#0d2018;padding:6px 14px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(0,180,140,0.18);flex-shrink:0; }
-        .wiz-pat-btn { background:rgba(0,180,140,0.08);color:rgba(0,200,150,0.7);border:1px solid rgba(0,180,140,0.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif; }
-        .wiz-pat-btn.active { background:rgba(0,200,150,0.2);color:#00c896;border-color:#00a07a;box-shadow:0 0 10px rgba(0,200,150,0.2); }
-        .wiz-pat-btn-add { background:transparent;color:rgba(0,200,150,0.5);border:1px dashed rgba(0,180,140,0.25); }
+        .wiz-patients-bar { background:#0d2018;padding:10px 14px;display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(0,180,140,0.18);flex-shrink:0; }
+        .wiz-pat-btn { background:rgba(0,180,140,0.08);color:rgba(0,200,150,0.7);border:1px solid rgba(0,180,140,0.2);border-radius:20px;padding:8px 18px;font-size:16px;font-weight:800;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-pat-btn.active { background:rgba(0,200,150,0.2);color:#00c896;border-color:#00a07a;box-shadow:0 0 10px rgba(0,200,150,0.2);font-size:16px;padding:8px 18px; }
+        .wiz-pat-btn-add { background:transparent;color:rgba(0,200,150,0.5);border:1px dashed rgba(0,180,140,0.25);font-size:16px;padding:8px 18px; }
 
         .wiz-dni-found { color:rgba(0,200,150,0.8);font-size:10px;margin-top:3px;font-weight:700; }
         .campo-found { background:rgba(0,200,150,0.08) !important; }
@@ -552,6 +556,10 @@
             #pcHeader { display: none !important; }
             #pcTitleBar { display: none !important; }
             .wizard-overlay { display: flex; flex-direction: column; height: 100dvh; background: #060f0d; overflow: hidden; }
+        }
+        @media screen and (orientation: landscape) and (max-width: 1024px) {
+            .wizard-overlay { height: 100dvh; }
+            .wiz-content { padding-bottom: 80px; }
         }
         @media (min-width: 1025px) {
             .wizard-overlay { display: none !important; }
@@ -1596,12 +1604,12 @@ document.addEventListener('focusin', function(e) {
 
         <!-- Toolbar: botones grandes DEBAJO de la barra de pacientes -->
         <div style="background:#0a1a16;padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid rgba(0,180,140,0.18);flex-shrink:0;">
-            <label for="excelInputMobile" id="lblCargar" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:14px 10px;border-radius:14px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.2;">
+            <label for="excelInputMobile" id="lblCargar" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:22px 10px;border-radius:16px;font-size:20px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1.2;">
                 <span>📂 Cargar Pacientes</span>
                 <span id="wizExcelStatus" style="font-size:11px;color:rgba(0,200,150,0.9);font-style:italic;font-weight:600;display:none;"></span>
             </label>
             <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
-            <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:16px 10px;border-radius:14px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
+            <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:22px 10px;border-radius:16px;font-size:20px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
                 🖨 Imprimir
             </button>
         </div>

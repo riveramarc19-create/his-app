@@ -4,9 +4,9 @@
   "description": "Registro Diario de Atención - MINSA Pacaipampa",
   "start_url": "./his_oreo_v2.html",
   "display": "standalone",
-  "background_color": "#edf7f2",
-  "theme_color": "#0f6e56",
-  "orientation": "landscape",
+  "background_color": "#060f0d",
+  "theme_color": "#00c896",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",
