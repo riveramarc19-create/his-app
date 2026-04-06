@@ -364,6 +364,23 @@
         /* BOTÓN AGREGAR */
         .b-add-diag { border:2px dashed rgba(0,180,140,0.3);border-radius:14px;padding:20px;text-align:center;font-size:24px;color:rgba(0,200,150,0.6);font-weight:800;cursor:pointer;margin-top:10px;font-family:'Rajdhani',sans-serif;letter-spacing:1px; }
 
+
+        /* CUSTOM CALENDAR */
+        .wiz-cal-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:16px; }
+        .wiz-cal-title { font-size:22px;font-weight:800;color:#00c896;text-transform:uppercase;letter-spacing:1px; }
+        .wiz-cal-nav { background:rgba(0,200,150,0.15);border:1.5px solid rgba(0,200,150,0.3);color:#00c896;border-radius:8px;padding:6px 14px;font-size:20px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif; }
+        .wiz-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px; }
+        .wiz-cal-dayname { text-align:center;font-size:14px;font-weight:900;color:rgba(0,200,150,0.6);text-transform:uppercase;padding:4px 0; }
+        .wiz-cal-day { text-align:center;padding:10px 2px;border-radius:8px;font-size:20px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
+        .wiz-cal-day:hover { background:rgba(0,200,150,0.2); }
+        .wiz-cal-day.today { border:1.5px solid rgba(0,200,150,0.5);color:#00c896; }
+        .wiz-cal-day.selected { background:#00c896;color:#060f0d;font-weight:900; }
+        .wiz-cal-day.empty { cursor:default; }
+        .wiz-cal-footer { display:flex;gap:10px;margin-top:16px; }
+        .wiz-cal-btn { flex:1;padding:12px;border-radius:10px;font-size:18px;font-weight:800;cursor:pointer;font-family:Rajdhani,sans-serif;border:none; }
+        .wiz-cal-ok { background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d; }
+        .wiz-cal-cancel { background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1) !important; }
+
         /* DATE INPUT */
         .b-date {
             width:100%;
@@ -1836,7 +1853,8 @@ document.addEventListener('focusin', function(e) {
                     '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '</div>' +
                   '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="">-- Seleccionar --</option>'+mesOpts+'</select></div>' +
-                  '<div class="b-field"><span class="b-lbl">FECHA ATENCIÓN</span><input class="b-date" id="wFechaAt" type="date" value="'+(est.fechaAtencion||new Date().toISOString().slice(0,10))+'" onchange="wizSaveEstab();wizRecalcEdades();wizFormatDate(this)" min="2020-01-01" max="2030-12-31"></div>' +
+                  '<div class="b-field" onclick="wizOpenCal()" style="cursor:pointer;"><span class="b-lbl">FECHA ATENCIÓN</span><div class="b-val" id="wFechaDisplay" style="display:flex;align-items:center;justify-content:center;height:80px;font-size:36px;font-weight:700;color:#ffffff;cursor:pointer;">'+(est.fechaAtencion ? wizFmtDate(est.fechaAtencion) : 'SELECCIONAR')+'</div></div>' +
+                  '<div id="wizCalPanel" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:#0a1a16;border:2px solid #00c896;border-radius:20px;padding:20px;width:320px;box-shadow:0 0 40px rgba(0,200,150,0.3);font-family:Rajdhani,sans-serif;"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Establecimiento</div>' +
@@ -2439,6 +2457,103 @@ document.addEventListener('focusin', function(e) {
             }
         }
     }
+
+
+    // ============================================================
+    // CUSTOM CALENDAR
+    // ============================================================
+    var _calDate = new Date();
+    var _calSelected = null;
+
+    function wizFmtDate(iso) {
+        if (!iso) return 'SELECCIONAR';
+        var p = iso.split('-');
+        if (p.length !== 3) return iso;
+        var months = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+        return p[2] + ' ' + months[parseInt(p[1])-1] + ' ' + p[0];
+    }
+
+    function wizOpenCal() {
+        var est = WIZ.estab;
+        var iso = est.fechaAtencion || new Date().toISOString().slice(0,10);
+        var parts = iso.split('-');
+        _calDate = new Date(parseInt(parts[0]), parseInt(parts[1])-1, 1);
+        _calSelected = iso;
+        wizDrawCal();
+        document.getElementById('wizCalPanel').style.display = 'block';
+    }
+
+    function wizDrawCal() {
+        var panel = document.getElementById('wizCalPanel');
+        if (!panel) return;
+        var months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+        var days = ['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
+        var y = _calDate.getFullYear();
+        var m = _calDate.getMonth();
+        var firstDay = new Date(y, m, 1).getDay();
+        var daysInMonth = new Date(y, m+1, 0).getDate();
+        var today = new Date();
+        var todayStr = today.getFullYear()+'-'+(String(today.getMonth()+1).padStart(2,'0'))+'-'+(String(today.getDate()).padStart(2,'0'));
+
+        var dayHeaders = days.map(function(d){ return '<div class="wiz-cal-dayname">'+d+'</div>'; }).join('');
+        var emptyCells = '';
+        for(var i=0;i<firstDay;i++) emptyCells += '<div class="wiz-cal-day empty"></div>';
+
+        var dayCells = '';
+        for(var d=1;d<=daysInMonth;d++){
+            var iso = y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+            var cls = 'wiz-cal-day';
+            if(iso===todayStr) cls+=' today';
+            if(iso===_calSelected) cls+=' selected';
+            dayCells += '<div class="'+cls+'" onclick="wizCalSelect(\"'+iso+'\")">'+d+'</div>';
+        }
+
+        panel.innerHTML =
+            '<div class="wiz-cal-hdr">' +
+                '<button class="wiz-cal-nav" onclick="wizCalMove(-1)">&#8249;</button>' +
+                '<div class="wiz-cal-title">'+months[m]+' '+y+'</div>' +
+                '<button class="wiz-cal-nav" onclick="wizCalMove(1)">&#8250;</button>' +
+            '</div>' +
+            '<div class="wiz-cal-grid">'+dayHeaders+emptyCells+dayCells+'</div>' +
+            '<div class="wiz-cal-footer">' +
+                '<button class="wiz-cal-btn wiz-cal-cancel" onclick="wizCloseCal()">CANCELAR</button>' +
+                '<button class="wiz-cal-btn wiz-cal-ok" onclick="wizCalConfirm()">CONFIRMAR</button>' +
+            '</div>';
+    }
+
+    function wizCalMove(dir) {
+        _calDate.setMonth(_calDate.getMonth() + dir);
+        wizDrawCal();
+    }
+
+    function wizCalSelect(iso) {
+        _calSelected = iso;
+        wizDrawCal();
+    }
+
+    function wizCalConfirm() {
+        if (!_calSelected) { wizCloseCal(); return; }
+        WIZ.estab.fechaAtencion = _calSelected;
+        var disp = document.getElementById('wFechaDisplay');
+        if (disp) disp.textContent = wizFmtDate(_calSelected);
+        wizSaveEstab();
+        wizRecalcEdades();
+        wizCloseCal();
+    }
+
+    function wizCloseCal() {
+        var p = document.getElementById('wizCalPanel');
+        if (p) p.style.display = 'none';
+    }
+
+    // Close on backdrop click
+    document.addEventListener('click', function(e) {
+        var panel = document.getElementById('wizCalPanel');
+        if (panel && panel.style.display==='block' && !panel.contains(e.target)) {
+            var display = document.getElementById('wFechaDisplay');
+            if (display && !display.contains(e.target)) wizCloseCal();
+        }
+    });
 
     // =============================================
     // INIT + SOUND HOOK
