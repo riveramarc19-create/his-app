@@ -371,8 +371,8 @@
         .wiz-cal-title { font-size:42px;font-weight:900;color:#00c896;text-transform:uppercase;letter-spacing:1px;white-space:nowrap; }
         .wiz-cal-nav { background:rgba(0,200,150,0.15);border:1.5px solid rgba(0,200,150,0.3);color:#00c896;border-radius:8px;padding:10px 20px;font-size:38px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif; }
         .wiz-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px; }
-        .wiz-cal-dayname { text-align:center;font-size:22px;font-weight:900;color:rgba(0,200,150,0.7);text-transform:uppercase;padding:10px 0; }
-        .wiz-cal-day { text-align:center;padding:12px 0;border-radius:10px;font-size:32px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
+        .wiz-cal-dayname { text-align:center;font-size:19px;font-weight:900;color:rgba(0,200,150,0.7);text-transform:uppercase;padding:10px 0; }
+        .wiz-cal-day { text-align:center;padding:12px 0;border-radius:10px;font-size:28px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
         .wiz-cal-day:hover { background:rgba(0,200,150,0.2); }
         .wiz-cal-day.today { border:1.5px solid rgba(0,200,150,0.5);color:#00c896; }
         .wiz-cal-day.selected { background:#00c896;color:#060f0d;font-weight:900; }
@@ -2518,6 +2518,11 @@ document.addEventListener('focusin', function(e) {
     function wizDrawCal() {
         var panel = document.getElementById('wizCalPanel');
         if (!panel) return;
+        // Force full screen width
+        panel.style.width = (window.innerWidth - 16) + 'px';
+        panel.style.left = '8px';
+        panel.style.transform = 'translateY(-50%)';
+        panel.style.maxWidth = 'none';
         var months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
         var days = ['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
         var y = _calDate.getFullYear();
