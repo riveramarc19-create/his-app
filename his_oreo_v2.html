@@ -374,7 +374,7 @@
             font-weight:600;text-align:center;padding:8px 0;
             line-height:1.4;
         }
-        .b-diag-desc.filled { color:#ffffff; }
+        .b-diag-desc.filled { color:#ffffff;font-size:36px; }
 
         /* BOTÓN AGREGAR DIAGNÓSTICO */
         .b-add-diag {
@@ -1596,15 +1596,15 @@ document.addEventListener('focusin', function(e) {
 
         <!-- Toolbar: botones grandes DEBAJO de la barra de pacientes -->
         <div style="background:#0a1a16;padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid rgba(0,180,140,0.18);flex-shrink:0;">
-            <label for="excelInputMobile" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:16px 10px;border-radius:14px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;">
-                📂 Cargar Pacientes
+            <label for="excelInputMobile" id="lblCargar" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:14px 10px;border-radius:14px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.2;">
+                <span>📂 Cargar Pacientes</span>
+                <span id="wizExcelStatus" style="font-size:11px;color:rgba(0,200,150,0.9);font-style:italic;font-weight:600;display:none;"></span>
             </label>
             <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
             <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:16px 10px;border-radius:14px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
                 🖨 Imprimir
             </button>
         </div>
-        <span id="wizExcelStatus" style="color:#ffffff;font-style:italic;text-align:center;padding:4px 14px;background:#0a1a16;flex-shrink:0;display:none;"></span>
 
         <!-- Progreso -->
         <div class="wiz-progress"><div class="wiz-progress-bar" id="wizProgress" style="width:33%"></div></div>
@@ -1941,6 +1941,7 @@ document.addEventListener('focusin', function(e) {
         var status = document.getElementById('wizExcelStatus');
         status.style.display='block';
         status.textContent = '⏳ Cargando...';
+        document.getElementById('lblCargar') && (document.getElementById('lblCargar').style.borderColor='rgba(0,200,150,0.6)');
         var mainInput = document.getElementById('excelInput');
         if (mainInput) {
             try {
@@ -2120,7 +2121,8 @@ document.addEventListener('focusin', function(e) {
     // COMMIT TO TABLE
     // =============================================
     function wizCommitToTable() {
-        var p = wizPat();
+        var p   = wizPat();
+        var est = WIZ.estab || {};
         var idx = WIZ.patIdx;
         var fnRows = document.querySelectorAll('tr.fn-fur-row');
         if (!fnRows[idx]) return;
@@ -2129,36 +2131,40 @@ document.addEventListener('focusin', function(e) {
         var fila2 = fila1 ? fila1.nextElementSibling : null;
         var fila3 = fila2 ? fila2.nextElementSibling : null;
 
-        function setVal(tr, selector, val) {
-            if (!tr) return;
-            var el = tr.querySelector(selector);
-            if (el) el.value = val;
+        function sv(el, val) { if(el && val !== undefined && val !== null && val !== '') el.value = val; }
+
+        // DIA desde fecha de atención
+        var dia = '';
+        if (est.fechaAtencion) {
+            var fa = new Date(est.fechaAtencion);
+            dia = fa.getDate();
         }
 
-        // fn-fur-row
+        // fn-fur-row: nombres, fn, fur
         var fnTds = fnRow.querySelectorAll('td');
-        if(fnTds[0]){ var ni=fnTds[0].querySelector('input'); if(ni) ni.value=p.nombres; }
-        if(fnTds[1]){ var fi=fnTds[1].querySelector('input'); if(fi) fi.value=p.fn; }
-        var furInp=fnTds[fnTds.length-1]?fnTds[fnTds.length-1].querySelector('input'):null;
-        if(furInp) furInp.value=p.fur;
+        if(fnTds[0]) sv(fnTds[0].querySelector('input'), p.nombres);
+        if(fnTds[1]) sv(fnTds[1].querySelector('input'), p.fn);
+        var furInp = fnTds[fnTds.length-1] ? fnTds[fnTds.length-1].querySelector('input') : null;
+        sv(furInp, p.fur);
 
         if(fila1){
             var t1=fila1.querySelectorAll('td');
-            if(t1[1]){ var di=t1[1].querySelector('input'); if(di) di.value=p.dni; }
-            if(t1[2]){ var fi2=t1[2].querySelector('input'); if(fi2) fi2.value=p.fin; }
-            if(t1[3]){ var di2=t1[3].querySelector('input'); if(di2) di2.value=p.distrito; }
-            if(t1[4]){ var ai=t1[4].querySelector('input.age-input'); if(ai) ai.value=p.edadA; }
-            if(t1[5]){ var si=t1[5].querySelector('input,select'); if(si) si.value=p.sexo; }
-            if(t1[6]){ var tli=t1[6].querySelector('input'); if(tli) tli.value=p.talla; }
-            if(t1[7]){ var pci=t1[7].querySelector('input'); if(pci) pci.value=p.pc; }
-            if(t1[8]){ var esti=t1[8].querySelector('select'); if(esti) esti.value=p.est; }
-            if(t1[9]){ var seri=t1[9].querySelector('select'); if(seri) seri.value=p.ser; }
-            if(t1[10]){ var d1=t1[10].querySelector('input'); if(d1) d1.value=p.diag1; }
-            if(t1[11]){ var tp1=t1[11].querySelector('select'); if(tp1) tp1.value=p.tipo1; }
-            if(t1[12]){ var l1=t1[12].querySelector('input'); if(l1) l1.value=p.lab1a; }
-            if(t1[13]){ var l2=t1[13].querySelector('input'); if(l2) l2.value=p.lab1b; }
-            if(t1[14]){ var l3=t1[14].querySelector('input'); if(l3) l3.value=p.lab1c; }
-            if(t1[15]){ var c1=t1[15].querySelector('input'); if(c1) c1.value=p.cie1; }
+            sv(t1[0]?t1[0].querySelector('input'):null, dia);
+            sv(t1[1]?t1[1].querySelector('input'):null, p.dni);
+            sv(t1[2]?t1[2].querySelector('input'):null, p.fin);
+            sv(t1[3]?t1[3].querySelector('input'):null, p.distrito);
+            sv(t1[4]?t1[4].querySelector('input.age-input'):null, p.edadA);
+            var sexoEl=t1[5]?t1[5].querySelector('input,select'):null; sv(sexoEl, p.sexo);
+            sv(t1[6]?t1[6].querySelector('input'):null, p.talla);
+            sv(t1[7]?t1[7].querySelector('input'):null, p.pc);
+            var estEl=t1[8]?t1[8].querySelector('select'):null; sv(estEl, p.est);
+            var serEl=t1[9]?t1[9].querySelector('select'):null; sv(serEl, p.ser);
+            sv(t1[10]?t1[10].querySelector('input'):null, p.diag1);
+            var tp1El=t1[11]?t1[11].querySelector('select'):null; sv(tp1El, p.tipo1);
+            sv(t1[12]?t1[12].querySelector('input'):null, p.lab1a);
+            sv(t1[13]?t1[13].querySelector('input'):null, p.lab1b);
+            sv(t1[14]?t1[14].querySelector('input'):null, p.lab1c);
+            sv(t1[15]?t1[15].querySelector('input'):null, p.cie1);
         }
         if(fila2){
             var t2=fila2.querySelectorAll('td');
