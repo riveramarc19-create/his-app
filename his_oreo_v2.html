@@ -1755,7 +1755,8 @@ document.addEventListener('focusin', function(e) {
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Identificación</div>' +
                   '<div class="b-field"><span class="b-lbl">DNI</span>' +
-                    '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="color:#ffffff;" oninput="wizDNISearch(this.value)" onchange="wizSave()">' +
+                    '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" inputmode="numeric" maxlength="8" style="color:#ffffff;" oninput="wizValidateDNI(this)" onchange="wizSave()">' +
+                  '<span id="wDniError" style="font-size:14px;color:#ff6b6b;display:none;font-family:Rajdhani,sans-serif;font-weight:700;padding:2px 0;"></span>' +
                   '</div>' +
                   '<div class="b-field" style="position:relative;"><span class="b-lbl">Apellidos y Nombres</span>' +
                     '<input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" placeholder="Buscar por nombre..." style="color:#ffffff;" oninput="wizNombreSearch(this.value)" onchange="wizSave()" autocomplete="off">' +
