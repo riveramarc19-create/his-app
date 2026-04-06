@@ -1860,7 +1860,7 @@ document.addEventListener('focusin', function(e) {
         if (!results.length) { drop.style.display='none'; return; }
 
         drop.innerHTML = results.map(function(p) {
-            return '<div onclick="wizSelectNombre(''+p.dni+'')" style="padding:12px 14px;border-bottom:1px solid rgba(0,180,140,0.1);cursor:pointer;font-family:Rajdhani,sans-serif;font-size:18px;color:#ffffff;font-weight:600;" onmouseover="this.style.background='rgba(0,180,140,0.1)'" onmouseout="this.style.background=''">' +
+            return '<div onclick="wizSelectNombre(\'' + p.dni + '\')" style="padding:12px 14px;border-bottom:1px solid rgba(0,180,140,0.1);cursor:pointer;font-family:Rajdhani,sans-serif;font-size:18px;color:#ffffff;font-weight:600;">' +
                 '<span style="color:#00c896;font-size:14px;margin-right:8px;">' + p.dni + '</span>' + p.nombres +
             '</div>';
         }).join('');
