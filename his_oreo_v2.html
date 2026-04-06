@@ -191,7 +191,7 @@
             flex-direction:row;
             align-items:center;
             min-height:80px;
-            margin-bottom:8px;
+            margin-bottom:14px;
             border-radius:14px;
             overflow:hidden;
             border:1.5px solid rgba(0,180,140,0.2);
@@ -271,9 +271,14 @@
             color-scheme:dark;
         }
         .b-date:focus { background:rgba(0,180,140,0.06); }
+        .b-date::-webkit-datetime-edit { text-transform:uppercase; }
+        .b-date::-webkit-datetime-edit-fields-wrapper { text-transform:uppercase; }
+        .b-date::-webkit-datetime-edit-day-field { text-transform:uppercase; }
+        .b-date::-webkit-datetime-edit-month-field { text-transform:uppercase; }
+        .b-date::-webkit-datetime-edit-year-field { text-transform:uppercase; }
         .b-date::-webkit-calendar-picker-indicator {
-            filter:invert(1) sepia(1) saturate(3) hue-rotate(100deg);
-            cursor:pointer;width:40px;height:40px;opacity:0.9;
+            display:none;
+            -webkit-appearance:none;
         }
 
         /* TOGGLE BUTTONS (M/T/N, F/M, P/D/R, N/C/R) */
@@ -335,7 +340,7 @@
         .b-age-val { font-size:30px;font-weight:900;color:#ffffff;line-height:1; }
 
         /* FILA DE 2 CAMPOS */
-        .b-row2 { display:flex;gap:8px;width:100%; }
+        .b-row2 { display:flex;gap:14px;width:100%; }
         .b-half { flex:1; }
 
         /* HINT (DNI encontrado) */
@@ -376,8 +381,8 @@
         }
         .b-date:focus { border-bottom-color:#00c896; }
         .b-date::-webkit-calendar-picker-indicator {
-            filter:invert(1) sepia(1) saturate(3) hue-rotate(100deg);
-            cursor:pointer;width:40px;height:40px;opacity:0.9;
+            display:none;
+            -webkit-appearance:none;
         }
 
         /* FILA de 2 campos */
@@ -621,7 +626,7 @@
         /* ===== OPCIÓN B: LISTA LIMPIA ===== */
         .b-group { margin-bottom:14px; }
 
-        .b-row2 { display:flex;gap:8px;width:100%; }
+        .b-row2 { display:flex;gap:14px;width:100%; }
         .b-half { flex:1; }
 
 
@@ -1831,7 +1836,7 @@ document.addEventListener('focusin', function(e) {
                     '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '</div>' +
                   '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="">-- Seleccionar --</option>'+mesOpts+'</select></div>' +
-                  '<div class="b-field"><span class="b-lbl">📅 Fecha de Atención</span><input class="b-date" id="wFechaAt" type="date" value="'+(est.fechaAtencion||new Date().toISOString().slice(0,10))+'" onchange="wizSaveEstab();wizRecalcEdades()" min="2020-01-01" max="2030-12-31"></div>' +
+                  '<div class="b-field"><span class="b-lbl">FECHA ATENCIÓN</span><input class="b-date" id="wFechaAt" type="date" value="'+(est.fechaAtencion||new Date().toISOString().slice(0,10))+'" onchange="wizSaveEstab();wizRecalcEdades();wizFormatDate(this)" min="2020-01-01" max="2030-12-31"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Establecimiento</div>' +
@@ -2419,6 +2424,20 @@ document.addEventListener('focusin', function(e) {
         wizSaveEstab();
         // Print
         setTimeout(function() { window.print(); }, 200);
+    }
+
+    // Format date display uppercase
+    function wizFormatDate(inp) {
+        // Force the displayed value to appear formatted
+        // Note: date inputs always show in browser locale
+        // We just ensure the stored value is correct
+        if (inp.value) {
+            var parts = inp.value.split('-');
+            if (parts.length === 3) {
+                // Store formatted for display
+                inp.setAttribute('data-display', parts[2]+'/'+parts[1]+'/'+parts[0]);
+            }
+        }
     }
 
     // =============================================
