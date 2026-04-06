@@ -573,6 +573,32 @@
         .wiz-line { flex:0.4;height:1px;background:rgba(0,180,140,0.18);margin-bottom:14px; }
         .wiz-progress { height:2px;background:rgba(0,180,140,0.1); }
         .wiz-progress-bar { height:100%;background:linear-gradient(90deg,#00a07a,#00c896);transition:width 0.5s ease;border-radius:0 2px 2px 0; }
+
+        /* FLOATING ZOOM RESET */
+        .zoom-reset-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 16px;
+            z-index: 9999;
+            background: rgba(0,180,140,0.9);
+            color: #060f0d;
+            border: none;
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            font-size: 22px;
+            font-weight: 900;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,200,150,0.3);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        @media (max-width: 1024px) {
+            .zoom-reset-btn { display: flex; }
+        }
+
         /* ===== IMPRESIÓN ===== */
         @media print {
             @page { size: A4 landscape; margin: 8mm 6mm; }
@@ -615,7 +641,7 @@
             <tr>
                 <td><input type="number" value="2026"></td>
                 <td>
-                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;color:#ffffff;font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="ENERO">ENERO</option>
                         <option value="FEBRERO">FEBRERO</option>
                         <option value="MARZO">MARZO</option>
@@ -631,7 +657,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;color:#ffffff;font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="">-- SELECCIONAR --</option>
                         <option value="E.S PACAIPAMPA">E.S PACAIPAMPA</option>
                         <option value="P.S EL PUERTO">P.S EL PUERTO</option>
@@ -641,7 +667,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;color:#ffffff;font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="MEDICINA">MEDICINA</option>
                         <option value="ENFERMERIA">ENFERMERÍA</option>
                         <option value="NUTRICION">NUTRICIÓN</option>
@@ -650,7 +676,7 @@
                     </select>
                 </td>
                 <td>
-                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;">
+                    <select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;color:#ffffff;font-weight:700;background:transparent;text-align:center;cursor:pointer;">
                         <option value="">-- TURNO --</option>
                         <option value="MAÑANA">MAÑANA</option>
                         <option value="TARDE">TARDE</option>
@@ -702,7 +728,7 @@
                         </div>
                     </td>
                     <td colspan="4"></td>
-                    <td colspan="3" style="text-align:center;font-size:8px;font-weight:700;color:#00c896;background:rgba(0,200,150,0.08);">FUR:</td>
+                    <td colspan="3" style="text-align:center;font-weight:700;color:#ffffff;background:rgba(0,200,150,0.08);">FUR:</td>
                     <td><input type="text" class="fn-fur-input" placeholder="dd/mm/aaaa"></td>
                 </tr>
 
@@ -719,10 +745,10 @@
                     <td><div class="antro-cell"><span class="antro-label">Talla</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.C.</span><input type="number" class="antro-input" step="0.1"></div></td>
 
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 1" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -738,14 +764,14 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Abd</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 2 / Proc." readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td class="cie-td"><input type="text" data-role="cie" autocomplete="off" style="pointer-events:auto; cursor:text;"></td>
                 </tr>
                 <tr class="patient-end">
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;color:#ffffff;font-weight:700;background:transparent;text-align:center;cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
                     <td><div class="age-cell"><span class="age-label">D</span><input type="number" class="age-input"></div></td>
 
                     <!-- Fila 3 antro: HB | P.Preg -->
@@ -753,7 +779,7 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Preg</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" placeholder="Diagnóstico 3 / Trat." readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -772,7 +798,7 @@
                         </div>
                     </td>
                     <td colspan="4"></td>
-                    <td colspan="3" style="text-align:center;font-size:8px;font-weight:700;color:#00c896;background:rgba(0,200,150,0.08);">FUR:</td>
+                    <td colspan="3" style="text-align:center;font-weight:700;color:#ffffff;background:rgba(0,200,150,0.08);">FUR:</td>
                     <td><input type="text" class="fn-fur-input" placeholder="dd/mm/aaaa"></td>
                 </tr>
 
@@ -788,10 +814,10 @@
                     <td><div class="antro-cell"><span class="antro-label">Talla</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.C.</span><input type="number" class="antro-input" step="0.1"></div></td>
 
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
-                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
+                    <td rowspan="3"><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="N">N</option><option value="C">C</option><option value="R">R</option></select></td>
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -806,21 +832,21 @@
                     <td><div class="antro-cell"><span class="antro-label">P.Abd</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td class="cie-td"><input type="text" data-role="cie" autocomplete="off" style="pointer-events:auto; cursor:text;"></td>
                 </tr>
                 <tr class="patient-end">
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;font-size:10px;color:rgba(200,255,240,0.9);font-weight:700;background:transparent;text-align:center;cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:Rajdhani,sans-serif;color:#ffffff;font-weight:700;background:transparent;text-align:center;cursor:pointer;"><option value="">--</option><option value="GESTANTE">GESTANTE</option><option value="PUERPERA">PUERPERA</option></select></td>
                     <td><div class="age-cell"><span class="age-label">D</span><input type="number" class="age-input"></div></td>
 
                     <td><div class="antro-cell"><span class="antro-label">HB</span><input type="number" class="antro-input" step="0.1"></div></td>
                     <td><div class="antro-cell"><span class="antro-label">P.Preg</span><input type="number" class="antro-input" step="0.1"></div></td>
 
                     <td><input type="text" class="input-left" readonly style="cursor:default;"></td>
-                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;font-size:10px;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
+                    <td><select style="width:100%;height:100%;border:none;outline:none;font-family:inherit;color:#085041;font-weight:600;background:transparent;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none;"><option value="">-</option><option value="P">P</option><option value="D">D</option><option value="R">R</option></select></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
                     <td><input type="text" style="pointer-events:auto;"></td>
@@ -832,15 +858,15 @@
             <div style="display:flex; align-items:center; gap:8px;">
                 <label for="excelInput"
                     style="padding:8px 14px; background-color:#0f6e56; color:white; border:none;
-                           cursor:pointer; font-weight:700; font-size:11px; display:flex; align-items:center; gap:6px; border-radius:6px;">
+                           cursor:pointer; font-weight:700;  display:flex; align-items:center; gap:6px; border-radius:6px;">
                     📂 CARGAR PACIENTES DESDE EXCEL
                 </label>
                 <input type="file" id="excelInput" accept=".xlsx,.xls" style="display:none;">
-                <span id="excelStatus" style="font-size:10px; color:#555; font-style:italic;"></span>
+                <span id="excelStatus" style=" color:#555; font-style:italic;"></span>
             </div>
 
             <button type="button" onclick="window.print()"
-                style="padding:9px 20px; background-color:#1d9e75; color:white; border:none; cursor:pointer; font-weight:700; border-radius:6px; font-size:11px;">
+                style="padding:9px 20px; background-color:#1d9e75; color:white; border:none; cursor:pointer; font-weight:700; border-radius:6px; ">
                 🖨 IMPRIMIR REGISTRO
             </button>
         </div></div>
@@ -1375,7 +1401,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                 if(CIE_LIST[_i].c.indexOf(v)===0||CIE_LIST[_i].d.indexOf(v)!==-1) resultados.push({cod:CIE_LIST[_i].c,desc:CIE_LIST[_i].d});
             }
             if (resultados.length === 0) {
-                dropdown.innerHTML = '<div style="padding:6px 10px;font-size:9px;color:#e05252;font-style:italic;">Código no encontrado</div>';
+                dropdown.innerHTML = '<div style="padding:6px 10px;color:#e05252;font-style:italic;">Código no encontrado</div>';
             } else {
                 resultados.forEach(function(r) {
                     (function(cod,desc){
@@ -1493,13 +1519,13 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
             }
 
             if(!res.length){
-                cieDDBody.innerHTML='<div style="padding:8px 12px;font-size:9px;color:#e05252;font-style:italic;">Código no encontrado</div>';
+                cieDDBody.innerHTML='<div style="padding:8px 12px;color:#e05252;font-style:italic;">Código no encontrado</div>';
             } else {
                 for(var j=0; j<res.length; j++){
                     (function(item){
                         var it = document.createElement('div');
                         it.style.cssText='padding:5px 12px;font-size:10px;color:rgba(200,255,240,0.85);cursor:pointer;border-bottom:1px solid rgba(0,180,140,0.12);font-family:Rajdhani,sans-serif;';
-                        it.innerHTML='<b style="color:#00c896;margin-right:8px;min-width:42px;display:inline-block;font-family:Orbitron,monospace;font-size:9px;">'+item.c+'</b><span style="color:rgba(200,255,240,0.8);">'+item.d+'</span>';
+                        it.innerHTML='<b style="color:#ffffff;margin-right:8px;min-width:42px;display:inline-block;font-family:Orbitron,monospace;">'+item.c+'</b><span style="color:#ffffff;">'+item.d+'</span>';
                         it.onmouseover=function(){ it.style.background='rgba(0,200,150,0.07)'; };
                         it.onmouseout =function(){ it.style.background=''; };
                         it.onmousedown=function(ev){
@@ -1570,15 +1596,15 @@ document.addEventListener('focusin', function(e) {
 
         <!-- Toolbar: botones grandes DEBAJO de la barra de pacientes -->
         <div style="background:#0a1a16;padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid rgba(0,180,140,0.18);flex-shrink:0;">
-            <label for="excelInputMobile" style="flex:1;background:rgba(0,200,150,0.1);color:#00c896;padding:16px 10px;border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;">
+            <label for="excelInputMobile" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:16px 10px;border-radius:14px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;">
                 📂 Cargar Pacientes
             </label>
             <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
-            <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:16px 10px;border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
+            <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:16px 10px;border-radius:14px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
                 🖨 Imprimir
             </button>
         </div>
-        <span id="wizExcelStatus" style="font-size:12px;color:rgba(0,200,150,0.7);font-style:italic;text-align:center;padding:4px 14px;background:#0a1a16;flex-shrink:0;display:none;"></span>
+        <span id="wizExcelStatus" style="color:#ffffff;font-style:italic;text-align:center;padding:4px 14px;background:#0a1a16;flex-shrink:0;display:none;"></span>
 
         <!-- Progreso -->
         <div class="wiz-progress"><div class="wiz-progress-bar" id="wizProgress" style="width:33%"></div></div>
@@ -1615,6 +1641,9 @@ document.addEventListener('focusin', function(e) {
             <button class="wiz-btn wiz-btn-next" id="wizBtnNext" onclick="wizNext()">Siguiente →</button>
         </div>
     </div>
+
+    <!-- Floating zoom reset button -->
+    <button class="zoom-reset-btn" onclick="resetZoom()" title="Restaurar zoom">⊙</button>
 
     <script>
     // =============================================
@@ -1713,7 +1742,7 @@ document.addEventListener('focusin', function(e) {
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Identificación</div>' +
                   '<div class="b-field"><span class="b-lbl">DNI</span>' +
-                    '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="font-size:18px;font-weight:800;color:#00c896;" oninput="wizDNISearch(this.value)" onchange="wizSave()">' +
+                    '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" style="color:#ffffff;" oninput="wizDNISearch(this.value)" onchange="wizSave()">' +
                   '</div>' +
                   '<div class="b-field"><span class="b-lbl">Apellidos y Nombres</span><input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" readonly style="color:#ffffff;"></div>' +
                   '<div class="b-field"><span class="b-lbl">Financiador</span><input class="b-val" id="wFin" value="'+(p.fin||'')+'" onchange="wizSave()"></div>' +
@@ -1747,14 +1776,14 @@ document.addEventListener('focusin', function(e) {
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Medidas corporales</div>' +
-                  '<div class="b-field"><span class="b-lbl">Talla (cm)</span><input class="b-val" id="wTalla" value="'+(p.talla||'')+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
-                  '<div class="b-field"><span class="b-lbl">Peso (kg)</span><input class="b-val" id="wPeso" value="'+(p.peso||'')+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Talla (cm)</span><input class="b-val" id="wTalla" value="'+(p.talla||'')+'" type="number" style="font-weight:800;color:#ffffff;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Peso (kg)</span><input class="b-val" id="wPeso" value="'+(p.peso||'')+'" type="number" style="font-weight:800;color:#ffffff;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Cefálico</span><input class="b-val" id="wPc" value="'+(p.pc||'')+'" type="number" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Abdominal</span><input class="b-val" id="wPabd" value="'+(p.pabd||'')+'" type="number" onchange="wizSave()"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
                   '<div class="b-group-ttl">Laboratorio</div>' +
-                  '<div class="b-field"><span class="b-lbl">Hemoglobina</span><input class="b-val" id="wHb" value="'+(p.hb||'')+'" type="number" style="font-size:18px;font-weight:800;color:#00c896;" onchange="wizSave()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Hemoglobina</span><input class="b-val" id="wHb" value="'+(p.hb||'')+'" type="number" style="font-weight:800;color:#ffffff;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Preg.</span><input class="b-val" id="wPpreg" value="'+(p.ppreg||'')+'" type="number" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">FUR</span><input class="b-val" id="wFur" value="'+(p.fur||'')+'" placeholder="dd/mm/aaaa" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">EST</span><div class="b-toggle">'+tog(['N','C','R'], p.est, 'est')+'</div></div>' +
@@ -1772,7 +1801,7 @@ document.addEventListener('focusin', function(e) {
                 diagsHtml +=
                     '<div class="b-diag-card">' +
                       '<div class="b-group-ttl">Diagnóstico '+n+'</div>' +
-                      '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-size:18px;font-weight:800;color:#00c896;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-weight:800;color:#ffffff;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
                       '<div class="b-field"><span class="b-lbl">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'—')+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Tipo</span><div class="b-toggle">'+tog(['P','D','R'], tipo, 'tipo'+n)+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Lab 1</span><input class="b-val" id="wLab'+n+'a" value="'+(p['lab'+n+'a']||'')+'" onchange="wizSave()"></div>' +
@@ -2174,7 +2203,7 @@ document.addEventListener('focusin', function(e) {
               '<div class="wiz-suc-title">GUARDADO</div>' +
               '<div class="wiz-suc-pts">+150 XP</div>' +
               '<div class="wiz-suc-table">' +
-                '<div style="font-size:8px;color:rgba(0,200,150,0.4);letter-spacing:2px;font-weight:700;margin-bottom:8px;text-transform:uppercase;">Tabla HIS Actualizada</div>' +
+                '<div style="color:#ffffff;letter-spacing:2px;font-weight:700;margin-bottom:8px;text-transform:uppercase;">Tabla HIS Actualizada</div>' +
                 '<table class="wiz-suc-tbl">' +
                   '<tr><th>DNI</th><th>PACIENTE</th><th>CIE</th><th>TIPO</th></tr>' +
                   '<tr class="wiz-new"><td>'+(p.dni?p.dni.slice(-5):'?')+'</td><td>'+(p.nombres?p.nombres.split(' ')[0]:'?')+'</td><td>'+(p.cie1||'—')+'</td><td>'+(p.tipo1||'—')+'</td></tr>' +
@@ -2286,6 +2315,34 @@ function playSaveBip(){
         });
     }catch(e){}
 }
+</script>
+
+
+<script>
+function resetZoom() {
+    // Reset viewport scale to 1
+    var meta = document.querySelector('meta[name="viewport"]');
+    if (meta) {
+        meta.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+        // Force reflow
+        document.body.style.zoom = '';
+        setTimeout(function() {
+            meta.content = 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes';
+        }, 100);
+    }
+    // Also scroll to top of content
+    var wc = document.getElementById('wizContent');
+    if (wc) wc.scrollTop = 0;
+}
+
+// Auto-prevent zoom on input focus by setting font-size >= 16px temporarily
+document.addEventListener('focusin', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+        // Ensure font-size is at least 16px to prevent iOS auto-zoom
+        var fs = parseInt(window.getComputedStyle(e.target).fontSize);
+        if (fs < 16) e.target.style.fontSize = '16px';
+    }
+});
 </script>
 
 </body>
