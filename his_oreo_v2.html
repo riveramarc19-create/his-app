@@ -202,12 +202,12 @@
         .b-lbl {
             background:#0a3d2e;
             color:rgba(0,200,150,0.95);
-            font-size:20px;font-weight:900;
+            font-size:17px;font-weight:900;
             text-transform:uppercase;
-            letter-spacing:0.5px;
-            padding:12px 14px;
-            min-width:150px;
-            max-width:150px;
+            letter-spacing:0px;
+            padding:10px 12px;
+            min-width:145px;
+            max-width:145px;
             min-height:125px;
             display:flex;
             align-items:center;
@@ -367,12 +367,12 @@
 
 
         /* CUSTOM CALENDAR */
-        .wiz-cal-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:20px; }
-        .wiz-cal-title { font-size:36px;font-weight:900;color:#00c896;text-transform:uppercase;letter-spacing:1px; }
+        .wiz-cal-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:8px; }
+        .wiz-cal-title { font-size:32px;font-weight:900;color:#00c896;text-transform:uppercase;letter-spacing:1px;white-space:nowrap; }
         .wiz-cal-nav { background:rgba(0,200,150,0.15);border:1.5px solid rgba(0,200,150,0.3);color:#00c896;border-radius:8px;padding:12px 24px;font-size:34px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif; }
         .wiz-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px; }
-        .wiz-cal-dayname { text-align:center;font-size:22px;font-weight:900;color:rgba(0,200,150,0.7);text-transform:uppercase;padding:8px 0; }
-        .wiz-cal-day { text-align:center;padding:16px 4px;border-radius:12px;font-size:30px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
+        .wiz-cal-dayname { text-align:center;font-size:24px;font-weight:900;color:rgba(0,200,150,0.7);text-transform:uppercase;padding:10px 0; }
+        .wiz-cal-day { text-align:center;padding:14px 2px;border-radius:12px;font-size:34px;font-weight:700;color:#ffffff;cursor:pointer;transition:all 0.15s; }
         .wiz-cal-day:hover { background:rgba(0,200,150,0.2); }
         .wiz-cal-day.today { border:1.5px solid rgba(0,200,150,0.5);color:#00c896; }
         .wiz-cal-day.selected { background:#00c896;color:#060f0d;font-weight:900; }
@@ -1882,10 +1882,10 @@ document.addEventListener('focusin', function(e) {
                   '<div id="wDniDropWrap" style="position:relative;margin-bottom:8px;display:none;">' +
                     '<div id="wDniDrop" style="background:#0d2018;border:1.5px solid rgba(0,200,150,0.3);border-radius:12px;overflow:hidden;max-height:250px;overflow-y:auto;"></div>' +
                   '</div>' +
-                  '<div class="b-field" style="position:relative;"><span class="b-lbl">Apellidos y Nombres</span>' +
-                    '<input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" placeholder="Buscar por nombre..." style="color:#ffffff;" oninput="wizNombreSearch(this.value)" onchange="wizSave()" autocomplete="off">' +
-                    '<div id="wNombresDrop" style="display:none;position:absolute;left:0;right:0;top:100%;z-index:999;background:#0d2018;border:2px solid rgba(0,180,140,0.3);border-radius:12px;max-height:220px;overflow-y:auto;margin-top:4px;"></div>' +
+                  '<div class="b-field" style="position:relative;overflow:visible;"><span class="b-lbl">APELLIDOS</span>' +
+                    '<input class="b-val" id="wNombres" value="'+(p.nombres||'')+'" placeholder="Escribe apellido..." style="color:#ffffff;" oninput="wizNombreSearch(this.value)" onchange="wizSave()" autocomplete="off">' +
                   '</div>' +
+                  '<div id="wNombresDrop" style="display:none;width:100%;z-index:9999;background:#0a1a16;border:2px solid rgba(0,200,150,0.35);border-radius:14px;max-height:300px;overflow-y:auto;margin-bottom:10px;"></div>' +
                   '<div class="b-field"><span class="b-lbl">Financiador</span><input class="b-val" id="wFin" value="'+(p.fin||'')+'" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">H. Clínica</span><input class="b-val" id="wHc" value="'+(p.hc||'')+'" onchange="wizSave()"></div>' +
                 '</div>' +
@@ -1975,26 +1975,27 @@ document.addEventListener('focusin', function(e) {
         var drop = document.getElementById('wNombresDrop');
         if (!drop) return;
         var v = val.trim().toUpperCase();
-        if (!v || v.length < 2) { drop.style.display='none'; return; }
-        if (typeof PACIENTES_DB === 'undefined') { drop.style.display='none'; return; }
-
+        if (v.length < 2) { drop.style.display = 'none'; return; }
+        if (typeof PACIENTES_DB === 'undefined') { drop.style.display = 'none'; return; }
         var results = [];
-        Object.keys(PACIENTES_DB).forEach(function(dni) {
-            var p = PACIENTES_DB[dni];
-            if (p.nombres && p.nombres.toUpperCase().indexOf(v) !== -1) {
-                results.push(p);
-            }
-        });
-        results = results.slice(0, 10);
-
-        if (!results.length) { drop.style.display='none'; return; }
-
+        var keys = Object.keys(PACIENTES_DB);
+        for (var i = 0; i < keys.length && results.length < 8; i++) {
+            var p = PACIENTES_DB[keys[i]];
+            if (p.nombres && p.nombres.indexOf(v) !== -1) results.push(p);
+        }
+        if (!results.length) { drop.style.display = 'none'; return; }
         drop.innerHTML = results.map(function(p) {
-            return '<div onclick="wizSelectNombre(\'' + p.dni + '\')" style="padding:12px 14px;border-bottom:1px solid rgba(0,180,140,0.1);cursor:pointer;font-family:Rajdhani,sans-serif;font-size:18px;color:#ffffff;font-weight:600;">' +
-                '<span style="color:#00c896;font-size:14px;margin-right:8px;">' + p.dni + '</span>' + p.nombres +
+            var div = '<div data-dni="' + p.dni + '" style="padding:18px 16px;border-bottom:1px solid rgba(0,180,140,0.12);cursor:pointer;font-family:Rajdhani,sans-serif;font-size:26px;color:#ffffff;font-weight:600;">' +
+                '<span style="color:#00c896;font-size:20px;margin-right:10px;">' + p.dni + '</span>' + p.nombres +
             '</div>';
+            return div;
         }).join('');
         drop.style.display = 'block';
+        // Add delegated click
+        drop.onclick = function(e) {
+            var el = e.target.closest('[data-dni]');
+            if (el) wizSelectNombre(el.getAttribute('data-dni'));
+        };
     }
 
     function wizSelectNombre(dni) {
