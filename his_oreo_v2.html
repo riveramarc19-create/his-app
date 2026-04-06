@@ -1857,12 +1857,12 @@ document.addEventListener('focusin', function(e) {
         if (!diagEl) return;
         if (typeof CIE_MAP !== 'undefined' && CIE_MAP[v]) {
             diagEl.textContent = CIE_MAP[v];
-            diagEl.className = 'wiz-diag-result filled';
+            diagEl.className = 'b-diag-desc filled';
             var p = wizPat();
             p['cie'+n] = v; p['diag'+n] = CIE_MAP[v];
         } else {
             diagEl.textContent = v.length >= 2 ? 'Buscando...' : 'Escribe un código CIE-10...';
-            diagEl.className = 'wiz-diag-result';
+            diagEl.className = 'b-diag-desc';
         }
     }
 
