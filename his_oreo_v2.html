@@ -414,6 +414,20 @@
             border-color:#00c896;
         }
 
+
+        /* TIPO P/D/R — purple when selected */
+        .b-t-tipo.sel {
+            background:rgba(160,80,255,0.2);
+            border:2.5px solid #a050ff;
+            color:#ffffff;
+            box-shadow:0 0 12px rgba(160,80,255,0.25);
+        }
+        .b-t-tipo.off {
+            background:rgba(0,180,140,0.05);
+            border:1.5px solid rgba(0,180,140,0.2);
+            color:rgba(255,255,255,0.3);
+        }
+
         /* DATE INPUT */
         .b-date {
             width:100%;
@@ -1985,8 +1999,8 @@ document.addEventListener('focusin', function(e) {
                       '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-weight:800;color:#ffffff;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
                       '<div class="b-field"><span class="b-lbl">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'—')+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Tipo</span><div class="b-toggle">'+tog(['P','D','R'], tipo, 'tipo'+n)+'</div></div>' +
-                      '<div class="b-field"><span class="b-lbl">Lab 1</span><input class="b-val" id="wLab'+n+'a" value="'+(p['lab'+n+'a']||'')+'" onchange="wizSave()"></div>' +
-                      '<div class="b-field"><span class="b-lbl">Lab 2</span><input class="b-val" id="wLab'+n+'b" value="'+(p['lab'+n+'b']||'')+'" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">Lab 1</span><input class="b-val" id="wLab'+n+'a" value="'+(p['lab'+n+'a']||'')+'" maxlength="3" oninput="this.value=this.value.toUpperCase().slice(0,3)" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">Lab 2</span><input class="b-val" id="wLab'+n+'b" value="'+(p['lab'+n+'b']||'')+'" maxlength="3" oninput="this.value=this.value.toUpperCase().slice(0,3)" onchange="wizSave()"></div>' +
                     '</div>';
             }
             c.innerHTML =
@@ -2097,10 +2111,12 @@ document.addEventListener('focusin', function(e) {
         var val = btn.getAttribute('data-val');
         var field = btn.getAttribute('data-field');
         var group = btn.parentElement;
-        group.querySelectorAll('.b-t').forEach(function(b){
-            b.className = 'b-t off';
+        var isTipo = field && field.indexOf('tipo') === 0;
+        var baseClass = isTipo ? 'b-t-tipo' : 'b-t';
+        group.querySelectorAll('.b-t, .b-t-tipo').forEach(function(b){
+            b.className = baseClass + ' off';
         });
-        btn.className = 'b-t sel';
+        btn.className = baseClass + ' sel';
         var p = wizPat();
         if (field === 'sexo') p.sexo = val;
         else if (field === 'est') p.est = val;
