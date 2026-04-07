@@ -228,7 +228,7 @@
             background:#060f0d;
             border:none;
             outline:none;
-            text-align:center;
+            text-align:left;
             padding:0 16px;
             height:125px;
             min-height:125px;
@@ -247,7 +247,7 @@
             background:#060f0d;
             border:none;
             outline:none;
-            text-align:center;
+            text-align:left;
             cursor:pointer;
             -webkit-appearance:none;
             padding:0 16px;
@@ -266,7 +266,7 @@
             background:#060f0d;
             border:none;
             outline:none;
-            text-align:center;
+            text-align:left;
             padding:0 16px;
             height:125px;
             color-scheme:dark;
@@ -288,7 +288,7 @@
             display:flex;
             gap:8px;
             align-items:center;
-            justify-content:center;
+            justify-content:flex-start;
             padding:0 12px;
             background:#060f0d;
             height:125px;
@@ -322,7 +322,7 @@
             display:flex;
             gap:6px;
             align-items:center;
-            justify-content:center;
+            justify-content:flex-start;
             padding:0 10px;
             background:#060f0d;
             height:125px;
@@ -1921,22 +1921,22 @@ document.addEventListener('focusin', function(e) {
             var upsOpts = ["MEDICINA","ENFERMERIA","NUTRICION","OBSTETRICIA","ODONTOLOGIA"].map(function(v){return "<option value='"+v+"'"+(v===est.ups?" selected":"")+">"+v+"</option>";}).join("");
             c.innerHTML =
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Fecha y turno</div>' +
+                  
                   '<div class="b-row2">' +
                     '<div class="b-field b-half"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" onchange="wizSaveEstab()"></div>' +
                     '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '</div>' +
                   '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="" disabled selected style="display:none;"></option>'+mesOpts+'</select></div>' +
-                  '<div class="b-field" onclick="wizOpenCal()" style="cursor:pointer;"><span class="b-lbl">FECHA ATENCIÓN</span><div class="b-val" id="wFechaDisplay" style="display:flex;align-items:center;justify-content:center;height:125px;font-size:56px;font-weight:700;color:#ffffff;cursor:pointer;">'+(est.fechaAtencion ? wizFmtDate(est.fechaAtencion) : '')+'</div></div>' +
+                  '<div class="b-field" onclick="wizOpenCal()" style="cursor:pointer;"><span class="b-lbl">FECHA ATENCIÓN</span><div class="b-val" id="wFechaDisplay" style="display:flex;align-items:center;justify-content:flex-start;height:125px;font-size:56px;padding-left:16px;font-weight:700;color:#ffffff;cursor:pointer;">'+(est.fechaAtencion ? wizFmtDate(est.fechaAtencion) : '')+'</div></div>' +
                   '<div id="wizCalPanel" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:#0a1a16;border:2px solid #00c896;border-radius:20px;padding:20px;width:320px;box-shadow:0 0 40px rgba(0,200,150,0.3);font-family:Rajdhani,sans-serif;"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Establecimiento</div>' +
+                  
                   '<div class="b-field"><span class="b-lbl">Establecimiento</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wEstab"><option value="" disabled selected style="display:none;"></option>'+estabOpts+'</select></div>' +
                   '<div class="b-field"><span class="b-lbl">UPS</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wUps"><option value="" disabled selected style="display:none;"></option>'+upsOpts+'</select></div>' +
                 '</div>' +
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Responsable</div>' +
+                  
                   '<div class="b-field"><span class="b-lbl">DNI Responsable</span><input class="b-val" id="wDniResp" value="'+(est.dniResp||'')+'" type="text" onchange="wizSaveEstab()"></div>' +
                   '<div class="b-field"><span class="b-lbl">Apellidos y Nombres</span><input class="b-val" id="wNombresResp" value="'+(est.nombresResp||'')+'" onchange="wizSaveEstab()"></div>' +
                 '</div>';
@@ -1947,7 +1947,7 @@ document.addEventListener('focusin', function(e) {
             nextBtn.textContent = 'SIGUIENTE →';
             c.innerHTML =
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Identificación</div>' +
+                  
                   '<div class="b-field"><span class="b-lbl">DNI</span>' +
                     '<input class="b-val" id="wDni" value="'+(p.dni||'')+'" type="text" inputmode="numeric" maxlength="8" style="color:#ffffff;" oninput="wizValidateDNI(this)" onchange="wizSave()">' +
                   '</div>' +
@@ -1960,7 +1960,7 @@ document.addEventListener('focusin', function(e) {
                   '<div class="b-field"><span class="b-lbl">H. Clínica</span><input class="b-val" id="wHc" value="'+(p.hc||'')+'" onchange="wizSave()"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Datos personales</div>' +
+                  
                   '<div class="b-field"><span class="b-lbl">F. Nacimiento</span><input class="b-val" id="wFN" value="'+(p.fn||'')+'" placeholder="dd/mm/aaaa" onchange="wizSave();wizCalcEdad()"></div>' +
                   '<div class="b-field"><span class="b-lbl">Sexo</span><div class="b-toggle">'+tog(['F','M'], p.sexo, 'sexo')+'</div></div>' +
                   '<div class="b-field"><span class="b-lbl">Edad</span>' +
@@ -1996,14 +1996,14 @@ document.addEventListener('focusin', function(e) {
                   '<div class="b-pat-meta">'+(p.edadA?p.edadA+'a':'')+' '+(p.sexo?'· '+p.sexo:'')+' '+(p.fin?'· '+p.fin:'')+'</div></div>' +
                 '</div>' +
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Medidas corporales</div>' +
+                  
                   '<div class="b-field"><span class="b-lbl">Talla (cm)</span><input class="b-val" id="wTalla" value="'+(p.talla||'')+'" type="number" style="font-weight:800;color:#ffffff;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">Peso (kg)</span><input class="b-val" id="wPeso" value="'+(p.peso||'')+'" type="number" style="font-weight:800;color:#ffffff;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Cefálico</span><input class="b-val" id="wPc" value="'+(p.pc||'')+'" type="number" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Abdominal</span><input class="b-val" id="wPabd" value="'+(p.pabd||'')+'" type="number" onchange="wizSave()"></div>' +
                 '</div>' +
                 '<div class="b-group">' +
-                  '<div class="b-group-ttl">Laboratorio</div>' +
+                  
                   '<div class="b-field"><span class="b-lbl">Hemoglobina</span><input class="b-val" id="wHb" value="'+(p.hb||'')+'" type="number" style="font-weight:800;color:#ffffff;" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">P. Preg.</span><input class="b-val" id="wPpreg" value="'+(p.ppreg||'')+'" type="number" onchange="wizSave()"></div>' +
                   '<div class="b-field"><span class="b-lbl">FUR</span><input class="b-val" id="wFur" value="'+(p.fur||'')+'" placeholder="dd/mm/aaaa" onchange="wizSave()"></div>' +
@@ -2021,7 +2021,7 @@ document.addEventListener('focusin', function(e) {
                 var cie = p['cie'+n]||'', diag = p['diag'+n]||'', tipo = p['tipo'+n]||'';
                 diagsHtml +=
                     '<div class="b-diag-card">' +
-                      '<div class="b-group-ttl">Diagnóstico '+n+'</div>' +
+                      
                       '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-weight:800;color:#ffffff;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
                       '<div class="b-field"><span class="b-lbl">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'—')+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Tipo</span><div class="b-toggle">'+tog(['P','D','R'], tipo, 'tipo'+n)+'</div></div>' +
@@ -2149,7 +2149,9 @@ document.addEventListener('focusin', function(e) {
         else if (field === 'ser') p.ser = val;
         else if (field && field.indexOf('tipo') === 0) {
             var n = parseInt(field.replace('tipo',''));
-            if (!isNaN(n)) p['tipo'+n] = val;
+            if (!isNaN(n)) {
+                p['tipo'+n] = val;
+            }
         }
     }
 
@@ -2300,7 +2302,7 @@ document.addEventListener('focusin', function(e) {
             p.fur=g('wFur');
         } else if (WIZ.step===4) {
             for(var n=1;n<=wizDiagCount;n++){
-                p['diag'+n]=g('wDiag'+n)||''; p['tipo'+n]=g('wTipo'+n);
+                p['diag'+n]=g('wDiag'+n)||''; var tipoVal=g('wTipo'+n); if(tipoVal) p['tipo'+n]=tipoVal;
                 p['cie'+n]=g('wCie'+n);
                 p['lab'+n+'a']=g('wLab'+n+'a'); p['lab'+n+'b']=g('wLab'+n+'b'); p['lab'+n+'c']=g('wLab'+n+'c');
             }
