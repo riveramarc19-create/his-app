@@ -415,7 +415,18 @@
         }
 
 
-        /* TIPO P/D/R — purple when selected */
+        /* TIPO P/D/R — same size as b-t, purple when selected */
+        .b-t-tipo {
+            flex:1;
+            height:91px;
+            border-radius:10px;
+            font-size:46px;font-weight:900;
+            cursor:pointer;
+            font-family:'Rajdhani',sans-serif;
+            transition:color 0.18s, background 0.18s, border-color 0.18s;
+            text-align:center;
+            display:flex;align-items:center;justify-content:center;
+        }
         .b-t-tipo.sel {
             background:rgba(160,80,255,0.2);
             border:2.5px solid #a050ff;
