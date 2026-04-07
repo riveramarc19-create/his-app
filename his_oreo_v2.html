@@ -1835,7 +1835,7 @@ document.addEventListener('focusin', function(e) {
             dni:'', nombres:'', fn:'', sexo:'', fin:'', hc:'',
             distrito:'', direccion:'', edadA:'', edadM:'', edadD:'',
             talla:'', peso:'', pc:'', pabd:'', hb:'', ppreg:'', fur:'',
-            est:'', ser:'',
+            est:'', ser:'', fromExcel: false,
             diag1:'', tipo1:'', lab1a:'', lab1b:'', lab1c:'', cie1:'',
             diag2:'', tipo2:'', lab2a:'', lab2b:'', lab2c:'', cie2:'',
             diag3:'', tipo3:'', lab3a:'', lab3b:'', lab3c:'', cie3:''
@@ -2345,15 +2345,16 @@ document.addEventListener('focusin', function(e) {
                     'wDni': p.dni, 'wNombres': p.nombres, 'wFin': p.fin, 'wHc': p.hc,
                     'wFN': p.fn, 'wDistrito': p.distrito, 'wDireccion': p.direccion
                 };
+                // Mark patient as coming from Excel
+                p.fromExcel = true;
+
                 Object.keys(lockedFields).forEach(function(id) {
                     var el = document.getElementById(id);
                     if (!el) return;
                     if (id === 'wFin') {
-                        // Map Excel value to option value
                         var finVal = lockedFields[id];
                         var finMap = {'1':'1-USUARIO','USUARIO':'1-USUARIO','1-USUARIO':'1-USUARIO','2':'2-SIS','SIS':'2-SIS','2-SIS':'2-SIS','3':'3-ESSALUD','ESSALUD':'3-ESSALUD','3-ESSALUD':'3-ESSALUD','10':'10-OTROS','OTROS':'10-OTROS','10-OTROS':'10-OTROS'};
                         el.value = finMap[finVal] || finVal;
-                        // Don't lock select — let user change if needed
                     } else {
                         el.value = lockedFields[id];
                         wizLockField(el);
