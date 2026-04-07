@@ -1934,6 +1934,16 @@ document.addEventListener('focusin', function(e) {
                   '<div class="b-field"><span class="b-lbl">Dirección</span><input class="b-val" id="wDireccion" value="'+(p.direccion||'')+'" onchange="wizSave()"></div>' +
                 '</div>';
 
+                    // Re-apply locks if patient came from Excel
+            if (p.fromExcel) {
+                setTimeout(function() {
+                    ['wDni','wNombres','wHc','wFN','wDistrito','wDireccion'].forEach(function(id) {
+                        var el = document.getElementById(id);
+                        if (el && el.value) wizLockField(el);
+                    });
+                }, 0);
+            }
+
         /* ===================== STEP 3: ANTROPOMETRÍA ===================== */
         } else if (WIZ.step === 3) {
             nextBtn.className = 'wiz-btn wiz-btn-next';
