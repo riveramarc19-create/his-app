@@ -2081,37 +2081,58 @@ document.addEventListener('focusin', function(e) {
         wizCloseNombreDrop();
         var panel = document.createElement('div');
         panel.id = 'wizNombrePanel';
-        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 16px 16px;max-height:40vh;overflow-y:auto;box-shadow:0 6px 30px rgba(0,200,150,0.2);';
+        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 18px 18px;box-shadow:0 6px 30px rgba(0,200,150,0.2);display:flex;flex-direction:column;max-height:50vh;';
 
-        var hdr = '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(0,180,140,0.2);flex-shrink:0;">'
-            + '<span style="font-size:24px;color:rgba(0,200,150,0.7);font-family:Rajdhani,sans-serif;font-weight:800;letter-spacing:1px;">RESULTADOS</span>'
-            + '<span id="wizNombreClose" style="font-size:34px;color:rgba(255,100,100,0.8);font-family:Rajdhani,sans-serif;font-weight:900;padding:0 8px;cursor:pointer;">&#10005;</span>'
-            + '</div>';
+        // Integrated search input inside panel
+        var searchRow = document.createElement('div');
+        searchRow.style.cssText = 'display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(0,180,140,0.2);flex-shrink:0;background:#0a3d2e;';
+        searchRow.innerHTML =
+            '<span style="font-size:20px;font-weight:900;color:rgba(0,200,150,0.7);font-family:Rajdhani,sans-serif;white-space:nowrap;text-transform:uppercase;">BUSCAR:</span>' +
+            '<input id="wizNombreInput" type="text" autocomplete="off" style="flex:1;background:transparent;border:none;border-bottom:2px solid #00c896;outline:none;font-size:30px;color:#ffffff;font-family:Rajdhani,sans-serif;font-weight:700;padding:4px 8px;" placeholder="">' +
+            '<span id="wizNombreCloseBtn" style="font-size:30px;color:rgba(255,100,100,0.8);cursor:pointer;padding:0 4px;font-family:Rajdhani,sans-serif;">&#10005;</span>';
+        panel.appendChild(searchRow);
 
-        var items = results.map(function(p) {
-            return '<div data-dni="' + p.dni + '" style="padding:16px 16px;border-bottom:1px solid rgba(0,180,140,0.1);font-family:Rajdhani,sans-serif;font-size:26px;color:#ffffff;font-weight:600;display:flex;gap:10px;align-items:center;cursor:pointer;">'
-                + '<span style="color:#00c896;font-size:18px;min-width:80px;flex-shrink:0;">' + p.dni + '</span>'
-                + '<span>' + p.nombres + '</span></div>';
+        // Results list
+        var list = document.createElement('div');
+        list.id = 'wizNombreList';
+        list.style.cssText = 'overflow-y:auto;flex:1;';
+        list.innerHTML = results.map(function(p) {
+            return '<div data-dni="' + p.dni + '" style="padding:16px 16px;border-bottom:1px solid rgba(0,180,140,0.12);font-family:Rajdhani,sans-serif;font-size:26px;color:#ffffff;font-weight:600;display:flex;gap:12px;align-items:center;cursor:pointer;">' +
+                '<span style="color:#00c896;font-size:22px;min-width:90px;flex-shrink:0;">' + p.dni + '</span>' +
+                '<span>' + p.nombres + '</span></div>';
         }).join('');
+        panel.appendChild(list);
 
-        panel.innerHTML = hdr + items;
+        // Events
+        searchRow.querySelector('#wizNombreCloseBtn').addEventListener('mousedown', function(e){ e.preventDefault(); wizCloseNombreDrop(); });
+        searchRow.querySelector('#wizNombreCloseBtn').addEventListener('touchend', function(e){ e.preventDefault(); wizCloseNombreDrop(); });
 
-        // Use mousedown/touchstart (before blur fires) to select
-        panel.addEventListener('mousedown', function(e) {
-            e.preventDefault(); // prevent input blur
+        list.addEventListener('mousedown', function(e) {
+            e.preventDefault();
             var el = e.target.closest('[data-dni]');
             if (el) { wizSelectNombre(el.getAttribute('data-dni')); wizCloseNombreDrop(); }
-            var cl = e.target.closest('#wizNombreClose');
-            if (cl) wizCloseNombreDrop();
         });
-        panel.addEventListener('touchstart', function(e) {
+        list.addEventListener('touchend', function(e) {
             var el = e.target.closest('[data-dni]');
             if (el) { e.preventDefault(); wizSelectNombre(el.getAttribute('data-dni')); wizCloseNombreDrop(); }
-            var cl = e.target.closest('#wizNombreClose');
-            if (cl) { e.preventDefault(); wizCloseNombreDrop(); }
-        }, {passive: false});
+        }, {passive:false});
 
         document.body.appendChild(panel);
+
+        // Focus integrated input and copy current value
+        setTimeout(function() {
+            var ni = document.getElementById('wizNombreInput');
+            var orig = document.getElementById('wNombres');
+            if (ni) {
+                if (orig) ni.value = orig.value;
+                ni.focus();
+                ni.oninput = function() {
+                    wizNombreSearch(this.value);
+                    // Update original input too
+                    if (orig) orig.value = this.value;
+                };
+            }
+        }, 80);
     }
 
     function wizCloseNombreDrop() {
@@ -2336,36 +2357,66 @@ document.addEventListener('focusin', function(e) {
         wizCloseDNIDrop();
         var panel = document.createElement('div');
         panel.id = 'wizDniPanel';
-        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 16px 16px;max-height:40vh;overflow-y:auto;box-shadow:0 6px 30px rgba(0,200,150,0.2);';
+        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 18px 18px;box-shadow:0 6px 30px rgba(0,200,150,0.2);display:flex;flex-direction:column;max-height:50vh;';
 
-        var hdr = '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(0,180,140,0.2);">'
-            + '<span style="font-size:24px;color:rgba(0,200,150,0.7);font-family:Rajdhani,sans-serif;font-weight:800;letter-spacing:1px;">RESULTADOS</span>'
-            + '<span id="wizDniClose" style="font-size:34px;color:rgba(255,100,100,0.8);font-family:Rajdhani,sans-serif;font-weight:900;padding:0 8px;cursor:pointer;">&#10005;</span>'
-            + '</div>';
+        var inp = document.getElementById('wDni');
+        var currentVal = inp ? inp.value : '';
 
-        var items = results.map(function(p) {
-            return '<div data-dni="' + p.dni + '" style="padding:16px 16px;border-bottom:1px solid rgba(0,180,140,0.1);font-family:Rajdhani,sans-serif;font-size:26px;color:#ffffff;font-weight:600;display:flex;gap:10px;align-items:center;cursor:pointer;">'
-                + '<span style="color:#00c896;font-size:18px;min-width:80px;flex-shrink:0;">' + p.dni + '</span>'
-                + '<span>' + p.nombres + '</span></div>';
+        var searchRow = document.createElement('div');
+        searchRow.style.cssText = 'display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(0,180,140,0.2);flex-shrink:0;background:#0a3d2e;';
+        searchRow.innerHTML =
+            '<span style="font-size:20px;font-weight:900;color:rgba(0,200,150,0.7);font-family:Rajdhani,sans-serif;white-space:nowrap;text-transform:uppercase;">DNI:</span>' +
+            '<input id="wizDniInput" type="text" inputmode="numeric" maxlength="8" autocomplete="off" value="' + currentVal + '" style="flex:1;background:transparent;border:none;border-bottom:2px solid #00c896;outline:none;font-size:30px;color:#ffffff;font-family:Rajdhani,sans-serif;font-weight:700;padding:4px 8px;">' +
+            '<span id="wizDniCloseBtn" style="font-size:30px;color:rgba(255,100,100,0.8);cursor:pointer;padding:0 4px;font-family:Rajdhani,sans-serif;">&#10005;</span>';
+        panel.appendChild(searchRow);
+
+        var list = document.createElement('div');
+        list.style.cssText = 'overflow-y:auto;flex:1;';
+        list.innerHTML = results.map(function(p) {
+            return '<div data-dni="' + p.dni + '" style="padding:16px 16px;border-bottom:1px solid rgba(0,180,140,0.12);font-family:Rajdhani,sans-serif;font-size:26px;color:#ffffff;font-weight:600;display:flex;gap:12px;align-items:center;cursor:pointer;">' +
+                '<span style="color:#00c896;font-size:22px;min-width:90px;flex-shrink:0;">' + p.dni + '</span>' +
+                '<span>' + p.nombres + '</span></div>';
         }).join('');
+        panel.appendChild(list);
 
-        panel.innerHTML = hdr + items;
+        searchRow.querySelector('#wizDniCloseBtn').addEventListener('mousedown', function(e){ e.preventDefault(); wizCloseDNIDrop(); });
+        searchRow.querySelector('#wizDniCloseBtn').addEventListener('touchend', function(e){ e.preventDefault(); wizCloseDNIDrop(); });
 
-        panel.addEventListener('mousedown', function(e) {
+        list.addEventListener('mousedown', function(e) {
             e.preventDefault();
             var el = e.target.closest('[data-dni]');
-            if (el) { var dni=el.getAttribute('data-dni'); var inp=document.getElementById('wDni'); if(inp) inp.value=dni; wizCloseDNIDrop(); wizDNISearch(dni); }
-            var cl = e.target.closest('#wizDniClose');
-            if (cl) wizCloseDNIDrop();
+            if (el) {
+                var dni = el.getAttribute('data-dni');
+                if (inp) inp.value = dni;
+                wizCloseDNIDrop();
+                wizDNISearch(dni);
+            }
         });
-        panel.addEventListener('touchstart', function(e) {
+        list.addEventListener('touchend', function(e) {
             var el = e.target.closest('[data-dni]');
-            if (el) { e.preventDefault(); var dni=el.getAttribute('data-dni'); var inp=document.getElementById('wDni'); if(inp) inp.value=dni; wizCloseDNIDrop(); wizDNISearch(dni); }
-            var cl = e.target.closest('#wizDniClose');
-            if (cl) { e.preventDefault(); wizCloseDNIDrop(); }
-        }, {passive: false});
+            if (el) {
+                e.preventDefault();
+                var dni = el.getAttribute('data-dni');
+                if (inp) inp.value = dni;
+                wizCloseDNIDrop();
+                wizDNISearch(dni);
+            }
+        }, {passive:false});
 
         document.body.appendChild(panel);
+
+        setTimeout(function() {
+            var ni = document.getElementById('wizDniInput');
+            if (ni) {
+                ni.focus();
+                ni.oninput = function() {
+                    var v = this.value.replace(/[^0-9]/g,'').slice(0,8);
+                    this.value = v;
+                    if (inp) inp.value = v;
+                    if(v.length===8){wizDNISearch(v);}else{wizCloseDNIDrop();wizValidateDNI(inp||{value:v,style:{},classList:{add:function(){},remove:function(){}},closest:function(){return null;}});}
+                };
+            }
+        }, 80);
     }
 
     function wizCloseDNIDrop() {
