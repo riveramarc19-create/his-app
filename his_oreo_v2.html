@@ -382,6 +382,38 @@
         .wiz-cal-ok { background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d; }
         .wiz-cal-cancel { background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1) !important; }
 
+
+        /* LOCKED FIELD */
+        .b-field-locked { position:relative; }
+        .b-val-locked {
+            color:rgba(200,255,240,0.7) !important;
+            background:#040c0a !important;
+            cursor:not-allowed;
+        }
+        .b-edit-btn {
+            position:absolute;
+            right:10px;
+            top:50%;
+            transform:translateY(-50%);
+            background:rgba(0,200,150,0.12);
+            border:1.5px solid rgba(0,200,150,0.4);
+            border-radius:10px;
+            color:#00c896;
+            font-family:'Rajdhani',sans-serif;
+            font-size:18px;
+            font-weight:800;
+            padding:8px 14px;
+            cursor:pointer;
+            letter-spacing:0.5px;
+            transition:all 0.2s;
+            white-space:nowrap;
+            z-index:10;
+        }
+        .b-edit-btn:active {
+            background:rgba(0,200,150,0.25);
+            border-color:#00c896;
+        }
+
         /* DATE INPUT */
         .b-date {
             width:100%;
@@ -2309,18 +2341,17 @@ document.addEventListener('focusin', function(e) {
                 p.fur       = found.fur        || '';
 
                 // Update visible fields immediately
-                var fields = {
+                var lockedFields = {
                     'wNombres': p.nombres, 'wFin': p.fin, 'wHc': p.hc,
                     'wFN': p.fn, 'wDistrito': p.distrito, 'wDireccion': p.direccion
                 };
-                Object.keys(fields).forEach(function(id) {
+                Object.keys(lockedFields).forEach(function(id) {
                     var el = document.getElementById(id);
-                    if (el) el.value = fields[id];
+                    if (el) {
+                        el.value = lockedFields[id];
+                        wizLockField(el);
+                    }
                 });
-
-                // Show found row
-                var nEl = document.getElementById('wNombres');
-                if (nEl) nEl.value = p.nombres;
 
                 // Sexo toggle
                 document.querySelectorAll('#wizContent .b-t[data-field="sexo"]').forEach(function(b) {
@@ -2330,6 +2361,51 @@ document.addEventListener('focusin', function(e) {
                 wizCalcEdad();
             }
         }
+    }
+
+
+    // =============================================
+    // FIELD LOCK / UNLOCK
+    // =============================================
+    function wizLockField(inp) {
+        if (!inp) return;
+        inp.readOnly = true;
+        inp.classList.add('b-val-locked');
+        var field = inp.closest('.b-field');
+        if (!field) return;
+        field.classList.add('b-field-locked');
+        field.style.position = 'relative';
+        // Remove existing edit btn if any
+        var old = field.querySelector('.b-edit-btn');
+        if (old) old.parentNode.removeChild(old);
+        // Add edit button
+        var btn = document.createElement('button');
+        btn.className = 'b-edit-btn';
+        btn.textContent = '✎ EDITAR';
+        btn.setAttribute('data-target', inp.id);
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            wizUnlockField(inp);
+        });
+        btn.addEventListener('touchend', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            wizUnlockField(inp);
+        });
+        field.appendChild(btn);
+    }
+
+    function wizUnlockField(inp) {
+        if (!inp) return;
+        inp.readOnly = false;
+        inp.classList.remove('b-val-locked');
+        var field = inp.closest('.b-field');
+        if (field) {
+            field.classList.remove('b-field-locked');
+            var btn = field.querySelector('.b-edit-btn');
+            if (btn) btn.parentNode.removeChild(btn);
+        }
+        inp.focus();
     }
 
     // =============================================
