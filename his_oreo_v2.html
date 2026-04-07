@@ -1906,8 +1906,11 @@ document.addEventListener('focusin', function(e) {
         if (!nextBtn) return;
 
         function tog(opts, val, field) {
+            var isTipo = field && field.indexOf('tipo') === 0;
             return opts.map(function(v) {
-                var cls = v===val ? 'b-t sel' : 'b-t off';
+                var baseClass = isTipo ? 'b-t-tipo' : 'b-t';
+                var selClass  = isTipo ? ' sel-'+v.toLowerCase() : ' sel';
+                var cls = baseClass + (v===val ? selClass : ' off');
                 return '<span class="'+cls+'" data-field="'+field+'" data-val="'+v+'" onclick="wizTog(this)">'+v+'</span>';
             }).join('');
         }
@@ -2302,7 +2305,7 @@ document.addEventListener('focusin', function(e) {
             p.fur=g('wFur');
         } else if (WIZ.step===4) {
             for(var n=1;n<=wizDiagCount;n++){
-                p['diag'+n]=g('wDiag'+n)||''; var tipoVal=g('wTipo'+n); if(tipoVal) p['tipo'+n]=tipoVal;
+                p['diag'+n]=g('wDiag'+n)||''; /* tipo saved by wizTog directly */
                 p['cie'+n]=g('wCie'+n);
                 p['lab'+n+'a']=g('wLab'+n+'a'); p['lab'+n+'b']=g('wLab'+n+'b'); p['lab'+n+'c']=g('wLab'+n+'c');
             }
