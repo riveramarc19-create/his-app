@@ -415,7 +415,7 @@
         }
 
 
-        /* TIPO P/D/R — same size as b-t, purple when selected */
+        /* TIPO P/D/R — colores por valor */
         .b-t-tipo {
             flex:1;
             height:91px;
@@ -423,20 +423,35 @@
             font-size:46px;font-weight:900;
             cursor:pointer;
             font-family:'Rajdhani',sans-serif;
-            transition:color 0.18s, background 0.18s, border-color 0.18s;
+            transition:color 0.18s, background 0.18s, border-color 0.18s, box-shadow 0.18s;
             text-align:center;
             display:flex;align-items:center;justify-content:center;
-        }
-        .b-t-tipo.sel {
-            background:rgba(160,80,255,0.2);
-            border:2.5px solid #a050ff;
-            color:#ffffff;
-            box-shadow:0 0 12px rgba(160,80,255,0.25);
         }
         .b-t-tipo.off {
             background:rgba(0,180,140,0.05);
             border:1.5px solid rgba(0,180,140,0.2);
-            color:rgba(255,255,255,0.3);
+            color:rgba(255,255,255,0.25);
+        }
+        /* P = CELESTE */
+        .b-t-tipo.sel-p {
+            background:rgba(0,180,255,0.18);
+            border:2.5px solid #00b4ff;
+            color:#ffffff;
+            box-shadow:0 0 14px rgba(0,180,255,0.25);
+        }
+        /* D = AMARILLO */
+        .b-t-tipo.sel-d {
+            background:rgba(255,210,0,0.18);
+            border:2.5px solid #ffd200;
+            color:#ffffff;
+            box-shadow:0 0 14px rgba(255,210,0,0.25);
+        }
+        /* R = MORADO */
+        .b-t-tipo.sel-r {
+            background:rgba(160,80,255,0.2);
+            border:2.5px solid #a050ff;
+            color:#ffffff;
+            box-shadow:0 0 14px rgba(160,80,255,0.25);
         }
 
         /* DATE INPUT */
@@ -2127,7 +2142,7 @@ document.addEventListener('focusin', function(e) {
         group.querySelectorAll('.b-t, .b-t-tipo').forEach(function(b){
             b.className = baseClass + ' off';
         });
-        btn.className = baseClass + ' sel';
+        btn.className = baseClass + (isTipo ? ' sel-'+val.toLowerCase() : ' sel');
         var p = wizPat();
         if (field === 'sexo') p.sexo = val;
         else if (field === 'est') p.est = val;
