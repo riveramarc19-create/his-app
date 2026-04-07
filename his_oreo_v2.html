@@ -1996,38 +1996,37 @@ document.addEventListener('focusin', function(e) {
         wizCloseNombreDrop();
         var panel = document.createElement('div');
         panel.id = 'wizNombrePanel';
-        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99998;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 20px 20px;max-height:50vh;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,200,150,0.25);';
+        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 16px 16px;max-height:40vh;overflow-y:auto;box-shadow:0 6px 30px rgba(0,200,150,0.2);';
 
-        var searchBar = '<div style="padding:12px 16px;border-bottom:1px solid rgba(0,180,140,0.2);display:flex;align-items:center;gap:10px;flex-shrink:0;">'
-            + '<span style="font-size:18px;color:rgba(0,200,150,0.6);font-family:Rajdhani,sans-serif;font-weight:700;white-space:nowrap;">APELLIDOS:</span>'
-            + '<input id="wizNombreInput" type="text" style="flex:1;background:transparent;border:none;border-bottom:2px solid #00c896;outline:none;font-size:28px;color:#ffffff;font-family:Rajdhani,sans-serif;font-weight:700;padding:4px 8px;" oninput="wizNombreSearch(this.value)" autocomplete="off">'
-            + '<span onclick="wizCloseNombreDrop()" style="font-size:28px;color:rgba(255,100,100,0.8);cursor:pointer;padding:0 8px;">&#10005;</span>'
+        var hdr = '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(0,180,140,0.2);flex-shrink:0;">'
+            + '<span style="font-size:20px;color:rgba(0,200,150,0.7);font-family:Rajdhani,sans-serif;font-weight:800;letter-spacing:1px;">RESULTADOS</span>'
+            + '<span id="wizNombreClose" style="font-size:28px;color:rgba(255,100,100,0.8);font-family:Rajdhani,sans-serif;font-weight:900;padding:0 8px;cursor:pointer;">&#10005;</span>'
             + '</div>';
 
         var items = results.map(function(p) {
-            return '<div data-dni="' + p.dni + '" style="padding:18px 16px;border-bottom:1px solid rgba(0,180,140,0.1);font-family:Rajdhani,sans-serif;font-size:24px;color:#ffffff;font-weight:600;display:flex;gap:12px;align-items:center;">'
-                + '<span style="color:#00c896;font-size:20px;min-width:85px;">' + p.dni + '</span>'
+            return '<div data-dni="' + p.dni + '" style="padding:16px 16px;border-bottom:1px solid rgba(0,180,140,0.1);font-family:Rajdhani,sans-serif;font-size:22px;color:#ffffff;font-weight:600;display:flex;gap:10px;align-items:center;cursor:pointer;">'
+                + '<span style="color:#00c896;font-size:18px;min-width:80px;flex-shrink:0;">' + p.dni + '</span>'
                 + '<span>' + p.nombres + '</span></div>';
         }).join('');
 
-        var listWrap = '<div style="overflow-y:auto;flex:1;">' + items + '</div>';
-        panel.innerHTML = searchBar + listWrap;
+        panel.innerHTML = hdr + items;
 
-        panel.addEventListener('click', function(e) {
+        // Use mousedown/touchstart (before blur fires) to select
+        panel.addEventListener('mousedown', function(e) {
+            e.preventDefault(); // prevent input blur
             var el = e.target.closest('[data-dni]');
             if (el) { wizSelectNombre(el.getAttribute('data-dni')); wizCloseNombreDrop(); }
+            var cl = e.target.closest('#wizNombreClose');
+            if (cl) wizCloseNombreDrop();
         });
-        panel.addEventListener('touchend', function(e) {
+        panel.addEventListener('touchstart', function(e) {
             var el = e.target.closest('[data-dni]');
             if (el) { e.preventDefault(); wizSelectNombre(el.getAttribute('data-dni')); wizCloseNombreDrop(); }
-        });
-        document.body.appendChild(panel);
+            var cl = e.target.closest('#wizNombreClose');
+            if (cl) { e.preventDefault(); wizCloseNombreDrop(); }
+        }, {passive: false});
 
-        setTimeout(function() {
-            var ni = document.getElementById('wizNombreInput');
-            var orig = document.getElementById('wNombres');
-            if (ni && orig) { ni.value = orig.value; ni.focus(); }
-        }, 100);
+        document.body.appendChild(panel);
     }
 
     function wizCloseNombreDrop() {
@@ -2248,24 +2247,35 @@ document.addEventListener('focusin', function(e) {
         wizCloseDNIDrop();
         var panel = document.createElement('div');
         panel.id = 'wizDniPanel';
-        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99998;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 20px 20px;max-height:45vh;overflow-y:auto;padding:8px 0;box-shadow:0 8px 40px rgba(0,200,150,0.25);';
-        var header = '<div style="padding:12px 16px;border-bottom:1px solid rgba(0,180,140,0.2);display:flex;align-items:center;gap:10px;"><span style="font-size:18px;color:rgba(0,200,150,0.6);font-family:Rajdhani,sans-serif;font-weight:700;white-space:nowrap;">DNI:</span><span id="wizDniSearchVal" style="flex:1;font-size:28px;color:#ffffff;font-family:Rajdhani,sans-serif;font-weight:700;padding:4px 8px;"></span><span onclick="wizCloseDNIDrop()" style="font-size:28px;color:rgba(255,100,100,0.8);cursor:pointer;padding:0 8px;">✕</span></div>';
+        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 16px 16px;max-height:40vh;overflow-y:auto;box-shadow:0 6px 30px rgba(0,200,150,0.2);';
+
+        var hdr = '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(0,180,140,0.2);">'
+            + '<span style="font-size:20px;color:rgba(0,200,150,0.7);font-family:Rajdhani,sans-serif;font-weight:800;letter-spacing:1px;">RESULTADOS</span>'
+            + '<span id="wizDniClose" style="font-size:28px;color:rgba(255,100,100,0.8);font-family:Rajdhani,sans-serif;font-weight:900;padding:0 8px;cursor:pointer;">&#10005;</span>'
+            + '</div>';
+
         var items = results.map(function(p) {
-            return '<div data-dni="' + p.dni + '" style="padding:22px 20px;border-bottom:1px solid rgba(0,180,140,0.1);font-family:Rajdhani,sans-serif;font-size:26px;color:#ffffff;font-weight:600;display:flex;gap:14px;align-items:center;">' +
-                '<span style="color:#00c896;font-size:22px;min-width:90px;">' + p.dni + '</span><span>' + p.nombres + '</span></div>';
+            return '<div data-dni="' + p.dni + '" style="padding:16px 16px;border-bottom:1px solid rgba(0,180,140,0.1);font-family:Rajdhani,sans-serif;font-size:22px;color:#ffffff;font-weight:600;display:flex;gap:10px;align-items:center;cursor:pointer;">'
+                + '<span style="color:#00c896;font-size:18px;min-width:80px;flex-shrink:0;">' + p.dni + '</span>'
+                + '<span>' + p.nombres + '</span></div>';
         }).join('');
-        var closeBtn = '<div id="wizDniClose" style="padding:18px;text-align:center;font-size:24px;font-weight:800;color:rgba(255,100,100,0.8);font-family:Rajdhani,sans-serif;">✕ CERRAR</div>';
-        panel.innerHTML = header + items + closeBtn;
-        panel.addEventListener('touchend', function(e) {
+
+        panel.innerHTML = hdr + items;
+
+        panel.addEventListener('mousedown', function(e) {
+            e.preventDefault();
             var el = e.target.closest('[data-dni]');
-            if (el) { e.preventDefault(); var dni=el.getAttribute('data-dni'); var inp=document.getElementById('wDni'); if(inp) inp.value=dni; wizCloseDNIDrop(); wizDNISearch(dni); return; }
-            if (e.target.id === 'wizDniClose') { wizCloseDNIDrop(); }
+            if (el) { var dni=el.getAttribute('data-dni'); var inp=document.getElementById('wDni'); if(inp) inp.value=dni; wizCloseDNIDrop(); wizDNISearch(dni); }
+            var cl = e.target.closest('#wizDniClose');
+            if (cl) wizCloseDNIDrop();
         });
-        panel.addEventListener('click', function(e) {
+        panel.addEventListener('touchstart', function(e) {
             var el = e.target.closest('[data-dni]');
-            if (el) { var dni=el.getAttribute('data-dni'); var inp=document.getElementById('wDni'); if(inp) inp.value=dni; wizCloseDNIDrop(); wizDNISearch(dni); return; }
-            if (e.target.id === 'wizDniClose') { wizCloseDNIDrop(); }
-        });
+            if (el) { e.preventDefault(); var dni=el.getAttribute('data-dni'); var inp=document.getElementById('wDni'); if(inp) inp.value=dni; wizCloseDNIDrop(); wizDNISearch(dni); }
+            var cl = e.target.closest('#wizDniClose');
+            if (cl) { e.preventDefault(); wizCloseDNIDrop(); }
+        }, {passive: false});
+
         document.body.appendChild(panel);
     }
 
