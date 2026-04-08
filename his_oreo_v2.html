@@ -2695,52 +2695,70 @@ document.addEventListener('focusin', function(e) {
     // PRINT ALL — commit all patients then print
     // =============================================
     function wizPrintAll() {
-        // Save current step data
+        // Save and commit all patients
         wizSave();
-        // Commit ALL patients to table
         var savedIdx = WIZ.patIdx;
         for (var i = 0; i < WIZ.patients.length; i++) {
             WIZ.patIdx = i;
             wizCommitToTable();
         }
         WIZ.patIdx = savedIdx;
-        // Sync estab header to PC table header
         wizSaveEstab();
-        // Show preview first, then print
-        var preview = document.getElementById('wizPrintPreview');
-        if (!preview) {
-            preview = document.createElement('div');
-            preview.id = 'wizPrintPreview';
-            preview.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:#fff;display:flex;flex-direction:column;overflow:hidden;';
-            preview.innerHTML =
-                '<div style="background:#0a4a3a;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">' +
-                    '<span style="font-family:Rajdhani,sans-serif;font-size:20px;font-weight:800;letter-spacing:1px;">VISTA PREVIA DE IMPRESIÓN</span>' +
-                    '<div style="display:flex;gap:10px;">' +
-                        '<button id="btnConfirmPrint" style="background:#00c896;color:#060f0d;border:none;border-radius:10px;padding:10px 20px;font-size:18px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif;">🖨 CONFIRMAR</button>' +
-                        '<button id="btnCancelPrint" style="background:rgba(255,100,100,0.2);color:#ff6666;border:1px solid rgba(255,100,100,0.4);border-radius:10px;padding:10px 20px;font-size:18px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif;">✕ CANCELAR</button>' +
-                    '</div>' +
-                '</div>' +
-                '<iframe id="previewFrame" style="flex:1;border:none;background:#fff;" src="about:blank"></iframe>';
-            document.body.appendChild(preview);
-        } else {
-            preview.style.display = 'flex';
-        }
 
-        // Copy current page HTML into iframe for preview
-        var iframe = document.getElementById('previewFrame');
-        var doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open();
-        // Get full page HTML and inject print mode
-        var html = document.documentElement.outerHTML;
-        doc.write(html);
-        doc.close();
+        // Remove old preview if exists
+        var old = document.getElementById('wizPrintPreview');
+        if (old) old.parentNode.removeChild(old);
+
+        // Show HIS table directly (no iframe)
+        var preview = document.createElement('div');
+        preview.id = 'wizPrintPreview';
+        preview.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:#fff;display:flex;flex-direction:column;overflow:hidden;';
+
+        var bar = document.createElement('div');
+        bar.style.cssText = 'background:#0a4a3a;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:10px;';
+        bar.innerHTML =
+            '<span style="font-family:Rajdhani,sans-serif;font-size:18px;font-weight:800;letter-spacing:1px;">VISTA PREVIA</span>' +
+            '<div style="display:flex;gap:8px;">' +
+                '<button id="btnConfirmPrint" style="background:#00c896;color:#060f0d;border:none;border-radius:10px;padding:10px 22px;font-size:20px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif;">🖨 IMPRIMIR</button>' +
+                '<button id="btnCancelPrint" style="background:transparent;color:#ff8888;border:1.5px solid rgba(255,100,100,0.5);border-radius:10px;padding:10px 16px;font-size:20px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif;">✕</button>' +
+            '</div>';
+        preview.appendChild(bar);
+
+        // Scrollable area with the HIS table
+        var scroll = document.createElement('div');
+        scroll.style.cssText = 'flex:1;overflow:auto;background:#fff;padding:8px;';
+
+        // Clone the his-container (table with all data)
+        var hisContainer = document.querySelector('.his-container');
+        if (hisContainer) {
+            var clone = hisContainer.cloneNode(true);
+            clone.style.cssText = 'background:#fff;color:#000;font-size:8px;';
+            // Make inputs visible as text
+            clone.querySelectorAll('input').forEach(function(inp) {
+                var span = document.createElement('span');
+                span.textContent = inp.value || '';
+                span.style.cssText = 'font-size:7px;color:#000;display:block;text-align:center;';
+                if(inp.parentNode) inp.parentNode.replaceChild(span, inp);
+            });
+            clone.querySelectorAll('select').forEach(function(sel) {
+                var span = document.createElement('span');
+                span.textContent = sel.value || '';
+                span.style.cssText = 'font-size:7px;color:#000;display:block;text-align:center;';
+                if(sel.parentNode) sel.parentNode.replaceChild(span, sel);
+            });
+            scroll.appendChild(clone);
+        } else {
+            scroll.innerHTML = '<p style="color:#333;font-family:sans-serif;padding:20px;">No hay datos para mostrar.</p>';
+        }
+        preview.appendChild(scroll);
+        document.body.appendChild(preview);
 
         document.getElementById('btnConfirmPrint').onclick = function() {
-            preview.style.display = 'none';
-            setTimeout(function() { window.print(); }, 100);
+            document.body.removeChild(preview);
+            setTimeout(function() { window.print(); }, 150);
         };
         document.getElementById('btnCancelPrint').onclick = function() {
-            preview.style.display = 'none';
+            document.body.removeChild(preview);
         };
     }
 
