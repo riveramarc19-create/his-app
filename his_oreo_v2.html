@@ -2233,7 +2233,7 @@ document.addEventListener('focusin', function(e) {
     // =============================================
     function wizSaveEstab() {
         var e = WIZ.estab;
-        function g(id){ var el=document.getElementById(id); return el?el.value:''; }
+        function g(id){ var el=document.getElementById(id); if(!el) return ''; return el.tagName==='INPUT'||el.tagName==='SELECT'||el.tagName==='TEXTAREA' ? el.value : (el.textContent||el.innerText||''); }
         e.anio           = g('wAnio');
         e.mes            = g('wMes');
         e.establecimiento= g('wEstab');
@@ -2311,7 +2311,7 @@ document.addEventListener('focusin', function(e) {
     // =============================================
     function wizSave() {
         var p = wizPat();
-        function g(id){ var el=document.getElementById(id); return el?el.value:''; }
+        function g(id){ var el=document.getElementById(id); if(!el) return ''; return el.tagName==='INPUT'||el.tagName==='SELECT'||el.tagName==='TEXTAREA' ? el.value : (el.textContent||el.innerText||''); }
         if (WIZ.step===2) {
             p.dni=g('wDni'); p.nombres=g('wNombres'); p.fn=g('wFN');
             p.fin=g('wFin'); p.hc=g('wHc');
@@ -2322,7 +2322,12 @@ document.addEventListener('focusin', function(e) {
             p.fur=g('wFur');
         } else if (WIZ.step===4) {
             for(var n=1;n<=wizDiagCount;n++){
-                p['diag'+n]=g('wDiag'+n)||''; /* tipo saved by wizTog directly */
+                // diag: read textContent since wDiag is a div
+                var diagEl=document.getElementById('wDiag'+n);
+                if(diagEl) p['diag'+n]=diagEl.textContent||'';
+                // tipo: read from active button
+                var tipoBtn=document.querySelector('#wizContent .b-t-tipo.sel-p, #wizContent .b-t-tipo.sel-d, #wizContent .b-t-tipo.sel-r');
+                if(tipoBtn && tipoBtn.closest && tipoBtn.closest('[data-field="tipo'+n+'"]')) {/* already saved by wizTog */}
                 p['cie'+n]=g('wCie'+n);
                 p['lab'+n+'a']=g('wLab'+n+'a'); p['lab'+n+'b']=g('wLab'+n+'b'); p['lab'+n+'c']=g('wLab'+n+'c');
             }
