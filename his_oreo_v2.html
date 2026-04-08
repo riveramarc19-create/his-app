@@ -353,14 +353,12 @@
             border-radius:14px;padding:14px 18px;
             display:flex;align-items:center;gap:14px;margin-bottom:14px;
         }
-        .b-pat-av { width:50px;height:50px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:2px solid rgba(0,200,150,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#00c896; }
-        .b-pat-name { font-size:20px;font-weight:700;color:#ffffff;line-height:1.3; }
-        .b-pat-meta { font-size:14px;color:rgba(0,200,150,0.6);margin-top:3px; }
+        .b-pat-av { width:75px;height:75px;border-radius:50%;flex-shrink:0;background:rgba(0,180,140,0.12);border:2px solid rgba(0,200,150,0.4);display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:900;color:#00c896; }
+        .b-pat-name { font-size:30px;font-weight:700;color:#ffffff;line-height:1.3; }
+        .b-pat-meta { font-size:21px;color:rgba(0,200,150,0.6);margin-top:3px; }
 
         /* TARJETA DIAGNÓSTICO */
         .b-diag-card { border-radius:14px;overflow:hidden;margin-bottom:12px;border:1.5px solid rgba(0,180,140,0.2); }
-        .b-diag-desc { width:100%;font-size:36px;color:rgba(0,200,150,0.6);font-weight:600;text-align:center;padding:14px 16px;line-height:1.4;background:#060f0d; }
-        .b-diag-desc.filled { color:#ffffff; }
 
         /* BOTÓN AGREGAR */
         .b-add-diag { border:2px dashed rgba(0,180,140,0.3);border-radius:14px;padding:20px;text-align:center;font-size:24px;color:rgba(0,200,150,0.6);font-weight:800;cursor:pointer;margin-top:10px;font-family:'Rajdhani',sans-serif;letter-spacing:1px; }
@@ -543,18 +541,18 @@
             gap:14px;margin-bottom:16px;
         }
         .b-pat-av {
-            width:50px;height:50px;border-radius:50%;flex-shrink:0;
+            width:75px;height:75px;border-radius:50%;flex-shrink:0;
             background:rgba(0,180,140,0.12);
             border:2.5px solid rgba(0,200,150,0.4);
             display:flex;align-items:center;justify-content:center;
-            font-size:18px;font-weight:900;color:#00c896;
+            font-size:27px;font-weight:900;color:#00c896;
         }
         .b-pat-name {
-            font-size:20px;font-weight:700;
+            font-size:30px;font-weight:700;
             color:rgba(200,255,240,0.9);line-height:1.3;
         }
         .b-pat-meta {
-            font-size:15px;color:rgba(0,200,150,0.55);
+            font-size:23px;color:rgba(0,200,150,0.55);
             margin-top:3px;
         }
 
@@ -633,7 +631,7 @@
         .wiz-step.active .wiz-step-num { background:rgba(0,200,150,0.15);border:2px solid #00c896;color:#00c896;box-shadow:0 0 14px rgba(0,200,150,0.3); }
         .wiz-step.done   .wiz-step-num { background:rgba(0,160,122,0.2);border:2px solid #00a07a;color:#00a07a; }
         .wiz-step.pending .wiz-step-num { background:transparent;border:2px solid rgba(0,180,140,0.15);color:rgba(0,180,140,0.2); }
-        .wiz-step-label { font-size:9px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase; }
+        .wiz-step-label { font-size:14px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase; }
         .wiz-step.active .wiz-step-label { color:rgba(0,200,150,0.7); }
         .wiz-step.done   .wiz-step-label { color:rgba(0,160,122,0.5); }
         .wiz-step.pending .wiz-step-label { color:rgba(0,180,140,0.15); }
@@ -700,13 +698,13 @@
         .wiz-suc-tbl th { font-size:7px;color:rgba(0,200,150,0.35);padding:3px 6px;border-bottom:1px solid rgba(0,180,140,0.12);text-align:left;font-weight:700; }
         .wiz-suc-tbl td { font-size:9px;color:rgba(180,240,220,0.7);padding:5px 6px;border-bottom:1px solid rgba(0,180,140,0.08); }
         .wiz-suc-tbl tr.wiz-new td { color:#00c896;font-weight:800; }
-        .wiz-suc-btn { width:100%;padding:14px;background:rgba(0,200,150,0.12);border:1.5px solid rgba(0,180,140,0.3);border-radius:12px;color:#00c896;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:1px; }
+        .wiz-suc-btn { width:100%;padding:26px;background:rgba(0,200,150,0.12);border:1.5px solid rgba(0,180,140,0.3);border-radius:16px;color:#00c896;font-family:'Rajdhani',sans-serif;font-size:33px;font-weight:800;cursor:pointer;letter-spacing:1px; }
 
         /* PATIENTS BAR */
-        .wiz-patients-bar { background:#0d2018;padding:10px 14px;display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(0,180,140,0.18);flex-shrink:0; }
-        .wiz-pat-btn { background:rgba(0,180,140,0.08);color:rgba(0,200,150,0.7);border:1px solid rgba(0,180,140,0.2);border-radius:20px;padding:10px 18px;font-size:25px;font-weight:800;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif; }
-        .wiz-pat-btn.active { background:rgba(0,200,150,0.2);color:#00c896;border-color:#00a07a;box-shadow:0 0 10px rgba(0,200,150,0.2);font-size:25px;padding:10px 18px; }
-        .wiz-pat-btn-add { background:transparent;color:rgba(0,200,150,0.5);border:1px dashed rgba(0,180,140,0.25);font-size:25px;padding:10px 18px; }
+        .wiz-patients-bar { background:#0d2018;padding:12px 14px;display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(0,180,140,0.18);flex-shrink:0; }
+        .wiz-pat-btn { background:rgba(0,180,140,0.08);color:rgba(0,200,150,0.7);border:1px solid rgba(0,180,140,0.2);border-radius:22px;padding:16px 29px;font-size:40px;font-weight:800;white-space:nowrap;cursor:pointer;font-family:'Rajdhani',sans-serif; }
+        .wiz-pat-btn.active { background:rgba(0,200,150,0.2);color:#00c896;border-color:#00a07a;box-shadow:0 0 10px rgba(0,200,150,0.2);font-size:40px;padding:16px 29px; }
+        .wiz-pat-btn-add { background:transparent;color:rgba(0,200,150,0.5);border:1px dashed rgba(0,180,140,0.25);font-size:40px;padding:16px 29px; }
 
         .wiz-dni-found { color:rgba(0,200,150,0.8);font-size:10px;margin-top:3px;font-weight:700; }
         .campo-found { background:rgba(0,200,150,0.08) !important; }
@@ -771,7 +769,7 @@
         .wiz-step.active .wiz-step-num { background:rgba(0,200,150,0.15);border:2px solid #00c896;color:#00c896;box-shadow:0 0 14px rgba(0,200,150,0.2); }
         .wiz-step.done   .wiz-step-num { background:rgba(0,160,122,0.2);border:2px solid #00a07a;color:#00a07a; }
         .wiz-step.pending .wiz-step-num { background:transparent;border:2px solid rgba(0,180,140,0.18);color:rgba(0,180,140,0.4); }
-        .wiz-step-label { font-size:8px;font-weight:700;letter-spacing:0.5px; }
+        .wiz-step-label { font-size:13px;font-weight:800;letter-spacing:0.5px; }
         .wiz-step.active .wiz-step-label { color:rgba(0,200,150,0.7); }
         .wiz-step.done   .wiz-step-label { color:rgba(0,180,140,0.4); }
         .wiz-step.pending .wiz-step-label { color:rgba(0,180,140,0.18); }
@@ -1173,7 +1171,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                 });
 
                 status.style.color = '#1a6e3c';
-                status.textContent = `✔ ${count.toLocaleString()} pacientes cargados.`; status.style.fontSize="15px";
+                status.textContent = `✔ ${count.toLocaleString()} pacientes cargados.`; status.style.fontSize="26px";
 
             } catch(err) {
                 status.style.color = '#e05252';
@@ -1799,16 +1797,13 @@ document.addEventListener('focusin', function(e) {
             <button class="wiz-pat-btn-add wiz-pat-btn" onclick="wizAddPatient()">+ Nuevo</button>
         </div>
 
-        <!-- Toolbar: botones grandes DEBAJO de la barra de pacientes -->
+        <!-- Toolbar: solo Cargar Pacientes -->
         <div style="background:#0a1a16;padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid rgba(0,180,140,0.18);flex-shrink:0;">
             <label for="excelInputMobile" id="lblCargar" style="flex:1;background:rgba(0,200,150,0.1);color:#ffffff;padding:22px 10px;border-radius:16px;font-size:31px;font-weight:800;cursor:pointer;text-align:center;border:1.5px solid rgba(0,180,140,0.35);font-family:Rajdhani,sans-serif;display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1.2;">
                 <span>📂 Cargar Pacientes</span>
-                <span id="wizExcelStatus" style="font-size:16px;color:rgba(0,200,150,0.9);font-style:italic;font-weight:700;display:none;"></span>
+                <span id="wizExcelStatus" style="font-size:26px;color:rgba(0,200,150,0.9);font-style:italic;font-weight:700;display:none;"></span>
             </label>
             <input type="file" id="excelInputMobile" accept=".xlsx,.xls" style="display:none;" onchange="wizLoadExcel(this)">
-            <button onclick="wizPrintAll()" style="flex:1;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;padding:22px 10px;border-radius:16px;font-size:31px;font-weight:800;cursor:pointer;border:none;font-family:Rajdhani,sans-serif;">
-                🖨 Imprimir
-            </button>
         </div>
 
         <!-- Progreso -->
@@ -2023,13 +2018,14 @@ document.addEventListener('focusin', function(e) {
             for (var n = 1; n <= wizDiagCount; n++) {
                 var cie = p['cie'+n]||'', diag = p['diag'+n]||'', tipo = p['tipo'+n]||'';
                 diagsHtml +=
+                    '<div style="font-size:36px;font-weight:900;color:rgba(0,200,150,0.85);font-family:Rajdhani,sans-serif;text-transform:uppercase;letter-spacing:2px;padding:14px 4px 6px;">DIAGNÓSTICO '+n+'</div>' +
                     '<div class="b-diag-card">' +
-                      
                       '<div class="b-field"><span class="b-lbl">CIE-10</span><input class="b-val" id="wCie'+n+'" value="'+cie+'" placeholder="Ej: Z349" style="font-weight:800;color:#ffffff;letter-spacing:2px;" oninput="wizCIESearch(this,'+n+')" onchange="wizSave()"></div>' +
-                      '<div class="b-field"><span class="b-lbl">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'">'+(diag||'—')+'</div></div>' +
+                      '<div class="b-field" style="align-items:flex-start;height:auto;min-height:125px;"><span class="b-lbl" style="align-self:stretch;display:flex;align-items:center;">Descripción</span><div class="b-diag-desc'+(diag?' filled':'')+'" id="wDiag'+n+'" style="align-self:flex-start;text-align:left;height:auto;min-height:125px;padding:16px;">'+( diag||'—')+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Tipo</span><div class="b-toggle">'+tog(['P','D','R'], tipo, 'tipo'+n)+'</div></div>' +
                       '<div class="b-field"><span class="b-lbl">Lab 1</span><input class="b-val" id="wLab'+n+'a" value="'+(p['lab'+n+'a']||'')+'" maxlength="3" oninput="this.value=this.value.toUpperCase().slice(0,3)" onchange="wizSave()"></div>' +
                       '<div class="b-field"><span class="b-lbl">Lab 2</span><input class="b-val" id="wLab'+n+'b" value="'+(p['lab'+n+'b']||'')+'" maxlength="3" oninput="this.value=this.value.toUpperCase().slice(0,3)" onchange="wizSave()"></div>' +
+                      '<div class="b-field"><span class="b-lbl">Lab 3</span><input class="b-val" id="wLab'+n+'c" value="'+(p['lab'+n+'c']||'')+'" maxlength="3" oninput="this.value=this.value.toUpperCase().slice(0,3)" onchange="wizSave()"></div>' +
                     '</div>';
             }
             c.innerHTML =
@@ -2265,7 +2261,7 @@ document.addEventListener('focusin', function(e) {
         if (!file) return;
         var status = document.getElementById('wizExcelStatus');
         status.style.display='block';
-        status.textContent = '⏳ Cargando...';
+        status.textContent = '⏳ Cargando...'; status.style.fontSize='26px';
         document.getElementById('lblCargar') && (document.getElementById('lblCargar').style.borderColor='rgba(0,200,150,0.6)');
         var mainInput = document.getElementById('excelInput');
         if (mainInput) {
@@ -2668,9 +2664,7 @@ document.addEventListener('focusin', function(e) {
         var initials = p.nombres ? p.nombres.split(' ').slice(0,2).map(function(w){return w[0];}).join('') : '?';
         c.innerHTML =
             '<div class="wiz-success">' +
-              '<div class="wiz-suc-icon">🏆</div>' +
-              '<div class="wiz-suc-title">GUARDADO</div>' +
-              '<div class="wiz-suc-pts">+150 XP</div>' +
+              
               '<div class="wiz-suc-table">' +
                 '<div style="color:#ffffff;letter-spacing:2px;font-weight:700;margin-bottom:8px;text-transform:uppercase;">Tabla HIS Actualizada</div>' +
                 '<table class="wiz-suc-tbl">' +
@@ -2678,6 +2672,7 @@ document.addEventListener('focusin', function(e) {
                   '<tr class="wiz-new"><td>'+(p.dni?p.dni.slice(-5):'?')+'</td><td>'+(p.nombres?p.nombres.split(' ')[0]:'?')+'</td><td>'+(p.cie1||'—')+'</td><td>'+(p.tipo1||'—')+'</td></tr>' +
                 '</table>' +
               '</div>' +
+              '<button onclick="wizPrintAll()" style="width:100%;padding:26px;background:linear-gradient(135deg,#00a07a,#00c896);color:#060f0d;border:none;border-radius:16px;font-size:34px;font-weight:900;cursor:pointer;font-family:Rajdhani,sans-serif;letter-spacing:1px;margin-bottom:12px;">🖨 IMPRIMIR</button>' +
               '<button class="wiz-suc-btn" onclick="wizAddPatient()">► NUEVO PACIENTE</button>' +
               '<button class="wiz-suc-btn" style="margin-top:8px;background:transparent;" onclick="wizEditarPaciente()">✏ EDITAR</button>' +
             '</div>';
