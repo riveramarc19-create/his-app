@@ -2732,23 +2732,28 @@ document.addEventListener('focusin', function(e) {
         var hisContainer = document.querySelector('.his-container');
         if (hisContainer) {
             var clone = hisContainer.cloneNode(true);
-            clone.style.cssText = 'background:#fff;color:#000;font-size:8px;';
-            // Make inputs visible as text
+            // Force all elements visible regardless of mobile CSS
+            clone.style.cssText = 'display:block !important;background:#fff;color:#000;font-size:8px;width:100%;overflow-x:auto;';
+            // Force visibility on pcHeader and hisForm
+            var ph = clone.querySelector('#pcHeader');
+            var pf = clone.querySelector('#hisForm');
+            var pt = clone.querySelector('#pcTitleBar');
+            if(ph) ph.style.cssText = 'display:block !important;';
+            if(pf) pf.style.cssText = 'display:block !important;';
+            if(pt) pt.style.cssText = 'display:block !important;background:#0a4a3a;color:#fff;padding:4px;font-size:10px;';
+            // Remove wizard overlay from clone
+            var wo = clone.querySelector('#wizardApp');
+            if(wo) wo.style.display = 'none';
+            // Make inputs show values as text overlay
             clone.querySelectorAll('input').forEach(function(inp) {
-                var span = document.createElement('span');
-                span.textContent = inp.value || '';
-                span.style.cssText = 'font-size:7px;color:#000;display:block;text-align:center;';
-                if(inp.parentNode) inp.parentNode.replaceChild(span, inp);
+                inp.style.cssText = 'color:#000 !important;background:transparent;font-size:7px;';
             });
             clone.querySelectorAll('select').forEach(function(sel) {
-                var span = document.createElement('span');
-                span.textContent = sel.value || '';
-                span.style.cssText = 'font-size:7px;color:#000;display:block;text-align:center;';
-                if(sel.parentNode) sel.parentNode.replaceChild(span, sel);
+                sel.style.cssText = 'color:#000 !important;background:transparent;font-size:7px;';
             });
             scroll.appendChild(clone);
         } else {
-            scroll.innerHTML = '<p style="color:#333;font-family:sans-serif;padding:20px;">No hay datos para mostrar.</p>';
+            scroll.innerHTML = '<p style="color:#333;font-family:sans-serif;padding:20px;">No hay datos cargados.</p>';
         }
         preview.appendChild(scroll);
         document.body.appendChild(preview);
