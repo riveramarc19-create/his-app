@@ -1611,8 +1611,8 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
             for(var _i=0;_i<CIE_LIST.length&&resultados.length<12;_i++){
                 if(CIE_LIST[_i].c.indexOf(v)===0||CIE_LIST[_i].d.indexOf(v)!==-1) resultados.push({cod:CIE_LIST[_i].c,desc:CIE_LIST[_i].d});
             }
-            // Prepend exact match if not already first
-            if(exactMatch.length && (resultados.length===0 || resultados[0].cod!==v)) {
+            // Prepend exact match, remove duplicate from results
+            if(exactMatch.length) {
                 resultados = exactMatch.concat(resultados.filter(function(r){return r.cod!==v;}));
             }
             if (resultados.length === 0) {
@@ -1719,10 +1719,11 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
 
             if(!v || v.length < 2){ closeCIE(); return; }
 
-            // Collect all matches (exact + partial)
+            // Collect all matches (exact first, then partial without duplicates)
             var res = [];
             if(CIE_MAP[v]) res.push({c:v, d:CIE_MAP[v]});
             for(var i=0; i<CIE_LIST.length && res.length<12; i++){
+                if(CIE_LIST[i].c === v) continue; // skip exact, already added
                 if(CIE_LIST[i].c.indexOf(v)===0 || CIE_LIST[i].d.indexOf(v)!==-1)
                     res.push(CIE_LIST[i]);
             }
