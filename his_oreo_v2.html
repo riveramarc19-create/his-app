@@ -1605,10 +1605,15 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
             dropdown.innerHTML = '';
             if (!valor || valor.length < 2) { dropdown.style.display = 'none'; return; }
             const v = valor.toUpperCase();
-            if (CIE_MAP[v]) { aplicar(v, CIE_MAP[v]); return; }
+            // Don't auto-apply — include exact match in results so user can choose similar codes
+            var exactMatch = CIE_MAP[v] ? [{cod:v, desc:CIE_MAP[v]}] : [];
             var resultados = [];
             for(var _i=0;_i<CIE_LIST.length&&resultados.length<12;_i++){
                 if(CIE_LIST[_i].c.indexOf(v)===0||CIE_LIST[_i].d.indexOf(v)!==-1) resultados.push({cod:CIE_LIST[_i].c,desc:CIE_LIST[_i].d});
+            }
+            // Prepend exact match if not already first
+            if(exactMatch.length && (resultados.length===0 || resultados[0].cod!==v)) {
+                resultados = exactMatch.concat(resultados.filter(function(r){return r.cod!==v;}));
             }
             if (resultados.length === 0) {
                 dropdown.innerHTML = '<div style="padding:6px 10px;color:#e05252;font-style:italic;">Código no encontrado</div>';
@@ -1716,7 +1721,8 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
 
             // Exact match
             if(CIE_MAP[v]){
-                applyCIE(inp, v, CIE_MAP[v]);
+                // Show in dropdown, don't auto-apply
+                // applyCIE(inp, v, CIE_MAP[v]);
                 closeCIE();
                 return;
             }
@@ -1927,10 +1933,8 @@ document.addEventListener('focusin', function(e) {
             c.innerHTML =
                 '<div class="b-group">' +
                   
-                  '<div class="b-row2">' +
-                    '<div class="b-field b-half"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" onchange="wizSaveEstab()"></div>' +
-                    '<div class="b-field b-half"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
-                  '</div>' +
+                  '<div class="b-field"><span class="b-lbl">Año</span><input class="b-val" id="wAnio" value="'+(est.anio||new Date().getFullYear())+'" type="number" onchange="wizSaveEstab()"></div>' +
+                  '<div class="b-field"><span class="b-lbl">Turno</span><div class="b-toggle">'+tog(["M","T","N"], est.turno, "turno")+'</div></div>' +
                   '<div class="b-field"><span class="b-lbl">Mes</span><select class="b-val b-sel" onchange="wizSaveEstab()" id="wMes"><option value="" disabled selected style="display:none;"></option>'+mesOpts+'</select></div>' +
                   '<div class="b-field" onclick="wizOpenCal()" style="cursor:pointer;"><span class="b-lbl">FECHA ATENCIÓN</span><div class="b-val" id="wFechaDisplay" style="display:flex;align-items:center;justify-content:flex-start;height:125px;font-size:56px;padding-left:16px;font-weight:700;color:#ffffff;cursor:pointer;">'+(est.fechaAtencion ? wizFmtDate(est.fechaAtencion) : '')+'</div></div>' +
                   '<div id="wizCalPanel" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:#0a1a16;border:2px solid #00c896;border-radius:20px;padding:20px;width:320px;box-shadow:0 0 40px rgba(0,200,150,0.3);font-family:Rajdhani,sans-serif;"></div>' +
@@ -2180,17 +2184,89 @@ document.addEventListener('focusin', function(e) {
 
     // CIE search in wizard
     function wizCIESearch(inp, n) {
-        var v = inp.value.toUpperCase();
+        var v = inp.value.toUpperCase().trim();
         var diagEl = document.getElementById('wDiag'+n);
         if (!diagEl) return;
-        if (typeof CIE_MAP !== 'undefined' && CIE_MAP[v]) {
-            diagEl.textContent = CIE_MAP[v];
-            diagEl.className = 'b-diag-desc filled';
-            var p = wizPat();
-            p['cie'+n] = v; p['diag'+n] = CIE_MAP[v];
-        } else {
-            diagEl.textContent = v.length >= 2 ? 'Buscando...' : 'Escribe un código CIE-10...';
+        if (v.length < 2) {
+            diagEl.textContent = 'Escribe un código CIE-10...';
             diagEl.className = 'b-diag-desc';
+            wizHideCIEDrop(n);
+            return;
+        }
+        // Collect all matching codes (exact + partial)
+        var results = [];
+        if (typeof CIE_LIST !== 'undefined') {
+            for (var i = 0; i < CIE_LIST.length && results.length < 10; i++) {
+                if (CIE_LIST[i].c.indexOf(v) === 0 || CIE_LIST[i].d.indexOf(v) !== -1) {
+                    results.push({cod: CIE_LIST[i].c, desc: CIE_LIST[i].d});
+                }
+            }
+        }
+        if (results.length === 0) {
+            diagEl.textContent = 'Código no encontrado...';
+            diagEl.className = 'b-diag-desc';
+            wizHideCIEDrop(n);
+            return;
+        }
+        // If only 1 exact match and no similar codes — apply directly
+        if (results.length === 1 && results[0].cod === v) {
+            wizApplyCIE(n, results[0].cod, results[0].desc);
+            wizHideCIEDrop(n);
+            return;
+        }
+        // Multiple options — show dropdown
+        diagEl.textContent = 'Selecciona un diagnóstico...';
+        diagEl.className = 'b-diag-desc';
+        wizShowCIEDrop(inp, n, results);
+    }
+
+    function wizApplyCIE(n, cod, desc) {
+        var diagEl = document.getElementById('wDiag'+n);
+        if (diagEl) {
+            diagEl.textContent = desc;
+            diagEl.className = 'b-diag-desc filled';
+        }
+        var p = wizPat();
+        p['cie'+n] = cod; p['diag'+n] = desc;
+        var cieInp = document.getElementById('wCie'+n);
+        if (cieInp) cieInp.value = cod;
+    }
+
+    function wizShowCIEDrop(inp, n, results) {
+        wizHideCIEDrop(n);
+        var panel = document.createElement('div');
+        panel.id = 'wizCieDrop'+n;
+        panel.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99997;background:#0a1a16;border-bottom:3px solid #00c896;border-radius:0 0 16px 16px;max-height:45vh;overflow-y:auto;box-shadow:0 6px 30px rgba(0,200,150,0.25);';
+        var hdr = '<div style="padding:10px 16px;border-bottom:1px solid rgba(0,180,140,0.2);display:flex;justify-content:space-between;align-items:center;">'
+            + '<span style="font-size:18px;font-weight:800;color:rgba(0,200,150,0.8);font-family:Rajdhani,sans-serif;">SELECCIONA CIE-10</span>'
+            + '<span id="wizCieClose'+n+'" style="font-size:26px;color:rgba(255,100,100,0.8);cursor:pointer;font-family:Rajdhani,sans-serif;">&#10005;</span>'
+            + '</div>';
+        var items = results.map(function(r) {
+            return '<div data-cod="'+r.cod+'" data-desc="'+r.desc+'" style="padding:14px 16px;border-bottom:1px solid rgba(0,180,140,0.1);cursor:pointer;">'
+                + '<span style="color:#00c896;font-size:20px;font-weight:800;font-family:Rajdhani,sans-serif;margin-right:12px;">'+r.cod+'</span>'
+                + '<span style="color:#ffffff;font-size:22px;font-family:Rajdhani,sans-serif;">'+r.desc+'</span>'
+                + '</div>';
+        }).join('');
+        panel.innerHTML = hdr + items;
+        panel.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            var el = e.target.closest('[data-cod]');
+            if (el) { wizApplyCIE(n, el.getAttribute('data-cod'), el.getAttribute('data-desc')); wizHideCIEDrop(n); }
+            if (e.target.id === 'wizCieClose'+n) wizHideCIEDrop(n);
+        });
+        panel.addEventListener('touchstart', function(e) {
+            var el = e.target.closest('[data-cod]');
+            if (el) { e.preventDefault(); wizApplyCIE(n, el.getAttribute('data-cod'), el.getAttribute('data-desc')); wizHideCIEDrop(n); }
+            if (e.target.id === 'wizCieClose'+n) { e.preventDefault(); wizHideCIEDrop(n); }
+        }, {passive:false});
+        document.body.appendChild(panel);
+    }
+
+    function wizHideCIEDrop(n) {
+        for (var i = 1; i <= 5; i++) {
+            var p = document.getElementById('wizCieDrop'+(n||i));
+            if (p && p.parentNode) p.parentNode.removeChild(p);
+            if (n) break;
         }
     }
 
