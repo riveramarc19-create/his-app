@@ -1441,7 +1441,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         sel.focus();
         sel.addEventListener('change', function handler() {
             if (this.value) {
-                this.style.backgroundColor = '#eaf6ee';
+                this.style.backgroundColor = 'rgba(0,180,140,0.08)';
                 this.style.color = '#085041';
                 this.style.fontWeight = '800';
             }
@@ -1548,7 +1548,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         sel.focus();
         sel.addEventListener('change', function handler() {
             if (this.value) {
-                this.style.backgroundColor = '#eaf6ee';
+                this.style.backgroundColor = 'rgba(0,180,140,0.08)';
                 this.style.color = '#085041';
                 this.style.fontWeight = '800';
             }
@@ -1767,7 +1767,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
             if(idx < 0) return;
             var diagTd = tds[idx-5];
             var tipoTd = tds[idx-4];
-            if(diagTd){ var di=diagTd.querySelector('input'); if(di){ di.value=desc; di.style.backgroundColor='#eaf6ee'; } }
+            if(diagTd){ var di=diagTd.querySelector('input'); if(di){ di.value=desc; di.style.backgroundColor='rgba(0,180,140,0.08)'; di.style.color='rgba(0,200,150,0.95)'; }} }
             if(tipoTd){ var ti=tipoTd.querySelector('select'); if(ti) activarTipo(ti); }
         }
 
@@ -2578,10 +2578,10 @@ document.addEventListener('focusin', function(e) {
         if (!diagEl) return;
         if (typeof CIE_MAP !== 'undefined' && CIE_MAP[v]) {
             diagEl.textContent = CIE_MAP[v];
-            diagEl.style.background = '#eaf6ee';
+            diagEl.style.background = 'rgba(0,180,140,0.08)';
             var p = wizPat();
             p['cie'+n] = v; p['diag'+n] = CIE_MAP[v];
-            if (tipoEl) { tipoEl.style.backgroundColor='#ffe0e0'; tipoEl.focus(); }
+            if (tipoEl) { tipoEl.style.backgroundColor='rgba(0,180,140,0.08)'; tipoEl.focus(); }
         } else {
             diagEl.textContent = v.length>1 ? 'Código no encontrado...' : 'Se llena al ingresar código CIE';
             diagEl.style.background = '#f4faf6';
