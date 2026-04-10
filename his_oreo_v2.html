@@ -1719,16 +1719,9 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
 
             if(!v || v.length < 2){ closeCIE(); return; }
 
-            // Exact match
-            if(CIE_MAP[v]){
-                // Show in dropdown, don't auto-apply
-                // applyCIE(inp, v, CIE_MAP[v]);
-                closeCIE();
-                return;
-            }
-
-            // Partial match
+            // Collect all matches (exact + partial)
             var res = [];
+            if(CIE_MAP[v]) res.push({c:v, d:CIE_MAP[v]});
             for(var i=0; i<CIE_LIST.length && res.length<12; i++){
                 if(CIE_LIST[i].c.indexOf(v)===0 || CIE_LIST[i].d.indexOf(v)!==-1)
                     res.push(CIE_LIST[i]);
