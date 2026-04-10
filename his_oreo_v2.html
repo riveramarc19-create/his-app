@@ -1595,7 +1595,8 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         function aplicar(cod, desc) {
             cieInput.value  = cod;
             diagInput.value = desc;
-            diagInput.style.backgroundColor = '#eaf6ee';
+            diagInput.style.backgroundColor = 'rgba(0,180,140,0.08)';
+            diagInput.style.color = 'rgba(0,200,150,0.95)';
             dropdown.style.display = 'none';
             activarTipo(tipoSelect);
         }
