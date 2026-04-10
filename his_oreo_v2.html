@@ -1692,7 +1692,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
         // --- CIE: event delegation at document level ---
         var cieDD = document.createElement('div');
         cieDD.id = 'cieDD';
-        cieDD.style.cssText = 'position:fixed;z-index:99999;background:#0a1a16;border:2px solid #00c896;width:520px;max-height:260px;overflow-y:auto;box-shadow:0 6px 20px rgba(0,200,150,0.2);border-radius:0 0 12px 12px;display:none;font-family:Rajdhani,sans-serif;';
+        cieDD.style.cssText = 'position:fixed;z-index:99999;background:#0a1a16;border:2px solid #00c896;width:700px;max-height:320px;overflow-y:auto;box-shadow:0 6px 20px rgba(0,200,150,0.2);border-radius:0 0 12px 12px;display:none;font-family:Rajdhani,sans-serif;';
 
         var cieDDHeader = document.createElement('div');
         cieDDHeader.style.cssText = 'background:rgba(0,180,140,0.15);color:#00c896;padding:6px 14px;font-size:9px;font-weight:700;letter-spacing:0.12em;position:sticky;top:0;border-bottom:1px solid rgba(0,180,140,0.2);font-family:Orbitron,monospace;';
@@ -1735,7 +1735,7 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
                     (function(item){
                         var it = document.createElement('div');
                         it.style.cssText='padding:10px 14px;cursor:pointer;border-bottom:1px solid rgba(0,180,140,0.1);display:flex;align-items:center;gap:10px;';
-                        it.innerHTML='<span style="background:rgba(0,200,150,0.15);border:1.5px solid #00c896;border-radius:6px;padding:2px 8px;color:#00c896;font-size:13px;font-weight:900;font-family:Rajdhani,sans-serif;white-space:nowrap;flex-shrink:0;">'+item.c+'</span><span style="color:#ffffff;font-size:13px;font-family:Rajdhani,sans-serif;font-weight:500;line-height:1.3;">'+item.d+'</span>';
+                        it.innerHTML='<span style="background:rgba(0,200,150,0.15);border:1.5px solid #00c896;border-radius:6px;padding:3px 10px;color:#00c896;font-size:14px;font-weight:900;font-family:Rajdhani,sans-serif;white-space:nowrap;flex-shrink:0;min-width:60px;text-align:center;">'+item.c+'</span><span style="color:#ffffff;font-size:14px;font-family:Rajdhani,sans-serif;font-weight:500;line-height:1.3;word-break:break-word;">'+item.d+'</span>';
                         it.onmouseover=function(){ it.style.background='rgba(0,200,150,0.08)'; };
                         it.onmouseout =function(){ it.style.background=''; };
                         it.onmousedown=function(ev){
@@ -1751,10 +1751,12 @@ for(var i=0;i<CIE_LIST.length;i++) CIE_MAP[CIE_LIST[i].c]=CIE_LIST[i].d;
             // Position below the active CIE input
             cieDDHeader.textContent = 'BUSCAR CIE-10  —  "' + v + '"';
             var rect = inp.getBoundingClientRect();
-            cieDD.style.top       = (rect.bottom + window.scrollY + 2) + 'px';
-            cieDD.style.left      = rect.left + 'px';
+            var panelW = Math.min(700, window.innerWidth - 40);
+            var leftPos = Math.max(10, Math.min(rect.left, window.innerWidth - panelW - 10));
+            cieDD.style.top       = (rect.bottom + 2) + 'px';
+            cieDD.style.left      = leftPos + 'px';
             cieDD.style.transform = '';
-            cieDD.style.width     = Math.max(520, rect.width) + 'px';
+            cieDD.style.width     = panelW + 'px';
             cieDD.style.display   = 'block';
         });
 
