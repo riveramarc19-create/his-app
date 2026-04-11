@@ -2315,30 +2315,28 @@ document.addEventListener('focusin', function(e) {
     function wizSaveEstab() {
         var e = WIZ.estab;
         function g(id){ var el=document.getElementById(id); if(!el) return ''; return el.tagName==='INPUT'||el.tagName==='SELECT'||el.tagName==='TEXTAREA' ? el.value : (el.textContent||el.innerText||''); }
-        e.anio           = g('wAnio');
-        e.mes            = g('wMes');
-        e.establecimiento= g('wEstab');
-        e.ups            = g('wUps');
-        e.dniResp        = g('wDniResp');
-        e.nombresResp    = g('wNombresResp');
-        if(g('wFechaAt')) e.fechaAtencion = g('wFechaAt');
-        // turno is saved directly by wizTog into WIZ.estab.turno
-        // Also sync to PC header selects
-        var anioInp = document.querySelector('table:first-of-type tbody input[type="number"]');
-        if (anioInp && e.anio) anioInp.value = e.anio;
-        // Sync DIA from fechaAtencion
-        if (e.fechaAtencion) {
-            var fa = new Date(e.fechaAtencion);
-            var diaInputs = document.querySelectorAll('tr.fn-fur-row ~ tr td:first-child input');
-            diaInputs.forEach(function(di){ if(di && !di.value) di.value = fa.getDate(); });
+        // Only update if DOM element exists (not called from print screen)
+        var _a=g('wAnio');           if(_a) e.anio=_a;
+        var _m=g('wMes');            if(_m) e.mes=_m;
+        var _est=g('wEstab');        if(_est) e.establecimiento=_est;
+        var _u=g('wUps');            if(_u) e.ups=_u;
+        var _dr=g('wDniResp');       if(_dr) e.dniResp=_dr;
+        var _nr=g('wNombresResp');   if(_nr) e.nombresResp=_nr;
+        var _fa=g('wFechaAt');       if(_fa) e.fechaAtencion=_fa;
+        // turno saved by wizTog directly into WIZ.estab.turno
+        // Sync ALL fields to PC header precisely
+        var pcHdr = document.getElementById('pcHeader');
+        if (pcHdr) {
+            var hSelects = pcHdr.querySelectorAll('select');
+            var hInputs  = pcHdr.querySelectorAll('input');
+            if(hInputs[0]  && e.anio)            hInputs[0].value  = e.anio;
+            if(hSelects[0] && e.mes)             hSelects[0].value = e.mes;
+            if(hSelects[1] && e.establecimiento) hSelects[1].value = e.establecimiento;
+            if(hSelects[2] && e.ups)             hSelects[2].value = e.ups;
+            if(hSelects[3] && e.turno)           hSelects[3].value = e.turno;
+            if(hInputs[1]  && e.dniResp)         hInputs[1].value  = e.dniResp;
+            if(hInputs[2]  && e.nombresResp)     hInputs[2].value  = e.nombresResp;
         }
-        var mesSel  = document.querySelector('table:first-of-type tbody select');
-        if (mesSel  && e.mes) mesSel.value  = e.mes;
-        // Sync turno/ups/estab via the PC selects
-        document.querySelectorAll('table select').forEach(function(sel) {
-            if (sel.querySelector('option[value="MEDICINA"]') && e.ups) sel.value = e.ups;
-            if (sel.querySelector('option[value="M"]') && e.turno) sel.value = e.turno;
-        });
     }
 
     // =============================================
@@ -2709,7 +2707,7 @@ document.addEventListener('focusin', function(e) {
         // DIA desde fecha de atención
         var dia = '';
         if (est.fechaAtencion) {
-            dia = String(new Date(est.fechaAtencion).getDate());
+            var _fd=new Date(est.fechaAtencion+'T00:00:00'); dia = String(_fd.getDate());
         }
 
         // ── FILA FN/FUR: NOMBRES, F.NACIMIENTO, FUR ──
@@ -2829,6 +2827,20 @@ document.addEventListener('focusin', function(e) {
         }
         WIZ.patIdx = savedIdx;
         wizSaveEstab();
+        // Direct sync WIZ.estab to pcHeader (bypasses DOM read issues)
+        var pcHdr2 = document.getElementById('pcHeader');
+        if (pcHdr2) {
+            var e2 = WIZ.estab;
+            var hs = pcHdr2.querySelectorAll('select');
+            var hi = pcHdr2.querySelectorAll('input');
+            if(hi[0]  && e2.anio)            hi[0].value  = e2.anio;
+            if(hs[0]  && e2.mes)             hs[0].value  = e2.mes;
+            if(hs[1]  && e2.establecimiento) hs[1].value  = e2.establecimiento;
+            if(hs[2]  && e2.ups)             hs[2].value  = e2.ups;
+            if(hs[3]  && e2.turno)           hs[3].value  = e2.turno;
+            if(hi[1]  && e2.dniResp)         hi[1].value  = e2.dniResp;
+            if(hi[2]  && e2.nombresResp)     hi[2].value  = e2.nombresResp;
+        }
 
         // Remove old preview if exists
         var old = document.getElementById('wizPrintPreview');
