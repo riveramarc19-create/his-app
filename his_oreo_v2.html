@@ -805,6 +805,8 @@
         /* ===== IMPRESIÓN ===== */
         @media print {
             @page { size: A4 landscape; margin: 8mm 6mm; }
+            select { display:none !important; }
+            .print-select-val { display:inline-block !important; font-size:6.5px !important; color:#000 !important; font-family:Rajdhani,sans-serif !important; font-weight:700 !important; width:100% !important; text-align:center !important; }
             body { margin:0;padding:0;background:white;font-size:7px;-webkit-print-color-adjust:exact;print-color-adjust:exact; }
             /* SHOW table on print, hide wizard */
             .wizard-overlay { display:none !important; }
@@ -2911,7 +2913,8 @@ document.addEventListener('focusin', function(e) {
 
         document.getElementById('btnConfirmPrint').onclick = function() {
             document.body.removeChild(preview);
-            setTimeout(function() { window.print(); }, 150);
+            replaceSelectsForPrint();
+        setTimeout(function() { window.print(); restoreSelectsAfterPrint(); }, 200);
         };
         document.getElementById('btnCancelPrint').onclick = function() {
             document.body.removeChild(preview);
@@ -3048,6 +3051,37 @@ document.addEventListener('focusin', function(e) {
     // INIT + SOUND HOOK
     // =============================================
     wizRender();
+
+    // =============================================
+    // BEFORE/AFTER PRINT — replace selects with text
+    // =============================================
+    function replaceSelectsForPrint() {
+        document.querySelectorAll('.his-container select').forEach(function(sel) {
+            if (sel.getAttribute('data-print-replaced')) return;
+            var val = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
+            if (!val || val === '-' || val === '--') val = '';
+            var span = document.createElement('span');
+            span.className = 'print-select-val';
+            span.textContent = val;
+            span.style.cssText = 'font-size:6.5px;color:#000;font-family:Rajdhani,sans-serif;font-weight:700;display:inline-block;width:100%;text-align:center;';
+            sel.setAttribute('data-print-replaced', '1');
+            sel.style.display = 'none';
+            sel.parentNode.insertBefore(span, sel.nextSibling);
+        });
+    }
+
+    function restoreSelectsAfterPrint() {
+        document.querySelectorAll('.his-container [data-print-replaced]').forEach(function(sel) {
+            sel.removeAttribute('data-print-replaced');
+            sel.style.display = '';
+        });
+        document.querySelectorAll('.his-container .print-select-val').forEach(function(span) {
+            span.parentNode.removeChild(span);
+        });
+    }
+
+    window.addEventListener('beforeprint', replaceSelectsForPrint);
+    window.addEventListener('afterprint', restoreSelectsAfterPrint);
 
     var _origWizNext = window.wizNext;
     window.wizNextSound = function(){
