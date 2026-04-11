@@ -2170,6 +2170,7 @@ document.addEventListener('focusin', function(e) {
         if (field === 'sexo') p.sexo = val;
         else if (field === 'est') p.est = val;
         else if (field === 'ser') p.ser = val;
+        else if (field === 'turno') WIZ.estab.turno = val;
         else if (field && field.indexOf('tipo') === 0) {
             var n = parseInt(field.replace('tipo',''));
             if (!isNaN(n)) {
@@ -2333,7 +2334,9 @@ document.addEventListener('focusin', function(e) {
             if(hSelects[0] && e.mes)             hSelects[0].value = e.mes;
             if(hSelects[1] && e.establecimiento) hSelects[1].value = e.establecimiento;
             if(hSelects[2] && e.ups)             hSelects[2].value = e.ups;
-            if(hSelects[3] && e.turno)           hSelects[3].value = e.turno;
+            var _turnoMap={'M':'MAÑANA','T':'TARDE','N':'NOCHE'};
+            var _turnoVal=_turnoMap[e.turno]||e.turno;
+            if(hSelects[3] && _turnoVal)           hSelects[3].value = _turnoVal;
             if(hInputs[1]  && e.dniResp)         hInputs[1].value  = e.dniResp;
             if(hInputs[2]  && e.nombresResp)     hInputs[2].value  = e.nombresResp;
         }
@@ -2702,6 +2705,15 @@ document.addEventListener('focusin', function(e) {
         function svSel(el, val) {
             if (!el || !val) return;
             el.value = val;
+            // If value didn't match, search through options
+            if (el.value !== val) {
+                for (var _i = 0; _i < el.options.length; _i++) {
+                    if (el.options[_i].value === val || el.options[_i].text === val) {
+                        el.selectedIndex = _i;
+                        break;
+                    }
+                }
+            }
         }
 
         // DIA desde fecha de atención
@@ -2837,7 +2849,9 @@ document.addEventListener('focusin', function(e) {
             if(hs[0]  && e2.mes)             hs[0].value  = e2.mes;
             if(hs[1]  && e2.establecimiento) hs[1].value  = e2.establecimiento;
             if(hs[2]  && e2.ups)             hs[2].value  = e2.ups;
-            if(hs[3]  && e2.turno)           hs[3].value  = e2.turno;
+            var _tm2={'M':'MAÑANA','T':'TARDE','N':'NOCHE'};
+            var _tv2=_tm2[e2.turno]||e2.turno;
+            if(hs[3]  && _tv2)           hs[3].value  = _tv2;
             if(hi[1]  && e2.dniResp)         hi[1].value  = e2.dniResp;
             if(hi[2]  && e2.nombresResp)     hi[2].value  = e2.nombresResp;
         }
