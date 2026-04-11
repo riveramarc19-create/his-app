@@ -805,8 +805,6 @@
         /* ===== IMPRESIÓN ===== */
         @media print {
             @page { size: A4 landscape; margin: 8mm 6mm; }
-            select { display:none !important; }
-            .print-select-val { display:inline-block !important; font-size:6.5px !important; color:#000 !important; font-family:Rajdhani,sans-serif !important; font-weight:700 !important; width:100% !important; text-align:center !important; }
             body { margin:0;padding:0;background:white;font-size:7px;-webkit-print-color-adjust:exact;print-color-adjust:exact; }
             /* SHOW table on print, hide wizard */
             .wizard-overlay { display:none !important; }
@@ -2842,21 +2840,28 @@ document.addEventListener('focusin', function(e) {
         WIZ.patIdx = savedIdx;
         wizSaveEstab();
         // Direct sync WIZ.estab to pcHeader (bypasses DOM read issues)
-        var pcHdr2 = document.getElementById('pcHeader');
-        if (pcHdr2) {
+        // Write WIZ.estab directly as text into pcHeader cells (bypass select issues)
+        (function() {
             var e2 = WIZ.estab;
-            var hs = pcHdr2.querySelectorAll('select');
-            var hi = pcHdr2.querySelectorAll('input');
-            if(hi[0]  && e2.anio)            hi[0].value  = e2.anio;
-            if(hs[0]  && e2.mes)             hs[0].value  = e2.mes;
-            if(hs[1]  && e2.establecimiento) hs[1].value  = e2.establecimiento;
-            if(hs[2]  && e2.ups)             hs[2].value  = e2.ups;
-            var _tm2={'M':'MAÑANA','T':'TARDE','N':'NOCHE'};
-            var _tv2=_tm2[e2.turno]||e2.turno;
-            if(hs[3]  && _tv2)           hs[3].value  = _tv2;
-            if(hi[1]  && e2.dniResp)         hi[1].value  = e2.dniResp;
-            if(hi[2]  && e2.nombresResp)     hi[2].value  = e2.nombresResp;
-        }
+            var turnoMap = {'M':'MAÑANA','T':'TARDE','N':'NOCHE'};
+            var tds = document.querySelectorAll('#pcHeader tbody tr td');
+            var cellStyle = 'font-size:7px;font-weight:700;font-family:Rajdhani,sans-serif;color:#fff;text-align:center;display:block;width:100%;';
+            function writeCell(td, val) {
+                if (!td || !val) return;
+                td.querySelectorAll('input,select').forEach(function(el){ el.style.display='none'; });
+                var sp = td.querySelector('.hdr-val-span');
+                if (!sp) { sp = document.createElement('span'); sp.className='hdr-val-span'; td.appendChild(sp); }
+                sp.textContent = val;
+                sp.style.cssText = cellStyle;
+            }
+            if (tds[0]) writeCell(tds[0], e2.anio);
+            if (tds[1]) writeCell(tds[1], e2.mes);
+            if (tds[2]) writeCell(tds[2], e2.establecimiento);
+            if (tds[3]) writeCell(tds[3], e2.ups);
+            if (tds[4]) writeCell(tds[4], turnoMap[e2.turno] || e2.turno);
+            if (tds[5]) writeCell(tds[5], e2.dniResp);
+            if (tds[6]) writeCell(tds[6], e2.nombresResp);
+        })();
 
         // Remove old preview if exists
         var old = document.getElementById('wizPrintPreview');
@@ -2898,11 +2903,22 @@ document.addEventListener('focusin', function(e) {
             var wo = clone.querySelector('#wizardApp');
             if(wo) wo.style.display = 'none';
             // Make inputs show values as text overlay
+            // Make inputs visible
             clone.querySelectorAll('input').forEach(function(inp) {
-                inp.style.cssText = 'color:#000 !important;background:transparent;font-size:7px;';
+                inp.style.cssText = 'color:#000 !important;background:transparent;font-size:7px;border:none;width:100%;';
             });
-            clone.querySelectorAll('select').forEach(function(sel) {
-                sel.style.cssText = 'color:#000 !important;background:transparent;font-size:7px;';
+            // Replace selects with text spans in clone (cloneNode loses live selection)
+            // First get original selects to read their values
+            var origSelects = hisContainer.querySelectorAll('select');
+            var cloneSelects = clone.querySelectorAll('select');
+            cloneSelects.forEach(function(cloneSel, idx) {
+                var origSel = origSelects[idx];
+                var txt = origSel && origSel.options[origSel.selectedIndex] ? origSel.options[origSel.selectedIndex].text : '';
+                if (txt === '-' || txt === '--' || txt === '-- TURNO --') txt = '';
+                var span = document.createElement('span');
+                span.textContent = txt;
+                span.style.cssText = 'font-size:7px;color:#000;font-family:Rajdhani,sans-serif;font-weight:700;display:block;text-align:center;width:100%;';
+                if (cloneSel.parentNode) cloneSel.parentNode.replaceChild(span, cloneSel);
             });
             scroll.appendChild(clone);
         } else {
@@ -2913,8 +2929,7 @@ document.addEventListener('focusin', function(e) {
 
         document.getElementById('btnConfirmPrint').onclick = function() {
             document.body.removeChild(preview);
-            replaceSelectsForPrint();
-        setTimeout(function() { window.print(); restoreSelectsAfterPrint(); }, 200);
+            setTimeout(function() { replaceSelectsForPrint(); window.print(); setTimeout(restoreSelectsAfterPrint, 500); }, 200);
         };
         document.getElementById('btnCancelPrint').onclick = function() {
             document.body.removeChild(preview);
@@ -3055,35 +3070,45 @@ document.addEventListener('focusin', function(e) {
     // =============================================
     // BEFORE/AFTER PRINT — replace selects with text
     // =============================================
+
+
+    // ====================================================
+    // PRINT HELPERS — replace all selects with visible text
+    // Covers: #pcHeader (MES, ESTAB, UPS, TURNO) + tabla HIS (EST, SER, TIPO, etc.)
+    // ====================================================
     function replaceSelectsForPrint() {
-        document.querySelectorAll('.his-container select').forEach(function(sel) {
+        // ALL selects on page: header + table
+        document.querySelectorAll('#pcHeader select, #hisForm select').forEach(function(sel) {
             if (sel.getAttribute('data-print-replaced')) return;
-            var val = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
-            if (!val || val === '-' || val === '--') val = '';
+            var idx = sel.selectedIndex;
+            var val = (idx >= 0 && sel.options[idx]) ? sel.options[idx].text.trim() : '';
+            var skipVals = ['-','--','','-- TURNO --','-- SELECCIONAR --'];
+            if (skipVals.indexOf(val) !== -1) val = '';
+            // Hide select, insert span with value
+            sel.setAttribute('data-print-replaced', '1');
+            sel.style.display = 'none';
             var span = document.createElement('span');
             span.className = 'print-select-val';
             span.textContent = val;
-            span.style.cssText = 'font-size:6.5px;color:#000;font-family:Rajdhani,sans-serif;font-weight:700;display:inline-block;width:100%;text-align:center;';
-            sel.setAttribute('data-print-replaced', '1');
-            sel.style.display = 'none';
+            span.style.cssText = 'font-size:6.5px;color:#000 !important;font-family:Rajdhani,sans-serif;font-weight:800;display:block;width:100%;text-align:center;line-height:14px;';
             sel.parentNode.insertBefore(span, sel.nextSibling);
         });
     }
 
     function restoreSelectsAfterPrint() {
-        document.querySelectorAll('.his-container [data-print-replaced]').forEach(function(sel) {
+        document.querySelectorAll('[data-print-replaced]').forEach(function(sel) {
             sel.removeAttribute('data-print-replaced');
             sel.style.display = '';
         });
-        document.querySelectorAll('.his-container .print-select-val').forEach(function(span) {
-            span.parentNode.removeChild(span);
+        document.querySelectorAll('.print-select-val').forEach(function(span) {
+            if (span.parentNode) span.parentNode.removeChild(span);
         });
     }
 
     window.addEventListener('beforeprint', replaceSelectsForPrint);
     window.addEventListener('afterprint', restoreSelectsAfterPrint);
 
-    var _origWizNext = window.wizNext;
+        var _origWizNext = window.wizNext;
     window.wizNextSound = function(){
         var s = WIZ && WIZ.step;
         if(s===3){ if(typeof playSaveBip!=='undefined') playSaveBip(); }
